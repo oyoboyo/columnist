@@ -1,3 +1,5 @@
+Columnist starter is a Next.js starter that lets creators focus on content.
+
 # Getting started
 
 Getting started is simple:
@@ -67,15 +69,12 @@ Columnist Starters are designed to abstact away development (to let creators foc
 
 In a starter you’ll find:
 
-- **Content:** sample \*\*\*\*content as example to get you started can be found in the `content` folder
+- **Content:** sample content as example to get you started can be found in the `content` folder
 - **Pages:** a home page, and Next.js catch all route have been provided in `src/pages`
 - **Components** at `src/components` (components can be added, or overidden from theme)
 - **Styles** at `src/styles` to be customized or extended
 
-<aside>
 👉 **Note:** This is the first starter but there will be others with different themes, and features — stay tuned.
-
-</aside>
 
 ## Core
 

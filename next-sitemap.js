@@ -1,3 +1,4 @@
+// Sitemap configuration
 module.exports = {
   siteUrl: "https://oyoboyo.com",
   changefreq: "daily",

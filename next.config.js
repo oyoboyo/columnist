@@ -1,9 +1,10 @@
-// next.config.js
+// Require to transpile Columnist modules
 const withTM = require("next-transpile-modules")([
   "@columnist/core",
   "@columnist/bootstrap",
 ]);
 
+// Webpack configuration and module exports
 module.exports = withTM({
   env: {
     apiUrl: "http://localhost:3000/api",

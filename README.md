@@ -1,6 +1,6 @@
 # Getting started
 
-Mag is designed with developer experience and content creators in mind. Getting started in simple.
+Getting started is simple:
 
 ## Setup
 
@@ -10,7 +10,7 @@ Clone the repository:
 Git clone git@github.com:oyoboyo/magazine.git
 ```
 
-From the directory, Install dependancies:
+From the directory, Install dependencies:
 
 ```markdown
 npm install
@@ -20,104 +20,75 @@ Run the project locally:
 
 ```
 npm run dev
-# or
-yarn dev
 ```
 
-## Configure & customize
+## Customize
 
-Edit the `mag.config.js` to customize the the site, e.g., change the site brand:
+Make the site your own:
 
-```jsx
-const mag = {
-  brand: {
-    name: "Magazine",
-    tagline: "The best content from the world of design",
-    logo: "/graphics/logo.svg",
-  },
-};
-```
+- Edit `columnist.config.js` to configure features e.g., brand, menu, social, etc.
+- Edit `src/styles/custom.scss` to customize style, e.g., type, colors, etc.
 
-Edit `src/styles/custom.scss` to edit Boostrap variables, e.g., type and colour:
-
-```scss
-// Type
-$font-family-sans-serif: "Inter", sans-serif;
-$font-family-serif: "Martel", serif;
-$font-size-base: 1rem;
-$font-family-base: $font-family-sans-serif;
-
-// Colors
-$blue: #1073ae !default;
-$indigo: #272c8c !default;
-$purple: #5d2e8c !default;
-$pink: #f2b2b2 !default;
-$red: #f24405 !default;
-$orange: #f29f05 !default;
-$yellow: #f2cc0f !default;
-$green: #02734a !default;
-$teal: #00b2a5 !default;
-$cyan: #23c1d9 !default;
-```
+[Learn more](https://www.notion.so/Starter-3202504417f544029f0939f629c7b309)
 
 ## Create content
 
-Populate the `content/issues` and `content/articles` folders with Markdown files to publish issues and articles, using front matter relevent to each type:
+Populate `content` with files and folders to publish pages, articles and collections:
 
-### Issue
+- Start by adding `*.md` files to the content folder e.g., `content/about.md`
+- Organize content in collection by adding files to a folder e.g., `content/articles`
+- Use folders to build structure; add front matter to add detail
+- See your content live on your local Columnist site
 
-Issues organize articles into features, like in a magazine.
-
-```yaml
----
-type: issue
-title: Creating culture
-date: 2021-01-05
-volume: 1
-issue: 1
-summary: "As creators were told to work ideas out in public — ship frequently, find your audience. But not all ideas are good."
-image:
-  src: /images/issue.jpeg
-  alt: An person priming a blank canvas
-  caption: An person priming a blank canvas
-features:
-  - name: Culture
-    summary: Making ourselves worthy of trust
-  - name: Impressions
-    summary: Work on it together
-  - name: Expertise
-    summary: By the end hopefully, will find ourselves
-  - name: Boundaries
-    summary: Explore, what it means
-  - name: Creativity
-    summary: "Ideas: pursue the good ones"
-editor: Mark Wang
----
-# Markdown...
-```
-
-### Article
-
-Articles elaborate on a topic, inside of a feature.
-
-```yaml
----
-type: article
-title: Finding inspiration everywhere
-date: 2021-01-01
-summary: In 1986, philosopher Edward S. Casey wrote, "The very word culture meant 'place tilled' in Middle English, and the same word goes back to Latin colere, 'to inhabit, care for, till, worship' and cultus.
-image:
-  src: /images/adaptable.jpeg
-  alt: An person priming a blank canvas
-  caption: An person priming a blank canvas
-author: Mark Wang
-issue: Creating Culture
-feature: Culture
-featured: true
----
-# Markdown...
-```
+[Learn more](https://www.notion.so/Starter-3202504417f544029f0939f629c7b309)
 
 ## Go live
 
-Publish your Next.js site to [Vercel](https://vercel.com/) or another compatible host, to go live.
+Publish your site to [Vercel](https://vercel.com/) or another compatible Next.js host to go live.
+
+# How it works
+
+Basically, Columnist is a Next.js starter, with a focus on generating static content from Markdown (and looking good).
+
+Columnist is documented for developers, but briefly:
+
+- A Next.js catch all route matches the structure of the `content` folder
+- Folders or `*.md` in the `content` folder generates routes in `getStaticPaths`
+- Content is parsed by Columnist in `getStaticProps` and rendered as static pages
+- Create structured content in `content` and get a static site (with matching structure)
+
+# Structure
+
+Columnist features are broken out into a few packages to help keep repositories clean:
+
+## Starter
+
+Columnist Starters are designed to abstact away development (to let creators focus on content).
+
+In a starter you’ll find:
+
+- **Content:** sample \*\*\*\*content as example to get you started can be found in the `content` folder
+- **Pages:** a home page, and Next.js catch all route have been provided in `src/pages`
+- **Components** at `src/components` (components can be added, or overidden from theme)
+- **Styles** at `src/styles` to be customized or extended
+
+<aside>
+👉 **Note:** This is the first starter but there will be others with different themes, and features — stay tuned.
+
+</aside>
+
+## Core
+
+Core Columnist functions have been packaged `@columnist/core` to include:
+
+- Services for walking a file system for processing content (e.g., Markdown)
+- Utilities for processing text and other common tasks
+- Generic default components i.e., those not “themed”
+
+## Themes
+
+Meanwhile components and styles are packaged in themes:
+
+- Separate packages e.g., `@columnist/bootstrap`
+- defined by a style framework e.g., Bootstrap
+- and including the default components

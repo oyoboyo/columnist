@@ -1,3 +1,4 @@
+// Configuration constants
 export const brand = {
   name: "Columnist",
   tagline: "The best content from the world of design",

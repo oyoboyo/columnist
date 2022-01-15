@@ -1,0 +1,26 @@
+{
+  "name": "columnist-starter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && next-sitemap",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^11.1.2",
+    "next-sitemap": "^1.6.18",
+    "next-transpile-modules": "^9.0.0",
+    "@columnist/core": "^0.1.0",
+    "@columnist/bootstrap": "^0.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
+    "react-responsive": "^8.2.0",
+    "react-firebase-hooks": "^3.0.4",
+    "sass": "^1.32.7"
+  },
+  "devDependencies": {
+    "yaml": "^1.10.2"
+  }
+}

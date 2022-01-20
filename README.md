@@ -9,7 +9,7 @@ Getting started is simple:
 Clone the repository:
 
 ```markdown
-Git clone git@github.com:oyoboyo/magazine.git
+Git clone git@github.com:oyoboyo/columnist.git
 ```
 
 From the directory, Install dependencies:

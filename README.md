@@ -78,9 +78,9 @@ In a starter you’ll find:
 - **Components** at `src/components` (components can be added, or overidden from theme)
 - **Styles** at `src/styles` to be customized or extended
 
-[Learn more](https://github.com/oyoboyo/columnist/wiki/Starter)
-
 👉 **Note:** This is the first starter but there will be others with different themes, and features — stay tuned.
+
+[Learn more](https://github.com/oyoboyo/columnist/wiki/Starter)
 
 ## Core
 

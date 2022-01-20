@@ -13,7 +13,7 @@ import { brand } from "columnist.config";
  * Dynamic catch all route for content and collections
  */
 
-export default function Content({ doc, collection, collections }) {
+export default function All({ doc, collection, collections }) {
   const description = doc && doc.summary ? doc.summary : brand.tagline;
   return (
     <Page header="bar">

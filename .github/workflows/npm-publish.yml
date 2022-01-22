@@ -17,11 +17,8 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
       - run: cd ./common/core
-      - run: npm version ${{ github.event.release.tag_name }}
       - run: npm publish
       - run: cd ../../themes/bootstrap
-      - run: npm version ${{ github.event.release.tag_name }}
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-

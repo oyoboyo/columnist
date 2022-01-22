@@ -8,16 +8,10 @@ Getting started is simple:
 
 ## Setup
 
-Create Next app:
+Create Next app with starter:
 
 ```markdown
 npx create-next-app --example https://github.com/oyoboyo/columnist/tree/workspace/starters/starter
-```
-
-From the directory, Install dependencies:
-
-```markdown
-npm install
 ```
 
 Run the project locally:

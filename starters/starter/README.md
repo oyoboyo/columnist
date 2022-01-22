@@ -1,4 +1,4 @@
-**Columnist is an open source Next.js starter for self-publishing.** 
+**Columnist is an open source Next.js starter for self-publishing.**
 
 Far from just another blog starter, Columnist was designed for creators. Building on the exceptional DX of Next.js, the starter offers scalability and ease of use for writers and their readers.
 
@@ -8,10 +8,10 @@ Getting started is simple:
 
 ## Setup
 
-Clone the repository:
+Create Next app:
 
 ```markdown
-Git clone git@github.com:oyoboyo/columnist.git
+npx create-next-app --example https://github.com/oyoboyo/columnist/tree/workspace/starters/starter
 ```
 
 From the directory, Install dependencies:

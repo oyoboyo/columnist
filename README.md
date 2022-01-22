@@ -18,7 +18,7 @@ Getting started is simple:
 Create Next app:
 
 ```markdown
-npx create-next-app --example columnist --example-path starter
+npx create-next-app --example https://github.com/oyoboyo/columnist --example-path starter
 ```
 
 From the directory, Install dependencies:

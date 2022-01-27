@@ -39,11 +39,7 @@ const processMarkdownFromFile = (filePath) => {
   // Process date
   let date;
   if (data && data.date) {
-    date = data.date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    date = data.date.toJSON();
   } else {
     date = null;
   }

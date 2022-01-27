@@ -3,7 +3,7 @@ import { walk } from "@root/walk";
 import getDocumentFromFile from "./getDocumentFromFile";
 
 /**
- * @file Get documents from dirtecory and all sub directories
+ * @file Get documents from directory and all sub directories
  *
  * @param {string} dir
  * @param {object} include

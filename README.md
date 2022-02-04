@@ -1,4 +1,6 @@
-**Columnist is an open source Next.js starter for self-publishing.**
+# Columnist
+
+**an open source Next.js starter for columnists.**
 
 Far from just another blog starter, Columnist was designed for creators. Building on the exceptional DX of Next.js, the starter offers scalability and ease of use for writers and their readers.
 

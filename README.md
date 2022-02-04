@@ -2,7 +2,7 @@
 
 **an open source Next.js starter for columnists.**
 
-Far from just another blog starter, Columnist was designed for creators. Building on the exceptional DX of Next.js, the starter offers scalability and ease of use for writers and their readers.
+Building on the DX of Next.js the starter offers easy bootstrapping for savvy self-publishing writers.
 
 Get the latest documentation on our [Notion](https://www.notion.so/oyoboyo/Columnist-Documentation-v0-1-0-d1bf444a324843a29fdaab660102cd67). 
 

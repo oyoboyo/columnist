@@ -1,8 +1,29 @@
+// Utilities
+import { makeStringFromDate, calcReadTimeFromText } from "@columnist/core";
+// Hooks
+import { useConfig } from "@columnist/core";
+
+// Components
 import Img from "../Img";
 import { Html } from "@columnist/core";
 
 const Detail = ({ content }) => {
-  const image = content.image ? content.image : null;
+  // Get detail config from config
+  const config = useConfig();
+  const detailConfig = config.collections[content.collection].detail;
+
+  // Make date string from content date if date in detail config
+  const contentDate =
+    content.date && detailConfig.date
+      ? makeStringFromDate(content.date, detailConfig.date)
+      : false;
+
+  // Calculate read time from content text if read time in detail config
+  const contentReadTime = detailConfig.readTime
+    ? calcReadTimeFromText(content.text)
+    : false;
+
+  // Render article
   return (
     <article className="border-bottom pb-4 mb-4">
       <header>
@@ -11,18 +32,25 @@ const Detail = ({ content }) => {
           <p className="lead text-muted mb-3">{content.summary}</p>
         ) : null}
         <div className="d-flex justify-between mb-3">
-          {content.date ? (
-            <>
-              <small className="text-muted">{content.date}</small>
-              <small className="text-muted">{content.readTime} min read</small>
-            </>
+          {contentDate ? (
+            <small className="text-muted">{contentDate}</small>
+          ) : null}
+          {contentReadTime ? (
+            <small className="text-muted">{contentReadTime} min read</small>
           ) : null}
         </div>
         {content.image ? (
           <div className="text-center">
-            <Img width={640} height={380} src={image.src} alt={image.alt} />
-            {image.caption ? (
-              <small className="text-muted mt-2 ">{image.caption}</small>
+            <Img
+              width={640}
+              height={380}
+              src={content.image.src}
+              alt={content.image.alt}
+            />
+            {content.image.caption ? (
+              <small className="text-muted mt-2 ">
+                {content.image.caption}
+              </small>
             ) : null}
           </div>
         ) : null}

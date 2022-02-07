@@ -1,16 +1,11 @@
 import Hero from "./Hero";
 import Bar from "./Bar";
 
-/**
- * Header component
- * Global navigation component
- */
-
-const Header = ({ brand, config, style }) => {
+const Header = ({ style }) => {
   return !style || style === "bar" ? (
-    <Bar brand={brand} config={config} />
+    <Bar />
   ) : style === "hero" ? (
-    <Hero brand={brand} config={config} />
+    <Hero />
   ) : null;
 };
 

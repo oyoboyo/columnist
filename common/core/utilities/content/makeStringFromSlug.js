@@ -5,7 +5,7 @@
  * @returns {string} title
  */
 
-export default function deslug(slug) {
+const makeStringFromSlug = (slug) => {
   var words = slug.split("-");
   return words
     .map(function (word) {
@@ -13,4 +13,6 @@ export default function deslug(slug) {
     })
     .join(" ");
   return title;
-}
+};
+
+export default makeStringFromSlug;

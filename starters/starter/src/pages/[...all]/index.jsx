@@ -6,7 +6,7 @@ import {
   getCollectionsFromParams,
 } from "@columnist/core";
 import { Page, Section, Article } from "src/components";
-import { brand } from "columnist.config";
+import config from "columnist.config";
 
 /**
  * Content
@@ -14,7 +14,7 @@ import { brand } from "columnist.config";
  */
 
 export default function All({ doc, collection, collections }) {
-  const description = doc && doc.summary ? doc.summary : brand.tagline;
+  const description = doc && doc.summary ? doc.summary : config.brand.tagline;
   return (
     <Page header="bar">
       <Head>
@@ -59,17 +59,19 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   // Get doc
-  const doc = await getDocumentFromParams(params.all, { html: true });
+  const doc = await getDocumentFromParams(params.all);
 
   // Get collection
-  const collection = await getCollectionFromParams(params.all, {
-    teaser: true,
-  });
+  const collection = await getCollectionFromParams(
+    params.all,
+    config.collections
+  );
 
   // Get collections
-  const collections = await getCollectionsFromParams(params.all, {
-    teaser: true,
-  });
+  const collections = await getCollectionsFromParams(
+    params.all,
+    config.collections
+  );
 
   return {
     props: { doc, collection, collections },

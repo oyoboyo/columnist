@@ -1,6 +1,8 @@
 import fs from "fs";
-import deSlug from "../../utilities/text/deslug";
+// Utilities
+import deSlug from "../../utilities/content/makeStringFromSlug";
 import makeRouteFromPath from "./utilities/makeRouteFromPath";
+// Services
 import getDocumentFromFile from "./getDocumentFromFile";
 
 /**
@@ -25,7 +27,7 @@ export default function getDocumentFromDir(dir, options) {
     // Make route, slug and params from directory path
     const { route, slug, params } = makeRouteFromPath(dir);
     // Make title from slug
-    const title = deSlug(slug);
+    const title = makeStringFromSlug(slug);
 
     doc = {
       type,

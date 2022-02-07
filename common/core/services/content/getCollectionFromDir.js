@@ -1,7 +1,8 @@
 import fs from "fs";
-
+// Services
 import getDocumentFromFile from "./getDocumentFromFile";
-import getDocumentFromDir from "./getDocumentFromDir";
+// Utilities
+import { sortCollectionByDate } from "../../utilities/content/sortCollectionByDate";
 
 /**
  * @file Make Collection From Files In Directory
@@ -44,10 +45,12 @@ export default function getCollectionFromDir(dir, options) {
 
   // Return and sort collection (if collection):
   if (collection.length > 0) {
-    collection.sort((a, b) => {
-      return new Date(b.date) - new Date(a.date);
-    });
-    return collection;
+    if (options.order && options.order === "date") {
+      const collectionByDate = sortCollectionByDate(collection);
+      return collectionByDate;
+    } else {
+      return collection;
+    }
   } else {
     return null;
   }

@@ -1,4 +1,4 @@
-// Configuration constants
+// config.brand
 export const brand = {
   name: "Columnist",
   tagline: "The best content from the world of design",
@@ -7,10 +7,12 @@ export const brand = {
   contact: "info@oyoboyo.com",
 };
 
+// config.head
 export const head = {
   GoogleAnalytics: "UA-XXXXX-Y",
 };
 
+// config.header
 export const header = {
   options: {
     logo: true,
@@ -34,6 +36,61 @@ export const header = {
   ],
 };
 
+// .config.date
+const date = {
+  locale: "en-US",
+  options: {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  },
+};
+
+// config.collections
+import { Article } from "src/components";
+
+// Default collection options
+export const collection = {
+  teaser: {
+    date: date,
+    limit: 120,
+  },
+  detail: {
+    date: false,
+    html: true,
+  },
+};
+
+export const collections = {
+  articles: {
+    component: Article,
+    teaser: {
+      date: date,
+      limit: 120,
+      readTime: true,
+    },
+    detail: {
+      date: date,
+      html: true,
+      readTime: true,
+    },
+  },
+};
+
+// .config/column
+export const column = {
+  limit: null,
+  order: "",
+};
+
+// .config/home
+export const home = {
+  limit: 120,
+  collections: collections,
+  column: column,
+};
+
+// config.footer
 import { FiLinkedin, FiGithub, FiInstagram } from "react-icons/fi";
 
 export const footer = {
@@ -62,6 +119,13 @@ export const footer = {
   ],
 };
 
-export const home = {
-  limit: 10,
+export default {
+  brand,
+  head,
+  header,
+  date,
+  collections,
+  column,
+  home,
+  footer,
 };

@@ -1,4 +1,5 @@
 import { walk } from "@root/walk";
+// Utilities
 import makeParamsFromPath from "./utilities/makeParamsFromPath";
 
 /**

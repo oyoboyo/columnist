@@ -9,11 +9,15 @@ import getDocumentFromDir from "./services/content/getDocumentFromDir";
 import getDocumentFromFile from "./services/content/getDocumentFromFile";
 import getDocumentFromParams from "./services/content/getDocumentFromParams";
 
-// utilities/text
-import capitalize from "./utilities/text/capitalize";
-import quantify from "./utilities/text/quantify";
-import slugify from "./utilities/text/slugify";
-import truncate from "./utilities/text/truncate";
+// utilities/content
+import makeSlugFromString from "./utilities/content/makeSlugFromString";
+import makeStringFromSlug from "./utilities/content/makeStringFromSlug";
+import makeStringFromDate from "./utilities/content/makeStringFromDate";
+import calcReadTimeFromText from "./utilities/content/calcReadTimeFromText";
+import truncateText from "./utilities/content/truncateText";
+import sortCollectionByDate from "./utilities/content/sortCollectionByDate";
+import sortCollectionByAlpha from "./utilities/content/sortCollectionByAlpha";
+import sortCollectionByNum from "./utilities/content/sortCollectionByNum";
 //hooks
 import useConfig from "./hooks/useConfig";
 // Components
@@ -32,11 +36,15 @@ export {
   getDocumentFromDir,
   getDocumentFromFile,
   getDocumentFromParams,
-  // utilities/text
-  capitalize,
-  quantify,
-  slugify,
-  truncate,
+  // utilities/content
+  makeStringFromSlug,
+  makeStringFromDate,
+  makeSlugFromString,
+  calcReadTimeFromText,
+  truncateText,
+  sortCollectionByDate,
+  sortCollectionByAlpha,
+  sortCollectionByNum,
   //hooks
   useConfig,
   //components

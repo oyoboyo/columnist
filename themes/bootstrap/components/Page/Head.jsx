@@ -1,11 +1,10 @@
 import Head from "next/head";
 
-/**
- * Page head component
- * Favicon links and Google Analytics
- */
+import { useConfig } from "@columnist/core";
 
-const PageHead = ({ config }) => {
+const PageHead = () => {
+  const config = useConfig();
+
   return (
     <>
       <Head>
@@ -40,14 +39,14 @@ const PageHead = ({ config }) => {
       }
       <script
         async
-        src={`https://www.googletagmanager.com/gtag/js?id=${config.GoogleAnalytics}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${config.head.GoogleAnalytics}`}
       ></script>
       <script
         dangerouslySetInnerHTML={{
           __html: `window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', ${config.GoogleAnalytics});`,
+      gtag('config', ${config.head.GoogleAnalytics});`,
         }}
       ></script>
     </>

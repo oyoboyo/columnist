@@ -1,36 +1,54 @@
+// Utilities
+import makeTeaserFromContent from "./utilities/makeTeaserFromContent";
+// Components
 import { Link } from "@columnist/core";
 import Img from "../Img";
 
 const Teaser = ({ content }) => {
-  const image = content.image ? content.image : null;
+  const teaser = makeTeaserFromContent(content);
 
   return (
     <article className="teaser border-bottom pb-4 mb-4">
       <div className="metadata d-flex justify-between">
-        {content.tag ? (
-          <small className="text-muted me-2">{content.tag}</small>
+        {teaser.tag ? (
+          <small className="text-muted me-2">{teaser.tag}</small>
         ) : null}
-        <small className="text-muted">{content.date}</small>
+        {teaser.date ? (
+          <small className="text-muted">{teaser.date}</small>
+        ) : null}
       </div>
-      <Link href={content.route}>
-        <h1 className="text-dark h2 mt-3">{content.title}</h1>
+      <Link href={teaser.route}>
+        <h1 className="text-dark h2 mt-3">{teaser.title}</h1>
       </Link>
-      <p className="lead text-muted mb-4">{content.summary}</p>
-      {content.image ? (
-        <Link className="text-center" href={content.route}>
-          <Img width={640} height={380} src={image.src} alt={image.alt} />
-          {image.caption ? (
-            <small className="text-muted mt-2">{image.caption}</small>
+      {teaser.summary ? (
+        <p className="lead text-muted mb-4">{teaser.summary}</p>
+      ) : null}
+      {teaser.image ? (
+        <Link className="text-center" href={teaser.route}>
+          <Img
+            width={640}
+            height={380}
+            src={teaser.image.src}
+            alt={teaser.image.alt}
+          />
+          {teaser.image.caption ? (
+            <small className="text-muted mt-2">{teaser.caption}</small>
           ) : null}
         </Link>
       ) : null}
-      <p className="serif mt-3 mb-3">{content.teaser}</p>
+      {teaser.truncated ? (
+        <p className="serif mt-3 mb-3">{teaser.truncated}</p>
+      ) : null}
       <nav className="navigation d-flex justify-between">
-        <Link className="small" href={content.route}>
-          {content.readTime} min read
+        <Link className="small" href={teaser.route}>
+          {teaser.readTime ? (
+            <span>{teaser.readTime} min read</span>
+          ) : (
+            <span>Read more</span>
+          )}
         </Link>
-        {content.author ? (
-          <small className="text-muted">Article by {content.author}</small>
+        {teaser.author ? (
+          <small className="text-muted">Article by {teaser.author}</small>
         ) : null}
       </nav>
     </article>

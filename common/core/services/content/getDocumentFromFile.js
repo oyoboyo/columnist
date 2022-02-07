@@ -1,11 +1,7 @@
-import quantify from "../../utilities/text/quantify";
-import truncate from "../../utilities/text/truncate";
-
 import processMarkdownFromFile from "./utilities/processMarkdownFromFile";
 import makeRouteFromFile from "./utilities/makeRouteFromPath";
 
 /**
- *
  * @file Get Document From File
  *
  * @param {string} file
@@ -14,7 +10,7 @@ import makeRouteFromFile from "./utilities/makeRouteFromPath";
  * @returns {object} document
  */
 
-export default function getDocumentFromFile(file, options) {
+export default function getDocumentFromFile(file) {
   // file is md?
   const fileIsMd = file.includes(".md");
 
@@ -22,12 +18,8 @@ export default function getDocumentFromFile(file, options) {
     // Process document
     const { params, slug, route } = makeRouteFromFile(file);
     const { data, html, text } = processMarkdownFromFile(file);
-
-    // Default truncation limit
-    const limit = options && options.truncation ? options.truncation : 200;
-    // Process text
-    const teaser = truncate(text, limit);
-    const quantities = quantify(text);
+    // Get collection from params
+    const collection = params[params.length - 2];
 
     // Make document
     const doc = {
@@ -35,28 +27,13 @@ export default function getDocumentFromFile(file, options) {
       params,
       slug,
       route,
+      collection,
       // Data
       ...data,
-      // Details
-      ...quantities,
+      // Content
+      text,
+      html,
     };
-
-    // Check includes
-    if (options) {
-      if (options.text) {
-        // Include plain text
-        doc.text = text;
-      }
-      if (options.html) {
-        // Include HTML
-        doc.html = html;
-      }
-      if (options.teaser) {
-        // Include teaser
-        doc.teaser = teaser;
-      }
-    }
-
     return { ...doc };
   }
 }

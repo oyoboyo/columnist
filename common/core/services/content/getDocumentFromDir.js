@@ -1,6 +1,6 @@
 import fs from "fs";
 // Utilities
-import deSlug from "../../utilities/content/makeStringFromSlug";
+import makeStringFromSlug from "../../utilities/content/makeStringFromSlug";
 import makeRouteFromPath from "./utilities/makeRouteFromPath";
 // Services
 import getDocumentFromFile from "./getDocumentFromFile";
@@ -12,21 +12,16 @@ import getDocumentFromFile from "./getDocumentFromFile";
  * @returns {object} doc
  */
 
-export default function getDocumentFromDir(dir, options) {
+export default function getDocumentFromDir(dir) {
   let doc;
 
-  // Check if "index.md" in dir
-  const indexExists = fs.existsSync(`${dir}/index.md`);
+  const dirHasIndex = fs.existsSync(`${dir}/index.md`);
 
-  if (indexExists) {
-    // Get document from file
-    doc = getDocumentFromFile(`${dir}/index.md`, options);
-  } else if (!indexExists) {
-    // Make document from directory
+  if (dirHasIndex) {
+    doc = getDocumentFromFile(`${dir}/index.md`);
+  } else {
     const type = "directory";
-    // Make route, slug and params from directory path
     const { route, slug, params } = makeRouteFromPath(dir);
-    // Make title from slug
     const title = makeStringFromSlug(slug);
 
     doc = {
@@ -37,5 +32,6 @@ export default function getDocumentFromDir(dir, options) {
       title,
     };
   }
+
   return doc;
 }

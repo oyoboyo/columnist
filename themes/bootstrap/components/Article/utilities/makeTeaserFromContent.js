@@ -6,6 +6,7 @@ import {
 } from "@columnist/core";
 // Hook
 import { useConfig } from "@columnist/core";
+import defConfig from "../../../defaults.config";
 
 /**
  * @files Make teaser from content
@@ -16,21 +17,22 @@ import { useConfig } from "@columnist/core";
 
 const makeTeaserFromContent = (content) => {
   // Get collection config from config
+
   let config = useConfig();
-  const teaserConfig = config.collections[content.collection].teaser;
+  let configArticle = config.article ? config.article : defConfig.article;
 
   // Make date string (if date)
   const contentDate = content.date
-    ? makeStringFromDate(content.date, teaserConfig.date)
+    ? makeStringFromDate(content.date, configArticle.teaser.date)
     : false;
 
   // Make teaser and read time
-  const contentTruncated = teaserConfig.limit
-    ? truncateText(content.text, teaserConfig.limit)
+  const contentTruncated = configArticle.teaser.limit
+    ? truncateText(content.text, configArticle.teaser.limit)
     : false;
 
   // Calculate read time from content text if read time in detail config
-  const contentReadTime = teaserConfig.readTime
+  const contentReadTime = configArticle.teaser.readTime
     ? calcReadTimeFromText(content.text)
     : false;
 

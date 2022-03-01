@@ -2,6 +2,12 @@ import getDocumentFromDir from "./getDocumentFromDir";
 import getDocumentFromFile from "./getDocumentFromFile";
 import checkFileOrDirFromParams from "./utilities/checkFileOrDirFromParams";
 
+/**
+ * @file Get Document From Params
+ * @param {params} params
+ * @returns {object} doc
+ */
+
 export default function getDocumentFromParams(params) {
   let doc;
 
@@ -14,8 +20,6 @@ export default function getDocumentFromParams(params) {
       doc = getDocumentFromDir(dir);
     }
   );
-
-  console.log(doc);
 
   return doc;
 }

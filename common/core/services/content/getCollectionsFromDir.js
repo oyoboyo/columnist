@@ -1,40 +1,40 @@
 import fs from "fs";
-// Services
+// services
 import getDocumentFromDir from "./getDocumentFromDir";
 import getCollectionFromDir from "./getCollectionFromDir";
+// services/utilities
+import checkFileOrDirFromPath from "./utilities/checkFileOrDirFromPath";
 
 /**
  * @file Get Collection From Directory
  *
  * @param {string} dir
- * @return {object} {doc, collections}
+ * @param {object} config
+ * @return {array} collections
  */
 
-const getCollectionsFromDirectory = (dir, options) => {
-  // Initialize collections
+export default function getCollectionsFromDir(dir, config) {
   let collections = [];
 
-  // Iterate directory
   fs.readdirSync(dir).map((item) => {
-    // Check item path
-    const itemPath = `${dir}/${item}`;
-    const itemIsDir = fs.lstatSync(itemPath).isDirectory();
+    const path = `${dir}/${item}`;
 
-    if (itemIsDir) {
-      // Get sub-collection
-      const collection = getCollectionFromDir(itemPath, options);
-      const doc = getDocumentFromDir(itemPath, options);
+    checkFileOrDirFromPath(path, null, (dir) => {
+      let collection;
+      let doc;
 
-      collections.push({ ...doc, collection });
-    }
+      const dirHasIndex = fs.existsSync(`${dir}/index.md`);
+
+      if (!dirHasIndex) {
+        collection = getCollectionFromDir(dir, config);
+        doc = getDocumentFromDir(dir, config);
+      }
+
+      if (collection) {
+        collections.push({ ...doc, collection });
+      }
+    });
   });
 
-  // Return if collections
-  if (collections.length > 0) {
-    return collections;
-  } else {
-    return null;
-  }
-};
-
-export default getCollectionsFromDirectory;
+  return collections.length > 0 ? collections : null;
+}

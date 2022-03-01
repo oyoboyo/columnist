@@ -1,9 +1,8 @@
 import Head from "next/head";
 import {
   getAllPathsFromDir,
-  getDocumentFromParams,
-  getCollectionFromParams,
-  getCollectionsFromParams,
+  getContentFromAllParams,
+  getDynamicPathsFromDir,
 } from "@columnist/core";
 import { Page, Section, Article } from "src/components";
 import config from "columnist.config";
@@ -51,29 +50,31 @@ export default function All({ doc, collection, collections }) {
 }
 
 export async function getStaticPaths() {
-  // Create path params from directory
   const paths = await getAllPathsFromDir("content");
+
+  {
+    /*  const dynamic = getDynamicPathsFromDir("content/articles", [
+    { key: "article", index: "1" },
+  ]);
+  */
+  }
+
+  // console.log(dynamic);
 
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  // Get doc
-  const doc = await getDocumentFromParams(params.all);
-
-  // Get collection
-  const collection = await getCollectionFromParams(
+  const { doc, collection, collections } = getContentFromAllParams(
     params.all,
-    config.collections
-  );
-
-  // Get collections
-  const collections = await getCollectionsFromParams(
-    params.all,
-    config.collections
+    config.all
   );
 
   return {
-    props: { doc, collection, collections },
+    props: {
+      doc,
+      collection,
+      collections,
+    },
   };
 }

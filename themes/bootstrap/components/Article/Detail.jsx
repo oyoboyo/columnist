@@ -2,7 +2,6 @@
 import { makeStringFromDate, calcReadTimeFromText } from "@columnist/core";
 // Hooks
 import { useConfig } from "@columnist/core";
-
 // Components
 import Img from "../Img";
 import { Html } from "@columnist/core";
@@ -10,16 +9,15 @@ import { Html } from "@columnist/core";
 const Detail = ({ content }) => {
   // Get detail config from config
   const config = useConfig();
-  const detailConfig = config.collections[content.collection].detail;
 
   // Make date string from content date if date in detail config
   const contentDate =
-    content.date && detailConfig.date
-      ? makeStringFromDate(content.date, detailConfig.date)
+    content.date && config.article.detail.date
+      ? makeStringFromDate(content.date, config.article.detail.date)
       : false;
 
   // Calculate read time from content text if read time in detail config
-  const contentReadTime = detailConfig.readTime
+  const contentReadTime = config.article.detail.readTime
     ? calcReadTimeFromText(content.text)
     : false;
 

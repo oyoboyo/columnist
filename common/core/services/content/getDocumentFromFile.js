@@ -5,35 +5,37 @@ import makeRouteFromFile from "./utilities/makeRouteFromPath";
  * @file Get Document From File
  *
  * @param {string} file
- * @param {object} include
- * @param {object} options
- * @returns {object} document
+ * @param {object} config
+ * @returns {object} doc
  */
 
-export default function getDocumentFromFile(file) {
-  // file is md?
-  const fileIsMd = file.includes(".md");
+const calcOrderFromFile = (slug) => {
+  let hasNum = /^\d+\-/;
 
-  if (fileIsMd) {
-    // Process document
+  if (hasNum.test(slug)) {
+    let dash = slug.indexOf("-");
+    let number = slug.slice(0, dash);
+  }
+};
+
+export default function getDocumentFromFile(file, config) {
+  const isMd = file.includes(".md") || file.includes(".mdx");
+
+  if (isMd) {
     const { params, slug, route } = makeRouteFromFile(file);
     const { data, html, text } = processMarkdownFromFile(file);
-    // Get collection from params
-    const collection = params[params.length - 2];
 
-    // Make document
-    const doc = {
-      // Route
+    calcOrderFromFile(slug);
+
+    return {
       params,
       slug,
       route,
-      collection,
-      // Data
       ...data,
-      // Content
       text,
       html,
     };
-    return { ...doc };
+  } else {
+    throw "Error: Not a Markdown file";
   }
 }

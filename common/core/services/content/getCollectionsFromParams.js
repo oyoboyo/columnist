@@ -6,12 +6,12 @@ import getCollectionsFromDir from "./getCollectionsFromDir";
 /**
  * @file Get Collections From Params
  *
- * @param {*} params
- * @param {*} options
- * @returns
+ * @param {array} params
+ * @param {array} options
+ * @returns {array} collections
  */
 
-export default async function getCollectionsFromParams(params, options) {
+export default async function getCollectionsFromParams(params, config) {
   let collections;
 
   checkFileOrDirFromParams(
@@ -20,7 +20,7 @@ export default async function getCollectionsFromParams(params, options) {
       collections = null;
     },
     (dir) => {
-      collections = getCollectionsFromDir(dir, options);
+      collections = getCollectionsFromDir(dir, config);
     }
   );
 

@@ -1,27 +1,21 @@
+// node_modules
 import { walk } from "@root/walk";
-// Utilities
+// services/utilities
 import makeParamsFromPath from "./utilities/makeParamsFromPath";
 
 /**
  * @file Get Paths From Directory
  *
- *
- * @param {string} dir - path of directory
- * @return {Promise<string>} paths - array of paths in directory
+ * @param {string} dir
+ * @return {Promise<array>} paths
  */
 
-export default async function getParamsFromDirectory(dir, keyIndex) {
-  // Initialize path and walker
+export default async function getAllPathsFromDir(dir) {
   let paths = [];
 
   const walker = async (error, path) => {
-    if (error) {
-      throw error;
-    }
-    // Make params from path
     let all = makeParamsFromPath(path);
 
-    // params to ignore
     const ignore =
       all.includes(".DS_Store") ||
       all.includes("content") ||
@@ -29,31 +23,17 @@ export default async function getParamsFromDirectory(dir, keyIndex) {
         ? true
         : false;
 
-    // If key index provided...
-    if (keyIndex && all.length > keyIndex.length + 1) {
-      // ...use to construct params
-      let indexed = {};
-      keyIndex.map((pair) => {
-        indexed[pair.key] = all[pair.index];
-      });
+    if (error) {
+      throw error;
+    }
 
-      if (!ignore) {
-        paths.push({
-          params: { all: all },
-        });
-      }
-      // ...otherwise,
-    } else if (!keyIndex) {
-      //... set slug param to all params
-      if (!ignore) {
-        paths.push({
-          params: { all: all },
-        });
-      }
+    if (!ignore) {
+      paths.push({
+        params: { all: all },
+      });
     }
   };
 
-  // Walk directory to populate paths
   await walk(dir, walker);
 
   return paths;

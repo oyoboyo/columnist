@@ -14,7 +14,7 @@ import config from "columnist.config";
 function MyApp({ Component, pageProps }) {
   return (
     <Config value={config}>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </Config>
   );
 }

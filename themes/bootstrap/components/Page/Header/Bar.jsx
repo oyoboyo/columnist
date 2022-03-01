@@ -17,7 +17,7 @@ const Bar = () => {
                 </Link>
               </span>
             ) : null}
-            {config.header.options.name ? (
+            {config.header.name ? (
               <div className="align-center">
                 <h1 className="name h4 me-3 mb-0">
                   <Link href="/">{config.brand.name}</Link>
@@ -36,7 +36,7 @@ const Bar = () => {
           </ul>
         </div>
         <div>
-          {config.header.options.cta ? (
+          {config.header.cta ? (
             <div>
               <Link
                 className="btn btn-primary ms-3"

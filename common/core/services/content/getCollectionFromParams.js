@@ -7,11 +7,11 @@ import checkFileOrDirFromParams from "./utilities/checkFileOrDirFromParams";
  * @file Get Collection From Params
  *
  * @param {*} params
- * @param {*} options
+ * @param {*} config
  * @returns
  */
 
-export default async function getCollectionFromParams(params, options) {
+export default async function getCollectionFromParams(params, config) {
   let collection;
 
   checkFileOrDirFromParams(
@@ -20,7 +20,7 @@ export default async function getCollectionFromParams(params, options) {
       collection = null;
     },
     (dir) => {
-      collection = getCollectionFromDir(dir, options);
+      collection = getCollectionFromDir(dir, config);
     }
   );
 

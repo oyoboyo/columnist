@@ -6,25 +6,25 @@ const Hero = () => {
     <nav className="main hero navbar navbar-expand navbar-light bg-white pt-md-4 mb-3 mb-md-5 border-bottom">
       <div className="container-fluid flex-column">
         <div className="row justify-center">
-          {config.header.options.logo ? (
+          {config.header.logo ? (
             <div className="logo mt-3 mb-3">
               <Link href="/">
                 <img className="img-fluid" src={config.brand.logo} />
               </Link>
             </div>
           ) : null}
-          {config.header.options.name ? (
+          {config.header.name ? (
             <h1 className=" name h3 text-center">
               <Link href="/">{config.brand.name}</Link>
             </h1>
           ) : null}
-          {config.header.options.tagline ? (
+          {config.header.tagline ? (
             <div className="tagline text-center mb-3">
               {config.brand.tagline}
             </div>
           ) : null}
           <div className="d-flex jtc">
-            {config.header.options.cta ? (
+            {config.header.cta ? (
               <Link
                 className="btn btn-primary me-3"
                 href={config.header.cta.url}

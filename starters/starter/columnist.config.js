@@ -1,3 +1,8 @@
+// config.head
+export const head = {
+  GoogleAnalytics: "UA-XXXXX-Y",
+};
+
 // config.brand
 export const brand = {
   name: "Columnist",
@@ -7,19 +12,11 @@ export const brand = {
   contact: "info@oyoboyo.com",
 };
 
-// config.head
-export const head = {
-  GoogleAnalytics: "UA-XXXXX-Y",
-};
-
 // config.header
 export const header = {
-  options: {
-    logo: true,
-    name: true,
-    tagline: true,
-    cta: true,
-  },
+  logo: true,
+  name: true,
+  tagline: true,
   cta: {
     button: "Subscribe",
     url: "/subscribe",
@@ -46,49 +43,68 @@ const date = {
   },
 };
 
-// config.collections
-import { Article } from "src/components";
-
-// Default collection options
-export const collection = {
+// config.article
+export const article = {
   teaser: {
     date: date,
     limit: 120,
+    readTime: true,
   },
   detail: {
-    date: false,
+    date: date,
     html: true,
+    readTime: true,
   },
 };
 
-export const collections = {
-  articles: {
-    component: Article,
-    teaser: {
-      date: date,
-      limit: 120,
-      readTime: true,
-    },
-    detail: {
-      date: date,
-      html: true,
-      readTime: true,
-    },
-  },
-};
-
-// .config/column
-export const column = {
-  limit: null,
-  order: "",
-};
-
-// .config/home
+// Pages
+// config.home
 export const home = {
-  limit: 120,
-  collections: collections,
-  column: column,
+  limit: 10,
+  sorts: [
+    (array) => {
+      array.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
+      return array;
+    },
+  ],
+  filters: [
+    (array) => {
+      array.filter((item) => item.type !== "article");
+      return array;
+    },
+  ],
 };
+
+// config.all
+const sortByDate = (array) => {
+  array.sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
+  return array;
+};
+
+// config.all
+const sortByOrder = (array) => {
+  array.sort((a, b) => {
+    return b.order - new a.order();
+  });
+  return array;
+};
+
+export const all = {
+  limit: 10,
+  sorts: [sortByDate],
+  filters: [
+    (array) => {
+      array.filter((item) => item.type === "article");
+      return array;
+    },
+  ],
+};
+
+// config.
 
 // config.footer
 import { FiLinkedin, FiGithub, FiInstagram } from "react-icons/fi";
@@ -120,12 +136,11 @@ export const footer = {
 };
 
 export default {
-  brand,
   head,
+  brand,
   header,
-  date,
-  collections,
-  column,
   home,
+  all,
+  article,
   footer,
 };

@@ -8,6 +8,8 @@ import getCollectionsFromParams from "./services/content/getCollectionsFromParam
 import getDocumentFromDir from "./services/content/getDocumentFromDir";
 import getDocumentFromFile from "./services/content/getDocumentFromFile";
 import getDocumentFromParams from "./services/content/getDocumentFromParams";
+import getContentFromAllParams from "./services/content/getContentFromAllParams";
+import getDynamicPathsFromDir from "./services/content/getDynamicPathsFromDir";
 
 // utilities/content
 import makeSlugFromString from "./utilities/content/makeSlugFromString";
@@ -15,9 +17,6 @@ import makeStringFromSlug from "./utilities/content/makeStringFromSlug";
 import makeStringFromDate from "./utilities/content/makeStringFromDate";
 import calcReadTimeFromText from "./utilities/content/calcReadTimeFromText";
 import truncateText from "./utilities/content/truncateText";
-import sortCollectionByDate from "./utilities/content/sortCollectionByDate";
-import sortCollectionByAlpha from "./utilities/content/sortCollectionByAlpha";
-import sortCollectionByNum from "./utilities/content/sortCollectionByNum";
 //hooks
 import useConfig from "./hooks/useConfig";
 // Components
@@ -29,6 +28,8 @@ export {
   //content
   getAllDocumentsFromDir,
   getAllPathsFromDir,
+  getDynamicPathsFromDir,
+  getContentFromAllParams,
   getCollectionFromDir,
   getCollectionFromParams,
   getCollectionsFromDir,
@@ -42,9 +43,6 @@ export {
   makeSlugFromString,
   calcReadTimeFromText,
   truncateText,
-  sortCollectionByDate,
-  sortCollectionByAlpha,
-  sortCollectionByNum,
   //hooks
   useConfig,
   //components

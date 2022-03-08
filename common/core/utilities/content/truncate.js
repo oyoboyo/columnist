@@ -5,7 +5,7 @@
  * @param {integer} limit - Maximum words
  * @return {string} text - Truncated text
  */
-const makeTruncatedFromText = (text, limit) => {
+const truncate = (text, limit) => {
   if (text) {
     if (text.length > limit) {
       for (let i = limit; i > 0; i--) {
@@ -23,4 +23,4 @@ const makeTruncatedFromText = (text, limit) => {
   } else return "";
 };
 
-export default makeTruncatedFromText;
+export default truncate;

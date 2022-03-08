@@ -1,7 +1,7 @@
 // .config.date
 const date = {
   locale: "en-US",
-  options: {
+  string: {
     year: "numeric",
     month: "long",
     day: "numeric",

@@ -3,14 +3,14 @@ import { Html, useConfig } from "@columnist/core";
 // component
 import Img from "../Img";
 // utilities
-import { makeReadTime, makeDate } from "@columnist/core";
+import makeReadTime from "./utilities/makeReadTime";
+import makeDate from "./utilities/makeDate";
 // config
 import defaults from "../../config.defaults";
 
 const Detail = ({ content }) => {
-  // Get config
   const config = useConfig();
-  // Check, get defaults
+  // Check config, set default
   const detail = config.article.detail
     ? config.article.detail
     : defaults.article.detail;

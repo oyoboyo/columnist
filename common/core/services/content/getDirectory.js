@@ -1,4 +1,4 @@
-import deSlug from "../../utilities/content/deSlug";
+import makeTitle from "../../utilities/content/makeTitle";
 
 /**
  * @file Get Directory
@@ -12,7 +12,7 @@ export default function getDirectory(dir) {
   const slug = params[params.length - 1];
   const route = `/${params.join("/")}`;
 
-  const title = deSlug(slug);
+  const title = makeTitle(slug);
 
   return {
     type,

@@ -1,12 +1,12 @@
 /**
- * @file Calculate read time
+ * @file Make read time
  * Take a string and return some useful quantities
  *
  * @param {string} string - string to calculate,
  * @returns {object} {wordCount, readTime} - calculated properties
  */
 
-const calcReadTime = (text) => {
+const makeReadTime = (text) => {
   // Process string
   text = text.replace(/\n/g, " "); // newlines to space
   text = text.replace(/(^\s*)|(\s*$)/gi, ""); // remove spaces from start + end
@@ -18,4 +18,4 @@ const calcReadTime = (text) => {
   return readTime;
 };
 
-export default calcReadTime;
+export default makeReadTime;

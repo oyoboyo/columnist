@@ -5,7 +5,7 @@
  * @returns {string} title
  */
 
-const deSlug = (slug) => {
+const makeTitle = (slug) => {
   var words = slug.split("-");
   return words
     .map(function (word) {
@@ -15,4 +15,4 @@ const deSlug = (slug) => {
   return title;
 };
 
-export default deSlug;
+export default makeTitle;

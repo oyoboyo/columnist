@@ -1,0 +1,128 @@
+// Header
+.header {
+  h1.name a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+    color: $black;
+  }
+  .btn-primary {
+    color: white;
+  }
+}
+
+header .bar {
+  h1.name a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+header .hero {
+  .logo {
+    width: 150px;
+  }
+}
+
+// Article
+
+article:last-of-type {
+  border-bottom: 0 solid transparent !important;
+  padding-bottom: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+// Feature
+
+.feature-body,
+.issue-body,
+.content-body {
+  // Feature elements
+  p,
+  div,
+  aside,
+  blockquote,
+  ul,
+  ol {
+    font-size: 1.2rem;
+    line-height: 2rem;
+  }
+  // Feature headings
+  h1 {
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+  }
+  h2 {
+    margin-top: 3rem;
+    font-size: 1.5rem;
+  }
+  // Features paragraphs
+  &:first-letter:not(h1) {
+    font-size: 4rem;
+    float: left;
+    padding-top: 1.5rem;
+    padding-right: 0.5rem;
+  }
+  h1 + p::first-letter {
+    font-size: 4rem;
+    float: left;
+    padding-top: 1.5rem;
+    padding-right: 0.5rem;
+  }
+  // feature lists
+  ul {
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+  blockquote {
+    border-left: 3px solid $primary;
+    padding-left: 1rem;
+  }
+  blockquote,
+  blockquote p {
+    font-style: italic;
+  }
+  small {
+    line-height: 1rem;
+  }
+}
+
+// Feature
+.feature-teaser {
+  p {
+    line-height: 1.6rem;
+  }
+}
+
+feature:last-child,
+.feature:last-child {
+  border-bottom: 0px !important;
+}
+
+// Navigation
+
+.account {
+  #account-nav-toggle {
+    width: 40px;
+    height: 40px;
+    padding: 2px 2px 2px 2px;
+    &::after {
+      display: none;
+    }
+  }
+
+  .dropdown-menu {
+    left: auto;
+    right: 0;
+  }
+}

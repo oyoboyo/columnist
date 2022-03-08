@@ -1,22 +1,19 @@
 //services/content
-import getAllDocumentsFromDir from "./services/content/getAllDocumentsFromDir";
-import getAllPathsFromDir from "./services/content/getAllPathsFromDir";
-import getCollectionFromDir from "./services/content/getCollectionFromDir";
-import getCollectionFromParams from "./services/content/getCollectionFromParams";
-import getCollectionsFromDir from "./services/content/getCollectionsFromDir";
-import getCollectionsFromParams from "./services/content/getCollectionsFromParams";
-import getDocumentFromDir from "./services/content/getDocumentFromDir";
-import getDocumentFromFile from "./services/content/getDocumentFromFile";
-import getDocumentFromParams from "./services/content/getDocumentFromParams";
-import getContentFromAllParams from "./services/content/getContentFromAllParams";
-import getDynamicPathsFromDir from "./services/content/getDynamicPathsFromDir";
+import getAllPaths from "./services/content/getAllPaths";
+import getAllContent from "./services/content/getAllContent";
+import getCollection from "./services/content/getCollection";
+import getCollections from "./services/content/getCollections";
+import getDirectory from "./services/content/getDirectory";
+import getDocument from "./services/content/getDocument";
+import getDocuments from "./services/content/getDocuments";
+import getDynamicPaths from "./services/content/getDynamicPaths";
 
 // utilities/content
-import makeSlugFromString from "./utilities/content/makeSlugFromString";
-import makeStringFromSlug from "./utilities/content/makeStringFromSlug";
-import makeStringFromDate from "./utilities/content/makeStringFromDate";
-import calcReadTimeFromText from "./utilities/content/calcReadTimeFromText";
-import truncateText from "./utilities/content/truncateText";
+import slugify from "./utilities/content/slugify";
+import stringDate from "./utilities/content/stringDate";
+import deSlug from "./utilities/content/deSlug";
+import calcTime from "./utilities/content/calcTime";
+import truncate from "./utilities/content/truncate";
 //hooks
 import useConfig from "./hooks/useConfig";
 // Components
@@ -26,23 +23,20 @@ import Html from "./components/Html";
 
 export {
   //content
-  getAllDocumentsFromDir,
-  getAllPathsFromDir,
-  getDynamicPathsFromDir,
-  getContentFromAllParams,
-  getCollectionFromDir,
-  getCollectionFromParams,
-  getCollectionsFromDir,
-  getCollectionsFromParams,
-  getDocumentFromDir,
-  getDocumentFromFile,
-  getDocumentFromParams,
+  getAllPaths,
+  getAllContent,
+  getCollection,
+  getCollections,
+  getDirectory,
+  getDocument,
+  getDocuments,
+  getDynamicPaths,
   // utilities/content
-  makeStringFromSlug,
-  makeStringFromDate,
-  makeSlugFromString,
-  calcReadTimeFromText,
-  truncateText,
+  slugify,
+  stringDate,
+  calcTime,
+  deSlug,
+  truncate,
   //hooks
   useConfig,
   //components

@@ -9,11 +9,12 @@ import getDocuments from "./services/content/getDocuments";
 import getDynamicPaths from "./services/content/getDynamicPaths";
 
 // utilities/content
-import slugify from "./utilities/content/slugify";
-import stringDate from "./utilities/content/stringDate";
-import deSlug from "./utilities/content/deSlug";
-import calcTime from "./utilities/content/calcTime";
+import makeDate from "./utilities/content/makeDate";
+import makeTitle from "./utilities/content/makeTitle";
+import makeReadTime from "./utilities/content/makeReadTime";
+import makeSlug from "./utilities/content/makeSlug";
 import truncate from "./utilities/content/truncate";
+
 //hooks
 import useConfig from "./hooks/useConfig";
 // Components
@@ -32,10 +33,10 @@ export {
   getDocuments,
   getDynamicPaths,
   // utilities/content
-  slugify,
-  stringDate,
-  calcTime,
-  deSlug,
+  makeDate,
+  makeSlug,
+  makeTitle,
+  makeReadTime,
   truncate,
   //hooks
   useConfig,

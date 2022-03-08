@@ -7,7 +7,7 @@ import slugify from "slugify";
  * @returns string - slug
  */
 
-const makeSlugFromString = (text) => {
+const makeSlug = (text) => {
   return slugify(text, {
     replacement: "-",
     remove: undefined,
@@ -18,4 +18,4 @@ const makeSlugFromString = (text) => {
   });
 };
 
-export default makeSlugFromString;
+export default makeSlug;

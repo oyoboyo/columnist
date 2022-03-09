@@ -1,4 +1,8 @@
-import fs from "fs";
+import {
+  existsSync as exists,
+  readdirSync as read,
+  lstatSync as status,
+} from "fs";
 // services
 import getCollection from "./getCollection";
 import getDirectory from "./getDirectory";
@@ -13,18 +17,14 @@ import getDirectory from "./getDirectory";
 export default function getCollections(dir, config) {
   let collections = [];
 
-  fs.readdirSync(dir).map((item) => {
+  read(dir).map((item) => {
     const path = `${dir}/${item}`;
 
-    const isDir = fs.existsSync(path) && fs.lstatSync(path).isDirectory();
-
-    if (isDir) {
+    if (exists(path) && status(path).isDirectory()) {
       let collection;
       let doc;
 
-      const hasIndex = fs.existsSync(`${path}/index.md`);
-
-      if (!hasIndex) {
+      if (!exists(`${path}/index.md`)) {
         collection = getCollection(path, config);
         doc = getDirectory(path);
       }

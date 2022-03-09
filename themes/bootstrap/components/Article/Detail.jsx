@@ -8,9 +8,8 @@ import { makeReadTime, makeDate } from "@columnist/core";
 import defaults from "../../config.defaults";
 
 const Detail = ({ content }) => {
-  // Get config
   const config = useConfig();
-  // Check, get defaults
+
   const detail = config.article.detail
     ? config.article.detail
     : defaults.article.detail;

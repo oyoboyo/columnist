@@ -1,4 +1,4 @@
-import fs from "fs";
+import { existsSync as exists, lstatSync as status } from "fs";
 // services/content
 import getDocument from "./getDocument";
 import getCollection from "./getCollection";
@@ -20,25 +20,15 @@ export default function getAllContent(all, config) {
   const dir = `content/${all.join("/")}`;
   const file = `content/${all.join("/")}.md`;
 
-  const isDir = fs.existsSync(dir) && fs.lstatSync(dir).isDirectory();
-  const isFile = fs.existsSync(file) && fs.lstatSync(file).isFile();
-
-  if (isFile) {
+  if (exists(file) && status(file).isFile()) {
     doc = getDocument(file);
     collection = null;
     collections = null;
   }
 
-  if (isDir) {
+  if (exists(dir) && status(dir).isDirectory()) {
     const index = `${dir}/index.md`;
-    const hasIndex = fs.existsSync(index);
-
-    if (hasIndex) {
-      doc = getDocument(index);
-    } else {
-      collection = getCollection(path, config);
-      doc = getDirectory(path);
-    }
+    doc = exists(index) ? getDocument(index) : getDirectory(dir);
 
     collection = getCollection(dir, config);
     collections = getCollections(dir, config);

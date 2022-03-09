@@ -46,7 +46,7 @@ const PageHead = () => {
           __html: `window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', ${config.head.GoogleAnalytics});`,
+      gtag('config', '${config.head.GoogleAnalytics}');`,
         }}
       ></script>
     </>

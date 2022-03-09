@@ -1,4 +1,9 @@
-import fs from "fs";
+import {
+  existsSync as exists,
+  readdirSync as read,
+  lstatSync as status,
+} from "fs";
+
 // services
 import getDocument from "./getDocument";
 
@@ -12,43 +17,37 @@ import getDocument from "./getDocument";
 export default function getCollection(dir, config) {
   let collection = [];
 
-  fs.readdirSync(dir).map((item) => {
+  read(dir).map((item) => {
     const path = `${dir}/${item}`;
 
-    const isDir = fs.existsSync(dir) && fs.lstatSync(dir).isDirectory();
-    const isFile = fs.existsSync(file) && fs.lstatSync(file).isFile();
-
-    if (isFile) {
-      const isIndex = path.includes("index.md");
-      if (!isIndex) {
-        const doc = getDocument(path);
-        collection.push(doc);
+    if (exists(path)) {
+      if (status(path).isFile()) {
+        if (!path.includes("index.md")) {
+          const doc = getDocument(path);
+          collection.push(doc);
+        }
       }
-    }
-
-    if (isDir) {
-      const index = `${path}/index.md`;
-      const hasIndex = fs.existsSync(index);
-      if (hasIndex) {
-        const doc = getDocument(index);
-        collection.push(doc);
+      if (status(path).isDirectory()) {
+        const index = `${path}/index.md`;
+        if (exists(index)) {
+          const doc = getDocument(index);
+          collection.push(doc);
+        }
       }
     }
   });
 
   if (collection.length > 0) {
-    let processors = [];
     if (config.sorts) {
-      processors.push(...config.sorts);
+      config.sorts.map((func) => {
+        collection = func(collection);
+      });
     }
     if (config.filters) {
-      processors.push(...config.filters);
+      config.filters.map((func) => {
+        collection = func(collection);
+      });
     }
-
-    collection = processors.map((processor) => {
-      collection = processor(collection);
-    });
-
     return collection;
   } else {
     return null;

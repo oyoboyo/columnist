@@ -1,4 +1,8 @@
-import fs from "fs";
+import {
+  existsSync as exists,
+  readdirSync as read,
+  lstatSync as status,
+} from "fs";
 
 /**
  * @file Get Dynamic Paths
@@ -10,10 +14,9 @@ import fs from "fs";
 export default function getDynamicPaths(dir, keyIndex) {
   let paths = [];
 
-  fs.readdirSync(dir).map((item) => {
+  fs.read(dir).map((item) => {
     const path = `${dir}/${item}`;
-
-    let all = path.replace("content/", "").replace(".md", "").split("/");
+    const all = path.replace("content/", "").replace(".md", "").split("/");
 
     let index = {};
 
@@ -21,20 +24,19 @@ export default function getDynamicPaths(dir, keyIndex) {
       index[pair.key] = all[pair.index];
     });
 
-    const isDir = fs.existsSync(path) && fs.lstatSync(path).isDirectory();
-    const isFile = fs.existsSync(path) && fs.lstatSync(path).isFile();
-
-    if (isFile) {
-      paths.push({
-        params: index,
-      });
-    }
-
-    if (isDir) {
-      if (fs.existsSync(`${path}/index.md`)) {
+    if (exists(path)) {
+      if (status(path).isFile()) {
         paths.push({
           params: index,
         });
+      }
+
+      if (status(path).isDirectory()) {
+        if (exists(`${path}/index.md`)) {
+          paths.push({
+            params: index,
+          });
+        }
       }
     }
   });

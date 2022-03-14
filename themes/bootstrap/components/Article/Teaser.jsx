@@ -15,30 +15,33 @@ const Teaser = ({ content }) => {
     : defaults.article.teaser;
 
   return (
-    <article className="teaser border-bottom pb-4 mb-4">
-      <div className="metadata d-flex justify-between">
+    <article className="teaser border-bottom pb-4 mb-5">
+      <div className="metadata d-flex justify-between ms-md-5 me-md-5">
         {content.tag ? (
           <small className="text-muted me-2">{content.tag}</small>
         ) : null}
-        {teaser.date ? (
+        {teaser.date && content.date ? (
           <small className="text-muted">
             {makeDate(content.date, teaser.date)}
           </small>
         ) : null}
       </div>
       <Link href={content.route}>
-        <h1 className="text-dark h2 mt-3">{content.title}</h1>
+        <h1 className="text-dark h2 mt-3 ms-md-5 me-md-5">{content.title}</h1>
       </Link>
       {content.summary ? (
-        <p className="lead text-muted mb-4">{content.summary}</p>
+        <p className="lead text-muted mb-4 ms-md-5 me-md-5">
+          {content.summary}
+        </p>
       ) : null}
-      {content.image ? (
+      {content.image && teaser.image ? (
         <Link className="text-center" href={content.route}>
           <Img
-            width={640}
-            height={380}
+            width={teaser.image.width}
+            height={teaser.image.height}
             src={content.image.src}
             alt={content.image.alt}
+            optimize={teaser.image.optimize}
           />
           {content.image.caption ? (
             <small className="text-muted mt-2">{content.caption}</small>
@@ -46,11 +49,11 @@ const Teaser = ({ content }) => {
         </Link>
       ) : null}
       {teaser.limit ? (
-        <p className="serif mt-3 mb-3">
+        <p className="serif mt-4 mb-4 ms-md-5 me-md-5">
           {truncate(content.text, teaser.limit)}
         </p>
       ) : null}
-      <nav className="navigation d-flex justify-between">
+      <nav className="navigation d-flex mb-3 justify-between ms-md-5 me-md-5">
         <Link className="small" href={content.route}>
           {teaser.readTime ? (
             <span>{makeReadTime(content.text)} min read</span>

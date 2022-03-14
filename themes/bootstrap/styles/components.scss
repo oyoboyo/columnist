@@ -53,6 +53,8 @@ article:last-of-type {
   ul,
   ol {
     font-size: 1.2rem;
+  }
+  p {
     line-height: 2rem;
   }
   // Feature headings
@@ -105,7 +107,7 @@ article:last-of-type {
     font-style: italic;
   }
   small {
-    line-height: 1rem;
+    line-height: 0.7rem;
   }
 }
 

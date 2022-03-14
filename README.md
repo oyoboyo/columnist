@@ -1,163 +1,128 @@
 # Columnist
 
-**an open source Next.js starter for columnists**
+A feature rich and familiar blog starter for Next.js built with writers (and their readers) in mind. Self-publish (and own your platform).
 
-Building on the DX of Next.js the starter offers easy bootstrapping for independent writers. 
+## **Features**
 
-Get the latest documentation on our [Notion](https://www.notion.so/oyoboyo/Columnist-Documentation-v0-1-0-d1bf444a324843a29fdaab660102cd67). 
+Columnist lets you:
 
-# Index
+- Create articles and pages with Markdown
+- Manage content collections to build structure
+- Easily configure, customize, and deploy you site
+- Extend with [Next.js](https://nextjs.org/)
+-
 
-- [Starter](https://github.com/oyoboyo/columnist/wiki/Starter)
-- [Core](https://github.com/oyoboyo/columnist/wiki/Core)
-- [Themes](https://github.com/oyoboyo/columnist/wiki/Themes)
-- [Workspace](https://github.com/oyoboyo/columnist/wiki/Workspace)
+# Documentation
+
+- [For creators](https://www.notion.so/For-creators-b2dafe28cee74b7aaa4d1fe97eb8c0df)
+- [For developers](https://www.notion.so/For-developers-3b5f7eb718a743c9a15b97762b1f114d)
+- [For contributors](https://www.notion.so/For-contributors-f63563f256a94f44bcda6d234ce8de38)
 
 # Getting started
 
-Getting started is simple:
+Getting started is simple (assuming you’re setup with [Node.js](https://www.newline.co/@Adele/how-to-install-nodejs-and-npm-on-macos--22782681)):
 
-## Setup
+In your terminal, create a Next.js app with the Columnist starter:
 
-Create Next.js app with starter:
-
-```markdown
+```yaml
 npx create-next-app --example https://github.com/oyoboyo/columnist/tree/workspace/starters/starter
 ```
 
 Run the project locally:
 
-```
+```yaml
 npm run dev
 ```
 
-## Customize
+Then visit [http://localhost:3000/](http://localhost:3000/) in your browser to view, and develop your site locally.
 
-Make the site your own:
+# Create
 
-- Edit `columnist.config.js` to configure features e.g., brand, menu, social, etc.
-- Edit `src/styles/custom.scss` to customize style, e.g., type, colors, etc.
+Columnist makes it easy to add and organize content to your site with [Markdown](https://www.markdownguide.org/cheat-sheet/).
 
-[Learn more](https://github.com/oyoboyo/columnist/wiki/Starter)
+Using your [integrated development environment](https://code.visualstudio.com/) or text editor of choice:
 
-## Create content
+- Add Markdown files to the `content` folder e.g., `content/about.md`
+- Organize content collections in folders e.g., `content/articles`
+- Nest folders to build content structure e.g., `content/issues/[issue]/[article]`
+- See content on your site, at a route matching the folder structure e.g., `/about` or `/articles`
 
-Populate `content` with files and folders to publish pages, articles and collections:
+Columnist has been designed to be intuitive for creators really — just add Markdown.
 
-- Start by adding `*.md` files to the content folder e.g., `content/about.md`
-- Organize content in collection by adding files to a folder e.g., `content/articles`
-- Use folders to build structure; add front matter to add detail
-- See your content live on your local Columnist site
+# Configure
 
-[Learn more](https://github.com/oyoboyo/columnist/wiki/Starter)
+Columnist can be configured in a number of ways, for example, to customize brand, the header, or footer.
 
-## Go live
+- For all configuration options [read our guide for creators](https://www.notion.so/For-creators-b2dafe28cee74b7aaa4d1fe97eb8c0df)
+- To edit configuration, it’s file `columnist.config.js` in the root folder
 
-Publish your site to [Vercel](https://vercel.com/) or another compatible Next.js host to go live.
+# Customize
 
-# How it works
+Columnist can also be customized to accommodate your brand:
 
-Basically, Columnist is a Next.js starter, with a focus on generating static content from Markdown (and looking good).
+## Logo
 
-Columnist is [documented for developers](https://github.com/oyoboyo/columnist/wiki), but briefly:
+The site logo can also be replaced at `public/graphics/logo.svg`.
 
-- A Next.js catch all route matches the structure of the `content` folder
-- Folders or `*.md` in the `content` folder generates routes in `getStaticPaths`
-- Content is parsed by Columnist in `getStaticProps` and rendered as static pages
-- Create structured content in `content` and get a static site (with matching structure)
+- The default logo is a `500 x 500 px` square icon `*.svg` file
 
-[Learn more](https://github.com/oyoboyo/columnist/wiki)
+## Icons
 
-# Structure
+Favicon have been included for a range of devices:
 
-Columnist features are broken out into a few packages to help keep repositories clean:
+- The starter favicons can be changed by replacing the files under `public/favicon`
+- To generate favicons we recommend [https://realfavicongenerator.net/](https://realfavicongenerator.net/)
 
-## Starter
+## Style
 
-Columnist Starters are designed to abstact away development (to let creators focus on content).
+Columnist uses SCSS and Bootstrap for style ([React Bootstrap optional](https://react-bootstrap.github.io/)). To customize:
 
-In a starter you’ll find:
+- Edit or add default Bootstrap variables to `src/style/custom.scss`
+- Add additional SCSS files (and import them to `src/style/index.scss`)
 
-- **Content:** sample content as example to get you started can be found in the `content` folder
-- **Pages:** a home page, and Next.js catch all route have been provided in `src/pages`
-- **Components** at `src/components` (components can be added, or overidden from theme)
-- **Styles** at `src/styles` to be customized or extended
+**Note:** Read [Bootstrap documentation](https://getbootstrap.com/docs/4.0/getting-started/theming/) for more information on customizing Bootstrap.
 
-[Learn more](https://github.com/oyoboyo/columnist/wiki/Starter)
+# Deploy
 
-👉 **Note:** This is the first starter but there will be others with different themes, and features — stay tuned.
+Deployment of your site is pretty easy:
 
-## Core
+1. [Start with a new git repository](https://kbroman.org/github_tutorial/pages/init.html) in your Columnist site folder
+2. Create content, configure, and customize, then git commit your site to Github
+3. [Deploy your site to Vercel](https://vercel.com/guides/deploying-react-with-vercel) by importing your git repository
 
-Core Columnist functions have been packaged `@columnist/core` to include:
+Vercel is [free for non-commericial hosting](https://vercel.com/pricing) for when your just getting started.
 
-- Services for walking a file system for processing content (e.g., Markdown)
-- Utilities for processing text and other common tasks
-- Generic default components i.e., those not “themed”
+👉 **Note:** new to git? No problem. [Learn the basics.](https://rogerdudler.github.io/git-guide/)
 
-[Learn more](https://github.com/oyoboyo/columnist/wiki/Core)
+# Develop
 
-## Themes
+Columnist was built with Next.js so all the Next.js [documentation](https://nextjs.org/docs/getting-started) will apply.
 
-Meanwhile components and styles are packaged in themes:
+We’ve also built in some useful core concepts for development of content centric websites:
 
-- Separate packages e.g., `@columnist/bootstrap`
-- defined by a style framework e.g., Bootstrap
-- and including the default components
+- [Themes](https://www.notion.so/For-developers-3b5f7eb718a743c9a15b97762b1f114d), allowing you to customize content components
+- [Services](https://www.notion.so/For-developers-3b5f7eb718a743c9a15b97762b1f114d), that help you get `content` when you build Next.js pages
+- [Utilities](https://www.notion.so/For-developers-3b5f7eb718a743c9a15b97762b1f114d), [starters](https://www.notion.so/For-developers-3b5f7eb718a743c9a15b97762b1f114d), a [monorepo](https://www.notion.so/For-developers-3b5f7eb718a743c9a15b97762b1f114d)... lots to help you expand on simple columns
 
-[Learn more](https://github.com/oyoboyo/columnist/wiki/Themes)
+👉 **Note:** new to Next.js? No problem. [Learn the basics.](https://nextjs.org/learn/foundations/about-nextjs?utm_source=next-site&utm_medium=nav-cta&utm_campaign=next-website)
 
----
+# Contribute
 
-# Workspaces
+We’re just ramping up, but we will take contributors. To get in touch to contribute talk to [Sean Rioux on Github](https://github.com/oyoboyo/columnist/discussions).
 
-Columnist uses NPM workspaces for local development of common features (e.g., themes, packages) as well as local development of Columnist apps and starters.
+— however if you want to poke around at the monorepo, feel free. [Documentation here](https://www.notion.so/For-contributors-f63563f256a94f44bcda6d234ce8de38).
 
-In the root there is a `package.json` for common dependencies and to identify workspaces.
+# Appendix
 
-At the moment you'll find the following:
+[Outline](https://www.notion.so/Outline-1fb14499acb84c61ba3f1c08a45cdf3f)
 
-- `themes` for CSS framework specific functionality e.g., Bootstrap
-- `common` for common functionality across apps e.g., Core
-- `starters` for staters
+## Changelog
 
-And the following packages:
+### v0.1.0
 
-- Columnist Core at `./common/core`
-- Columnist Bootstrap at `./themes/bootstrap`
-- Columnist Stater at `./staters/starter`
+- Initialize Columnist Monorepo, core, themes, starter
+- **Stories:** create content, customize, configure, deploy
 
-## Development
+### v0.2.0
 
-To develop with the workspaces:
-
-1. Create an app in the `./apps` or folder
-2. Run NPM install in the `./` root folder
-3. You can now use the local `./common` and `./themes` in your project.
-
-## Packages
-
-Packages `@columnist` organization. In each workspace, there are packages. The packages are named with the convention `@columnist/[package-name]` for easy reference in apps, e.g.:
-
-- `@columnist/core`
-- `@columnist/bootstrap`
-
-Packages are published and versioned via NPM leveraging workspaces features ([see documentation](https://docs.npmjs.com/cli/v8/commands/npm-publish)).
-
-To publish:
-
-### Increment version
-
-Use `npm versions` to numbers for all workspaces e.g.:
-
-```
-npm version v0.1.4 --workspaces
-```
-
-### Publish workspaces
-
-Use `npm publish` to publish all workspaces e.g.:
-
-```
-npm publish --workspaces
-```
+- Services refactoring

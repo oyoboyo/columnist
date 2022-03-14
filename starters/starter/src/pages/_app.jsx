@@ -1,8 +1,7 @@
 import "src/styles/index.scss";
 
 import { Config } from "@columnist/core";
-
-import { brand, head, header, footer } from "columnist.config";
+import config from "columnist.config";
 
 /**
  * @file App
@@ -13,15 +12,8 @@ import { brand, head, header, footer } from "columnist.config";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Config
-      value={{
-        brand,
-        head,
-        header,
-        footer,
-      }}
-    >
-      <Component {...pageProps} />;
+    <Config value={config}>
+      <Component {...pageProps} />
     </Config>
   );
 }

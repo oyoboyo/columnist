@@ -1,12 +1,7 @@
 import Head from "next/head";
-import {
-  getAllPathsFromDir,
-  getDocumentFromParams,
-  getCollectionFromParams,
-  getCollectionsFromParams,
-} from "@columnist/core";
+import { getAllPaths, getAllContent } from "@columnist/core";
 import { Page, Section, Article } from "src/components";
-import { brand } from "columnist.config";
+import config from "columnist.config";
 
 /**
  * Content
@@ -14,7 +9,7 @@ import { brand } from "columnist.config";
  */
 
 export default function All({ doc, collection, collections }) {
-  const description = doc && doc.summary ? doc.summary : brand.tagline;
+  const description = doc && doc.summary ? doc.summary : config.brand.tagline;
   return (
     <Page header="bar">
       <Head>
@@ -36,8 +31,13 @@ export default function All({ doc, collection, collections }) {
         </Section>
       ) : null}
       {collections
-        ? collections.map((section) => (
-            <Section name={section.slug} title={section.title} style="column">
+        ? collections.map((section, index) => (
+            <Section
+              key={index}
+              name={section.slug}
+              title={section.title}
+              style="column"
+            >
               {section.collection
                 ? section.collection.map((doc, index) => (
                     <Article key={index} content={doc} style="teaser" />
@@ -51,27 +51,22 @@ export default function All({ doc, collection, collections }) {
 }
 
 export async function getStaticPaths() {
-  // Create path params from directory
-  const paths = await getAllPathsFromDir("content");
+  const paths = await getAllPaths("content");
 
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  // Get doc
-  const doc = await getDocumentFromParams(params.all, { html: true });
-
-  // Get collection
-  const collection = await getCollectionFromParams(params.all, {
-    teaser: true,
-  });
-
-  // Get collections
-  const collections = await getCollectionsFromParams(params.all, {
-    teaser: true,
-  });
+  const { doc, collection, collections } = getAllContent(
+    params.all,
+    config.all
+  );
 
   return {
-    props: { doc, collection, collections },
+    props: {
+      doc,
+      collection,
+      collections,
+    },
   };
 }

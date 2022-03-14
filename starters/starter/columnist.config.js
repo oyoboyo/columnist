@@ -1,8 +1,3 @@
-// config.head
-export const head = {
-  GoogleAnalytics: "UA-XXXXX-Y",
-};
-
 // config.brand
 export const brand = {
   name: "Columnist",
@@ -10,6 +5,11 @@ export const brand = {
   logo: "/graphics/logo.svg",
   domain: "www.oyoboyo.com",
   contact: "info@oyoboyo.com",
+};
+
+// config.head
+export const head = {
+  GoogleAnalytics: "UA-XXXXX-Y",
 };
 
 // config.header
@@ -33,10 +33,10 @@ export const header = {
   ],
 };
 
-// .config.date
+// .config/collection.js
 const date = {
   locale: "en-US",
-  options: {
+  string: {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -47,61 +47,54 @@ const date = {
 export const article = {
   teaser: {
     date: date,
-    limit: 120,
+    limit: 220,
     readTime: true,
+    image: {
+      width: 960,
+      height: 640,
+      optimize: true,
+    },
   },
   detail: {
     date: date,
     html: true,
     readTime: true,
+    image: {
+      width: 960,
+      height: 640,
+      optimize: true,
+    },
   },
+};
+
+// config.all
+const sortByDate = (array) => {
+  return array.sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
+};
+
+const sortByOrder = (array) => {
+  return array.sort((a, b) => {
+    return b.order - new a.order();
+  });
+};
+
+const filterPages = (array) => {
+  return array.filter((item) => item.type !== "page");
 };
 
 // Pages
 // config.home
 export const home = {
-  limit: 10,
-  sorts: [
-    (array) => {
-      array.sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
-      });
-      return array;
-    },
-  ],
-  filters: [
-    (array) => {
-      array.filter((item) => item.type !== "article");
-      return array;
-    },
-  ],
-};
-
-// config.all
-const sortByDate = (array) => {
-  array.sort((a, b) => {
-    return new Date(b.date) - new Date(a.date);
-  });
-  return array;
-};
-
-// config.all
-const sortByOrder = (array) => {
-  array.sort((a, b) => {
-    return b.order - new a.order();
-  });
-  return array;
+  limit: 10, // Null for no limit?
+  sorts: [sortByDate],
+  filters: [filterPages],
 };
 
 export const all = {
-  limit: 10,
+  limit: 10, // Null for no limit?
   sorts: [sortByDate],
-  filters: [
-    (array) => {
-      array.filter((item) => item.type === "article");
-      return array;
-    },
-  ],
 };
 
 // config.

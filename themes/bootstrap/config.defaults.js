@@ -14,11 +14,21 @@ export const article = {
     date: date,
     limit: 120,
     readTime: true,
+    image: {
+      width: 640,
+      height: 380,
+      optimize: true,
+    },
   },
   detail: {
     date: date,
     html: true,
     readTime: true,
+    image: {
+      width: 640,
+      height: 380,
+      optimize: true,
+    },
   },
 };
 

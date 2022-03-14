@@ -1,7 +1,6 @@
 import "src/styles/index.scss";
 
 import { Config } from "@columnist/core";
-
 import config from "columnist.config";
 
 /**

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { getAllDocumentsFromDir } from "@columnist/core";
+import { getDocuments } from "@columnist/core";
 import { Page, Section } from "src/components";
 import { Article } from "src/components";
 import config from "columnist.config";
@@ -30,7 +30,7 @@ export default function HomePage({ documents }) {
 }
 
 export async function getStaticProps() {
-  let documents = await getAllDocumentsFromDir("content", config.home);
+  let documents = await getDocuments("content", config.home);
 
   return {
     props: {

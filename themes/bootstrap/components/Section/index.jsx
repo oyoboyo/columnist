@@ -2,7 +2,7 @@ const Section = ({ title, children, name, style }) => {
   const containerClass = name ? `${name} ` : "";
   const columnClass =
     style && style === "column"
-      ? "col-sm-10 col-md-7 col-xxl-6"
+      ? "col-sm-10 col-md-9 col-lg-9 col-xl-8 col-xxl-7"
       : style && style === "wide"
       ? "col-md-12 col-lg-10 col-xxl-9"
       : style && style === "narrow"

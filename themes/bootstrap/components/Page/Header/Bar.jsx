@@ -1,28 +1,32 @@
 import { Link } from "@columnist/core";
 
-const Bar = ({ brand, config }) => {
+import { useConfig } from "@columnist/core";
+
+const Bar = () => {
+  const config = useConfig();
+
   return (
     <nav className="main bar navbar navbar-expand navbar-light bg-white p-md-4 mb-3 mb-md-5 border-bottom">
       <div className="container-fluid justify-between">
         <div className="d-flex align-center">
           <>
-            {config.options.logo ? (
+            {config.brand.logo ? (
               <span className="logo me-2 me-md-4">
                 <Link href="/">
-                  <img className="img-fluid" src={brand.logo} />
+                  <img className="img-fluid" src={config.brand.logo} />
                 </Link>
               </span>
             ) : null}
-            {config.options.name ? (
+            {config.header.name ? (
               <div className="align-center">
                 <h1 className="name h4 me-3 mb-0">
-                  <Link href="/">{brand.name}</Link>
+                  <Link href="/">{config.brand.name}</Link>
                 </h1>
               </div>
             ) : null}
           </>
           <ul className="navbar-nav d-flex">
-            {config.menu.map(({ url, title }, index) => (
+            {config.header.menu.map(({ url, title }, index) => (
               <li className="nav-item" key={index}>
                 <Link className="nav-link" href={url}>
                   {title}
@@ -32,10 +36,13 @@ const Bar = ({ brand, config }) => {
           </ul>
         </div>
         <div>
-          {config.options.cta ? (
+          {config.header.cta ? (
             <div>
-              <Link className="btn btn-primary ms-3" href={config.cta.url}>
-                {config.cta.button}
+              <Link
+                className="btn btn-primary ms-3"
+                href={config.header.cta.url}
+              >
+                {config.header.cta.button}
               </Link>
             </div>
           ) : null}

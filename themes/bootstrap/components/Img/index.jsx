@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-const Img = ({ src, alt, width, height }) => {
-  return (
+const Img = ({ src, alt, width, height, optimize }) => {
+  return optimize ? (
     <Image
       width={width}
       height={height}
@@ -10,6 +10,8 @@ const Img = ({ src, alt, width, height }) => {
       layout="responsive"
       objectFit="cover"
     />
+  ) : (
+    <img className="img-fluid" src={src} alt={alt} />
   );
 };
 

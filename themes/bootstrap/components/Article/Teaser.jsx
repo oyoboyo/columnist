@@ -4,18 +4,10 @@ import Img from "../Img";
 // utilities
 import { makeReadTime, makeDate, truncate } from "@columnist/core";
 // default config
-import defaults from "../../config.defaults";
 import Author from "./Author";
 
 const Teaser = ({ content }) => {
-  // Get config
   const config = useConfig();
-  // Check, get defaults
-  const teaser = config.article.teaser
-    ? config.article.teaser
-    : defaults.article.teaser;
-
-  const authors = config.authors ? config.authors : null;
 
   return (
     <article className="teaser border-bottom pb-4 mb-5">
@@ -23,9 +15,9 @@ const Teaser = ({ content }) => {
         {content.tag ? (
           <small className="text-muted me-2">{content.tag}</small>
         ) : null}
-        {teaser.date && content.date ? (
+        {config.article.teaser.date && content.date ? (
           <small className="text-muted">
-            {makeDate(content.date, teaser.date)}
+            {makeDate(content.date, config.article.teaser.date)}
           </small>
         ) : null}
       </div>
@@ -37,28 +29,28 @@ const Teaser = ({ content }) => {
           {content.summary}
         </p>
       ) : null}
-      {content.image && teaser.image ? (
+      {content.image && config.article.teaser.image ? (
         <Link className="text-center" href={content.route}>
           <Img
-            width={teaser.image.width}
-            height={teaser.image.height}
+            width={config.article.teaser.image.width}
+            height={config.article.teaser.image.height}
             src={content.image.src}
             alt={content.image.alt}
-            optimize={teaser.image.optimize}
+            optimize={config.article.teaser.image.optimize}
           />
           {content.image.caption ? (
             <small className="text-muted mt-2">{content.caption}</small>
           ) : null}
         </Link>
       ) : null}
-      {teaser.limit ? (
+      {config.article.teaser.limit ? (
         <p className="serif mt-4 mb-4 ms-md-5 me-md-5">
-          {truncate(content.text, teaser.limit)}
+          {truncate(content.text, config.article.teaser.limit)}
         </p>
       ) : null}
       <nav className="navigation d-flex justify-content-between align-items-center mb-3 ms-md-5 me-md-5">
         <Link className="small" href={content.route}>
-          {teaser.readTime ? (
+          {config.article.teaser.readTime ? (
             <span>{makeReadTime(content.text)} min read</span>
           ) : (
             <span>Read more</span>
@@ -67,8 +59,8 @@ const Teaser = ({ content }) => {
         {content.author ? (
           <Author
             content={
-              authors && authors[content.author.key]
-                ? authors[content.author.key]
+              config.authors[content.author]
+                ? config.authors[content.author]
                 : content.author
             }
             style="teaser"

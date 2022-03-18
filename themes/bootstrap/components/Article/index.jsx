@@ -1,8 +1,3 @@
-// core
-import { useConfig } from "@columnist/core";
-// local defaults
-import defaults from "../../config.defaults";
-
 import Teaser from "./Teaser";
 import Detail from "./Detail";
 

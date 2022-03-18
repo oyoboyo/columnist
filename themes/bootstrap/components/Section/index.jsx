@@ -10,7 +10,7 @@ const Section = ({ title, children, name, style }) => {
       : "";
   return (
     <section className={`${containerClass}container-fluid mb-5`}>
-      <div className="row alc jtc">
+      <div className="row align-items justify-content-center">
         <div className={columnClass}>
           {title ? (
             <h1 className="h5 fw-bold border-bottom pb-2 mb-3">{title}</h1>

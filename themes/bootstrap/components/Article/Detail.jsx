@@ -1,11 +1,12 @@
 // core
-import { Html, useConfig } from "@columnist/core";
+import { Html, Link, useConfig } from "@columnist/core";
 // component
 import Img from "../Img";
 // utilities
 import { makeReadTime, makeDate } from "@columnist/core";
 // config
 import defaults from "../../config.defaults";
+import Author from "./Author";
 
 const Detail = ({ content }) => {
   const config = useConfig();
@@ -14,16 +15,23 @@ const Detail = ({ content }) => {
     ? config.article.detail
     : defaults.article.detail;
 
+  const authors = config.authors ? config.authors : null;
+
   return (
     <article className="border-bottom pb-4 mb-4">
       <header>
+        {content.tag ? (
+          <small className="text-muted me-2 ms-md-5 me-md-5">
+            {content.tag}
+          </small>
+        ) : null}
         <h1 className="mt-2 ms-md-5 me-md-5">{content.title}</h1>
         {content.summary ? (
           <p className="lead text-muted mb-3 ms-md-5 me-md-5">
             {content.summary}
           </p>
         ) : null}
-        <div className="d-flex justify-between mb-3 ms-md-5 me-md-5">
+        <div className="d-flex justify-content-between mb-3 ms-md-5 me-md-5">
           {detail.date && content.date ? (
             <small className="text-muted">
               {makeDate(content.date, detail.date)}
@@ -59,7 +67,13 @@ const Detail = ({ content }) => {
       </main>
       <footer>
         {content.author ? (
-          <small className="text-muted">Article by {content.author}</small>
+          content.author.key && authors[content.author.key] ? (
+            <div className="ms-md-5 me-md-5">
+              <Author content={authors[content.author.key]} style="detail" />
+            </div>
+          ) : (
+            <Author content={content.author} style="teaser" />
+          )
         ) : null}
       </footer>
     </article>

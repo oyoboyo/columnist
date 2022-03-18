@@ -5,6 +5,7 @@ import Img from "../Img";
 import { makeReadTime, makeDate, truncate } from "@columnist/core";
 // default config
 import defaults from "../../config.defaults";
+import Author from "./Author";
 
 const Teaser = ({ content }) => {
   // Get config
@@ -14,9 +15,11 @@ const Teaser = ({ content }) => {
     ? config.article.teaser
     : defaults.article.teaser;
 
+  const authors = config.authors ? config.authors : null;
+
   return (
     <article className="teaser border-bottom pb-4 mb-5">
-      <div className="metadata d-flex justify-between ms-md-5 me-md-5">
+      <div className="metadata d-flex justify-content-between ms-md-5 me-md-5">
         {content.tag ? (
           <small className="text-muted me-2">{content.tag}</small>
         ) : null}
@@ -53,7 +56,7 @@ const Teaser = ({ content }) => {
           {truncate(content.text, teaser.limit)}
         </p>
       ) : null}
-      <nav className="navigation d-flex mb-3 justify-between ms-md-5 me-md-5">
+      <nav className="navigation d-flex justify-content-between align-items-center mb-3 ms-md-5 me-md-5">
         <Link className="small" href={content.route}>
           {teaser.readTime ? (
             <span>{makeReadTime(content.text)} min read</span>
@@ -62,7 +65,14 @@ const Teaser = ({ content }) => {
           )}
         </Link>
         {content.author ? (
-          <small className="text-muted">Article by {content.author}</small>
+          <Author
+            content={
+              authors && authors[content.author.key]
+                ? authors[content.author.key]
+                : content.author
+            }
+            style="teaser"
+          />
         ) : null}
       </nav>
     </article>

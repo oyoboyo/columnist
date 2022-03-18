@@ -3,12 +3,12 @@ import { Link, useConfig } from "@columnist/core";
 const Footer = () => {
   const config = useConfig();
   return (
-    <div className="container-fluid d-flex border-top jbtw alc ps-md-4 pe-md-4 mt-5 pt-4 pb-4">
-      <div className="d-flex alc small">
+    <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center ps-md-4 pe-md-4 mt-5 pt-4 pb-4 border-top">
+      <div className="d-flex align-items-center flex-column flex-md-row small">
         <span className="text-muted me-2">
           © {new Date().getFullYear()} {config.brand.name}
         </span>
-        <nav className="nav">
+        <nav className="nav mt-3 mt-sm-0">
           {config.footer.menu.map((item, index) => (
             <Link key={index} className="nav-link" href={item.url}>
               {item.title}

@@ -74,12 +74,17 @@ const sortByDate = (array) => {
   });
 };
 
+// Natural sorting
 const sortByOrder = (array) => {
   return array.sort((a, b) => {
-    return b.order - new a.order();
+    return a.slug.localeCompare(b.slug, undefined, {
+      numeric: true,
+      sensitivity: "base",
+    });
   });
 };
 
+// Filter pages (out)
 const filterPages = (array) => {
   return array.filter((item) => item.type !== "page");
 };

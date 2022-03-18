@@ -1,21 +1,14 @@
 // core
-import { Html, Link, useConfig } from "@columnist/core";
+import { Html, useConfig } from "@columnist/core";
 // component
 import Img from "../Img";
 // utilities
 import { makeReadTime, makeDate } from "@columnist/core";
 // config
-import defaults from "../../config.defaults";
 import Author from "./Author";
 
 const Detail = ({ content }) => {
   const config = useConfig();
-
-  const detail = config.article.detail
-    ? config.article.detail
-    : defaults.article.detail;
-
-  const authors = config.authors ? config.authors : null;
 
   return (
     <article className="border-bottom pb-4 mb-4">
@@ -31,26 +24,28 @@ const Detail = ({ content }) => {
             {content.summary}
           </p>
         ) : null}
-        <div className="d-flex justify-content-between mb-3 ms-md-5 me-md-5">
-          {detail.date && content.date ? (
-            <small className="text-muted">
-              {makeDate(content.date, detail.date)}
-            </small>
-          ) : null}
-          {detail.readTime ? (
-            <small className="text-muted">
-              {makeReadTime(content.text)} min read
-            </small>
-          ) : null}
-        </div>
-        {content.image && detail.image ? (
+        {content.type !== "page" ? (
+          <div className="d-flex justify-content-between mb-3 ms-md-5 me-md-5">
+            {config.article.detail.date && content.date ? (
+              <small className="text-muted">
+                {makeDate(content.date, config.article.detail.date)}
+              </small>
+            ) : null}
+            {config.article.detail.readTime ? (
+              <small className="text-muted">
+                {makeReadTime(content.text)} min read
+              </small>
+            ) : null}
+          </div>
+        ) : null}
+        {content.image && config.article.detail.image ? (
           <div className="text-center">
             <Img
-              width={detail.image.width}
-              height={detail.image.height}
+              width={config.article.detail.image.width}
+              height={config.article.detail.image.height}
               src={content.image.src}
               alt={content.image.alt}
-              optimize={detail.image.optimize}
+              optimize={config.article.detail.image.optimize}
             />
             {content.image.caption ? (
               <small className="text-muted mt-2 ">
@@ -67,13 +62,16 @@ const Detail = ({ content }) => {
       </main>
       <footer>
         {content.author ? (
-          content.author.key && authors[content.author.key] ? (
-            <div className="ms-md-5 me-md-5">
-              <Author content={authors[content.author.key]} style="detail" />
-            </div>
-          ) : (
-            <Author content={content.author} style="teaser" />
-          )
+          <div className="ms-md-5 me-md-5">
+            <Author
+              content={
+                config.authors[content.author]
+                  ? config.authors[content.author]
+                  : content.author
+              }
+              style="detail"
+            />
+          </div>
         ) : null}
       </footer>
     </article>

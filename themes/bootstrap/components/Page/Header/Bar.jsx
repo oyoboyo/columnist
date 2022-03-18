@@ -10,7 +10,7 @@ const Bar = () => {
       <div className="container-fluid">
         <div className="d-flex w-100 align-content-start justify-content-between">
           <div className="d-flex flex-column flex-md-row">
-            <div class="d-flex align-items-center">
+            <div className="d-flex align-items-center">
               {config.brand.logo ? (
                 <span className="logo me-2 me-md-4">
                   <Link href="/">

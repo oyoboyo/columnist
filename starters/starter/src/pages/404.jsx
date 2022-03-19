@@ -1,11 +1,11 @@
-import { Page, Section } from "src/components";
+import { Page, Column } from "src/components";
 
 export default function Custom404() {
   return (
     <Page header="bar">
-      <Section style="column">
+      <Column>
         <h1>404: Page Not Found</h1>
-      </Section>
+      </Column>
     </Page>
   );
 }

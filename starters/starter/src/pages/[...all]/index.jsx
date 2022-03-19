@@ -1,49 +1,31 @@
-import Head from "next/head";
 import { getAllPaths, getAllContent } from "@columnist/core";
-import { Page, Section, Article } from "src/components";
+import { Page, Column, Article } from "src/components";
 import config from "columnist.config";
 
-/**
- * Content
- * Dynamic catch all route for content and collections
- */
-
 export default function All({ doc, collection, collections }) {
-  const description = doc && doc.summary ? doc.summary : config.brand.tagline;
   return (
     <Page header="bar">
-      <Head>
-        <title>{doc.title}</title>
-        <meta name="description" content={description} />
-        <meta property="og:title" content={doc.title} />
-        <meta property="og:description" content={description} />
-      </Head>
-      {doc.type !== "directory" ? (
-        <Section name="article" style="column">
+      {doc ? (
+        <Column name="article">
           <Article content={doc} style="detail" />
-        </Section>
+        </Column>
       ) : null}
       {collection ? (
-        <Section name={doc.slug} title={doc.title} style="column">
-          {collection.map((doc, index) => (
-            <Article key={index} content={doc} style="teaser" />
-          ))}
-        </Section>
+        <Column name="collection" title={doc.collection ? doc.collection : null}>
+          {collection.map((doc, index) =>
+            doc.type === "article" ? (
+              <Article key={index} content={doc} style="teaser" />
+            ) : null
+          )}
+        </Column>
       ) : null}
       {collections
-        ? collections.map((section, index) => (
-            <Section
-              key={index}
-              name={section.slug}
-              title={section.title}
-              style="column"
-            >
-              {section.collection
-                ? section.collection.map((doc, index) => (
-                    <Article key={index} content={doc} style="teaser" />
-                  ))
-                : null}
-            </Section>
+        ? collections.map((column, index) => (
+            <Column key={index} name="collections" title={column.title}>
+              {column.collection.map((doc, index) => (
+                <Article key={index} content={doc} style="teaser" />
+              ))}
+            </Column>
           ))
         : null}
     </Page>
@@ -57,10 +39,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { doc, collection, collections } = getAllContent(
-    params.all,
-    config.all
-  );
+  const { doc, collection, collections } = getAllContent(params.all, config.all);
 
   return {
     props: {

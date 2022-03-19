@@ -33,11 +33,13 @@ header .hero {
 }
 
 // Article
-
-article:last-of-type {
-  border-bottom: 0 solid transparent !important;
-  padding-bottom: 0px !important;
-  margin-bottom: 0px !important;
+.collection,
+.collections {
+  article:last-of-type {
+    border-bottom: 0 solid transparent !important;
+    padding-bottom: 0px !important;
+    margin-bottom: 0px !important;
+  }
 }
 
 .author {

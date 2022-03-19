@@ -36,13 +36,9 @@ function Detail({ content }) {
         </div>
       ) : null}
       <div className="detail-info">
-        <h1 className="h6 mb-1">
-          Article by {content.name ? content.name : content}
-        </h1>
+        <h1 className="h6 mb-1">Article by {content.name ? content.name : content}</h1>
         {content.bio ? <div className="mb-2">{content.bio}</div> : null}
-        {content.email ? (
-          <a href={`mailto:${content.email}`}>{content.email}</a>
-        ) : null}
+        {content.email ? <a href={`mailto:${content.email}`}>{content.email}</a> : null}
         {content.social ? (
           <ul className="nav d-flex">
             {content.social.map(({ url, Icon }, index) => (

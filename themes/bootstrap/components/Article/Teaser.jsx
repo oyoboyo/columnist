@@ -12,9 +12,7 @@ const Teaser = ({ content }) => {
   return (
     <article className="teaser border-bottom pb-4 mb-5">
       <div className="metadata d-flex justify-content-between ms-md-5 me-md-5">
-        {content.tag ? (
-          <small className="text-muted me-2">{content.tag}</small>
-        ) : null}
+        {content.tag ? <small className="text-muted me-2">{content.tag}</small> : null}
         {config.article.teaser.date && content.date ? (
           <small className="text-muted">
             {makeDate(content.date, config.article.teaser.date)}
@@ -25,9 +23,7 @@ const Teaser = ({ content }) => {
         <h1 className="text-dark h2 mt-3 ms-md-5 me-md-5">{content.title}</h1>
       </Link>
       {content.summary ? (
-        <p className="lead text-muted mb-4 ms-md-5 me-md-5">
-          {content.summary}
-        </p>
+        <p className="lead text-muted mb-4 ms-md-5 me-md-5">{content.summary}</p>
       ) : null}
       {content.image && config.article.teaser.image ? (
         <Link className="text-center" href={content.route}>

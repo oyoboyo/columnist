@@ -8,6 +8,19 @@ const PageHead = () => {
   return (
     <>
       <Head>
+        <title>{config.brand.name}</title>
+        <meta property="og:title" content={config.brand.name} key="og-title" />
+        <meta
+          property="og:site_name"
+          content={config.brand.name}
+          key="og-site-name"
+        />
+        <meta name="description" content={config.brand.tagline} key="desc" />
+        <meta
+          property="og:description"
+          content={config.brand.tagline}
+          key="og-desc"
+        />
         <link
           rel="apple-touch-icon"
           sizes="180x180"

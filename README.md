@@ -1,8 +1,6 @@
 # Columnist
 
-A feature rich and familiar blog starter for Next.js built with writers (and their readers) in mind.
-
-Self-publish (and own your platform).
+A feature rich blog starter for Next.js built with writers (and their readers) in mind. Self-publish (and own your platform).
 
 ## **Features**
 

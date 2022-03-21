@@ -12,7 +12,6 @@ Columnist lets you:
 - Manage content collections to build structure
 - Easily configure, customize, and deploy you site
 - Extend with [Next.js](https://nextjs.org/)
--
 
 # Documentation
 

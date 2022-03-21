@@ -38,7 +38,7 @@ npm run dev
 
 Then visit [http://localhost:3000/](http://localhost:3000/) in your browser to view, and develop your site locally.
 
-# Create
+## Create
 
 Columnist makes it easy to add and organize content to your site with [Markdown](https://www.markdownguide.org/cheat-sheet/).
 
@@ -51,31 +51,31 @@ Using your [integrated development environment](https://code.visualstudio.com/) 
 
 Columnist has been designed to be intuitive for creators really — just add Markdown.
 
-# Configure
+## Configure
 
 Columnist can be configured in a number of ways, for example, to customize brand, the header, or footer.
 
 - For all configuration options [read our guide for creators](https://www.notion.so/For-creators-b2dafe28cee74b7aaa4d1fe97eb8c0df)
 - To edit configuration, it’s file `columnist.config.js` in the root folder
 
-# Customize
+## Customize
 
 Columnist can also be customized to accommodate your brand:
 
-## Logo
+### Logo
 
 The site logo can also be replaced at `public/graphics/logo.svg`.
 
 - The default logo is a `500 x 500 px` square icon `*.svg` file
 
-## Icons
+### Icons
 
 Favicon have been included for a range of devices:
 
 - The starter favicons can be changed by replacing the files under `public/favicon`
 - To generate favicons we recommend [https://realfavicongenerator.net/](https://realfavicongenerator.net/)
 
-## Style
+### Style
 
 Columnist uses SCSS and Bootstrap for style ([React Bootstrap optional](https://react-bootstrap.github.io/)). To customize:
 
@@ -84,7 +84,7 @@ Columnist uses SCSS and Bootstrap for style ([React Bootstrap optional](https://
 
 **Note:** Read [Bootstrap documentation](https://getbootstrap.com/docs/4.0/getting-started/theming/) for more information on customizing Bootstrap.
 
-# Deploy
+## Deploy
 
 Deployment of your site is pretty easy:
 
@@ -96,7 +96,7 @@ Vercel is [free for non-commericial hosting](https://vercel.com/pricing) for whe
 
 👉 **Note:** new to git? No problem. [Learn the basics.](https://rogerdudler.github.io/git-guide/)
 
-# Develop
+## Develop
 
 Columnist was built with Next.js so all the Next.js [documentation](https://nextjs.org/docs/getting-started) will apply.
 
@@ -108,7 +108,7 @@ We’ve also built in some useful core concepts for development of content centr
 
 👉 **Note:** new to Next.js? No problem. [Learn the basics.](https://nextjs.org/learn/foundations/about-nextjs?utm_source=next-site&utm_medium=nav-cta&utm_campaign=next-website)
 
-# Contribute
+## Contribute
 
 We’re just ramping up, but we will take contributors. To get in touch to contribute talk to [Sean Rioux on Github](https://github.com/oyoboyo/columnist/discussions).
 

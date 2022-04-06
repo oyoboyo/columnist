@@ -7,7 +7,10 @@
  */
 
 const makeDate = (date, config) => {
-  return new Date(date).toLocaleDateString(config.locale, config.string);
+	return new Date(date.replace(".000Z", "")).toLocaleDateString(
+		config.locale,
+		config.string
+	);
 };
 
 export default makeDate;

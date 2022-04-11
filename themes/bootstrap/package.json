@@ -1,11 +1,11 @@
 {
-	"name": "@columnist/bootstrap",
-	"version": "0.2.9",
-	"private": false,
-	"main": "index.js",
-	"dependencies": {
-		"bootstrap": "^5.1.1",
-		"next": "^12.1.0",
-		"voca": "^1.4.0"
-	}
+  "name": "@columnist/bootstrap",
+  "version": "0.2.10",
+  "private": false,
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^5.1.1",
+    "next": "^12.1.0",
+    "voca": "^1.4.0"
+  }
 }

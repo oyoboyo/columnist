@@ -1,6 +1,6 @@
 import { Link, useConfig } from "@columnist/core";
 
-const Footer = () => {
+export default function Footer() {
   const config = useConfig();
   return (
     <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center ps-md-4 pe-md-4 mt-5 pt-4 pb-4 border-top">
@@ -27,6 +27,4 @@ const Footer = () => {
       </ul>
     </div>
   );
-};
-
-export default Footer;
+}

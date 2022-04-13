@@ -73,12 +73,8 @@ const Detail = ({ content }) => {
         {content.author ? (
           <div className="ms-md-5 me-md-5">
             <Author
-              content={
-                config.authors[content.author]
-                  ? config.authors[content.author]
-                  : content.author
-              }
-              style="detail"
+              content={config.authors ? config.authors[content.author] : content.author}
+              style="teaser"
             />
           </div>
         ) : null}

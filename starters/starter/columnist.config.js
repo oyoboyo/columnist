@@ -41,6 +41,7 @@ const date = {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "America/Toronto",
   },
 };
 
@@ -85,22 +86,28 @@ const sortByOrder = (array) => {
   });
 };
 
-// Filter pages (out)
-const filterPages = (array) => {
-  return array.filter((item) => item.type !== "page");
+// Filter articles
+const filterArticles = (array) => {
+  return array.filter((item) => item.type === "article");
+};
+
+// Filter published
+const filterDrafts = (array) => {
+  return array.filter((item) => !item.draft);
 };
 
 // Pages
 // config.home
 export const home = {
-  limit: 10, // Null for no limit?
+  limit: 10,
   sorts: [sortByDate],
-  filters: [filterPages],
+  filters: [filterArticles, filterDrafts],
 };
 
 export const all = {
-  limit: 10, // Null for no limit?
+  limit: 10,
   sorts: [sortByDate],
+  filters: [filterArticles, filterDrafts],
 };
 
 // config.

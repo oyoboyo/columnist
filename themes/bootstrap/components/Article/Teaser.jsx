@@ -54,11 +54,7 @@ const Teaser = ({ content }) => {
         </Link>
         {content.author ? (
           <Author
-            content={
-              config.authors[content.author]
-                ? config.authors[content.author]
-                : content.author
-            }
+            content={config.authors ? config.authors[content.author] : content.author}
             style="teaser"
           />
         ) : null}

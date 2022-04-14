@@ -2,7 +2,7 @@ import { Link, useConfig } from "@columnist/core";
 // local components
 import Img from "../Img";
 // utilities
-import { makeReadTime, makeDate, truncate } from "@columnist/core";
+import { makeDate } from "@columnist/core";
 // default config
 import Author from "./Author";
 
@@ -39,15 +39,11 @@ const Teaser = ({ content }) => {
           ) : null}
         </Link>
       ) : null}
-      {config.article.teaser.limit ? (
-        <p className="serif mt-4 mb-4 ms-md-5 me-md-5">
-          {truncate(content.text, config.article.teaser.limit)}
-        </p>
-      ) : null}
+      <p className="serif mt-4 mb-4 ms-md-5 me-md-5">{content.truncated}</p>
       <nav className="navigation d-flex justify-content-between align-items-center mb-3 ms-md-5 me-md-5">
         <Link className="small" href={content.route}>
           {config.article.teaser.readTime ? (
-            <span>{makeReadTime(content.text)} min read</span>
+            <span>{content.readTime} min read</span>
           ) : (
             <span>Read more</span>
           )}

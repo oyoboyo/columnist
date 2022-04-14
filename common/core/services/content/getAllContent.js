@@ -21,14 +21,14 @@ export default function getAllContent(all, config) {
   const file = `content/${all.join("/")}.md`;
 
   if (exists(file) && status(file).isFile()) {
-    doc = getDocument(file);
+    doc = getDocument(file, { truncation: false });
     collection = null;
     collections = null;
   }
 
   if (exists(dir) && status(dir).isDirectory()) {
     const index = `${dir}/index.md`;
-    doc = exists(index) ? getDocument(index) : getDirectory(dir);
+    doc = exists(index) ? getDocument(index, { truncation: false }) : getDirectory(dir);
 
     collection = getCollection(dir, config);
     collections = getCollections(dir, config);

@@ -31,7 +31,7 @@ export default async function getDocuments(dir, config) {
   await walk(dir, walker);
 
   let documents = files.map((file) => {
-    const doc = getDocument(`${file.path}/${file.name}`);
+    const doc = getDocument(`${file.path}/${file.name}`, config);
     return doc ? doc : null;
   });
 

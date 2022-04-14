@@ -5,7 +5,7 @@ import Head from "next/head";
 import Img from "../Img";
 import Author from "./Author";
 // Utilities
-import { makeReadTime, makeDate } from "@columnist/core";
+import { makeDate } from "@columnist/core";
 
 const Detail = ({ content }) => {
   const config = useConfig();
@@ -48,8 +48,8 @@ const Detail = ({ content }) => {
                 {makeDate(content.date, config.article.detail.date)}
               </small>
             ) : null}
-            {config.article.detail.readTime && content.text ? (
-              <small className="text-muted">{makeReadTime(content.text)} min read</small>
+            {config.article.detail.readTime ? (
+              <small className="text-muted">{content.readTime} min read</small>
             ) : null}
           </div>
         ) : null}

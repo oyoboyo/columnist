@@ -1,4 +1,6 @@
 import { readFileSync as readFile } from "fs";
+import truncate from "../../utilities/content/truncate";
+import makeReadTime from "../../utilities/content/makeReadTime";
 // Processors
 import unified from "unified";
 import remark from "remark";
@@ -38,26 +40,36 @@ export default function getDocument(path, config) {
     // Process Markdown
     const contents = readFile(path, "utf8");
     const { data, content } = getDataAndContent(contents);
-    const processed = unified() // https://unifiedjs.com/learn/recipe/remark-html
-      .use(treeParser)
-      .use(HASTParser, { allowDangerousHtml: true })
-      .use(HTMLParser)
-      .use(stringParser)
-      .processSync(content);
-    const html = processed.contents;
-    const text = remark().use(stripMarkdown).processSync(content).toString();
-
     // Process data
-    let date = data && data.date ? data.date.toJSON() : null;
-    return {
+    const date = data && data.date ? data.date.toJSON() : null;
+    const text = remark().use(stripMarkdown).processSync(content).toString();
+    const readTime = makeReadTime(text);
+
+    let doc = {
       params,
       slug,
       route,
       ...data,
       date,
-      text,
-      html,
+      readTime,
     };
+
+    if (config.truncation) {
+      const truncated = truncate(text, config.truncation);
+      doc.truncated = truncated;
+    } else {
+      const processed = unified() // https://unifiedjs.com/learn/recipe/remark-html
+        .use(treeParser)
+        .use(HASTParser, { allowDangerousHtml: true })
+        .use(HTMLParser)
+        .use(stringParser)
+        .processSync(content);
+
+      const html = processed.contents;
+      doc.html = html;
+    }
+
+    return doc;
   } else {
     throw "Error: Not a Markdown file";
   }

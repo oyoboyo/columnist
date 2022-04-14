@@ -100,17 +100,17 @@ const filterDrafts = (array) => {
 // config.home
 export const home = {
   limit: 10,
+  truncation: 220,
   sorts: [sortByDate],
   filters: [filterArticles, filterDrafts],
 };
 
 export const all = {
   limit: 10,
+  truncation: 220,
   sorts: [sortByDate],
   filters: [filterArticles, filterDrafts],
 };
-
-// config.
 
 // config.footer
 import { FiLinkedin, FiGithub, FiInstagram } from "react-icons/fi";

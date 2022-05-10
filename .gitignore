@@ -35,8 +35,8 @@ yarn-error.log*
 .vercel
 
 # Columnist
-/apps/
-/starters/pro
-/legacy/
+apps/
+common/pro/
+legacy/
 *.next/
 *.vscode/

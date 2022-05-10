@@ -1,19 +1,19 @@
 {
-	"name": "columnist-workspace",
-	"version": "0.2.0",
-	"private": true,
-	"description": "Next.js self-publishing framework",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"workspaces": [
-		"./common/*",
-		"./themes/*",
-		"./starters/*",
-		"./apps/*"
-	],
-	"author": "Sean Rioux",
-	"license": "MIT",
-	"dependencies": {}
+  "name": "columnist-workspace",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Next.js self-publishing framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "workspaces": [
+    "./common/*",
+    "./themes/*",
+    "./starters/*",
+    "./apps/*"
+  ],
+  "author": "Sean Rioux",
+  "license": "MIT",
+  "dependencies": {}
 }

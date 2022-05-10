@@ -1,5 +1,6 @@
 import { readFileSync as readFile } from "fs";
 import truncate from "../../utilities/content/truncate";
+import rehypeTruncate from "rehype-truncate";
 import makeReadTime from "../../utilities/content/makeReadTime";
 // Processors
 import unified from "unified";
@@ -58,15 +59,26 @@ export default function getDocument(path, config) {
       const truncated = truncate(text, config.truncation);
       doc.truncated = truncated;
     } else {
-      const processed = unified() // https://unifiedjs.com/learn/recipe/remark-html
+      const html = unified() // https://unifiedjs.com/learn/recipe/remark-html
         .use(treeParser)
         .use(HASTParser, { allowDangerousHtml: true })
         .use(HTMLParser)
         .use(stringParser)
-        .processSync(content);
+        .processSync(content).contents;
 
-      const html = processed.contents;
       doc.html = html;
+
+      if (data.gated) {
+        const truncated = unified()
+          .use(treeParser)
+          .use(HASTParser, { allowDangerousHtml: true })
+          .use(rehypeTruncate, { maxChars: 1000 })
+          .use(HTMLParser)
+          .use(stringParser)
+          .processSync(content).contents;
+
+        doc.truncated = truncated;
+      }
     }
 
     return doc;

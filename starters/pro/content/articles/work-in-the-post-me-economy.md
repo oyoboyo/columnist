@@ -20,7 +20,7 @@ To carry ourselves with the right mindset, we need only look towards the best ra
 
 # Meaningful habits
 
-Not all habits are made the same. Some have the distinction of not being very good, infant, [there are bad habits](https://en.wikipedia.org/wiki/Habit#Bad_habits) and many are not good. Some however, offer us unique insight into the nature of being (but only if we consider carefully the implication of their pursuit). This is not a particularly meaningful consideration given the nature of habits, but if we take a second to deepen our understanding, many new things become apparent, for example:
+Not all habits are made the same. Some have the distinction of not being very good, infact, [there are bad habits](https://en.wikipedia.org/wiki/Habit#Bad_habits) and many are not good. Some however, offer us unique insight into the nature of being (but only if we consider carefully the implication of their pursuit). This is not a particularly meaningful consideration given the nature of habits, but if we take a second to deepen our understanding, many new things become apparent, for example:
 
 - Not all habits are easy
 - Most are hard, and require careful time management

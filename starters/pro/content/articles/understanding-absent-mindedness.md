@@ -8,7 +8,6 @@ image:
   caption: The key to remembering? Keeping an eye on your keys.
 author: Tim Wong
 tag: Habits
-gate: true
 ---
 
 What are habits? Forming the ultimate habits require we consider how a list of things we might accomplish is limited by only our ability to adopt them. Carefully considering what constitutes a good habit may differ from even the most self-explanatory consideration.

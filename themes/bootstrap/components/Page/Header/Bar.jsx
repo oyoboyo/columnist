@@ -20,7 +20,7 @@ const Bar = () => {
               ) : null}
               {config.header.name ? (
                 <div className="align-items-center">
-                  <h1 className="name h4 me-3 mb-0">
+                  <h1 className="name h5 me-3 mb-0">
                     <Link href="/">{config.brand.name}</Link>
                   </h1>
                 </div>
@@ -36,16 +36,21 @@ const Bar = () => {
               ))}
             </ul>
           </div>
-          {config.header.cta ? (
-            <div>
-              <Link
-                className="btn btn-primary ms-3"
-                href={config.header.cta.url}
-              >
+          <div>
+            {config.header.cta ? (
+              <Link className="btn btn-primary" href={config.header.cta.url}>
                 {config.header.cta.button}
               </Link>
-            </div>
-          ) : null}
+            ) : null}
+            {config.header.logIn ? (
+              <Link
+                className="btn btn-white btn-lg ms-1 me-sm-2"
+                href={config.header.logIn.url}
+              >
+                {config.header.logIn.button}
+              </Link>
+            ) : null}
+          </div>
         </div>
       </div>
     </nav>

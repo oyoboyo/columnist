@@ -2,7 +2,7 @@ import Head from "./Head";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const Page = ({ children, header }) => {
+const Page = ({ children, header, title }) => {
   return (
     <>
       <Head />

@@ -12,17 +12,19 @@ const Detail = ({ content }) => {
   return (
     <>
       <Head content={content} />
-      <article className="mb-4">
+      <article>
         <Intro content={content} />
         {content.gated ? (
           <>
-            <Html className="content-body serif mt-3 ms-md-5 me-md-5">
-              {content.truncated}
-            </Html>
+            <div className="content-body serif mt-3 ms-md-5 me-md-5">
+              <Html>{content.html}</Html>
+            </div>
             <Gate />
           </>
         ) : content.html ? (
-          <Html className="content-body serif mt-3 ms-md-5 me-md-5">{content.html}</Html>
+          <div className="content-body serif mt-3 ms-md-5 me-md-5">
+            <Html>{content.html}</Html>
+          </div>
         ) : null}
         {content.author && !content.gated ? (
           <div className="ms-md-5 me-md-5">

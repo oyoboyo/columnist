@@ -3,13 +3,10 @@ import { Link, useConfig } from "@columnist/core";
 const Hero = () => {
   const config = useConfig();
   return (
-    <nav className="main hero navbar navbar-expand navbar-light bg-white pt-md-4 mb-3 mb-md-5 border-bottom">
+    <nav className="main hero navbar navbar-expand navbar-light bg-white mb-3 mb-md-5 border-bottom">
       <div className="container-fluid flex-column">
         {config.header.logIn ? (
-          <Link
-            className="btn-login btn btn-white btn-lg me-sm-2 ms-2"
-            href={config.header.logIn.url}
-          >
+          <Link className="btn-login btn btn-lg btn-white" href={config.header.logIn.url}>
             {config.header.logIn.button}
           </Link>
         ) : null}
@@ -17,7 +14,7 @@ const Hero = () => {
           {config.header.logo ? (
             <div className="logo mt-4 mb-3">
               <Link href="/">
-                <img className="img-fluid" src={config.brand.logo} />
+                <img className="mt-1 img-fluid" src={config.brand.logo} />
               </Link>
             </div>
           ) : null}
@@ -27,7 +24,9 @@ const Hero = () => {
             </h1>
           ) : null}
           {config.header.tagline ? (
-            <div className="tagline text-center mb-3">{config.brand.tagline}</div>
+            <div className="lead tagline text-center mb-3 text-muted">
+              {config.brand.tagline}
+            </div>
           ) : null}
           <div className="d-flex flex-column flex-sm-row align-items-center justify-content-center">
             {config.header.cta ? (

@@ -9,9 +9,8 @@ export default function Gate() {
         <div className="row justify-content-center">
           <div class="col-md-7 col-lg-6">
             <h2 className="h3">{config.gate.heading}</h2>
-            <p className="lead text-muted">{config.gate.lead}</p>
             <div className="d-grid gap-2">
-              <LogInForm />
+              <LogInForm lead={config.gate.lead} />
             </div>
           </div>
         </div>

@@ -117,3 +117,14 @@ header .hero {
     line-height: 0.7rem;
   }
 }
+
+.btn-login {
+  position: absolute;
+  right: 15px;
+}
+
+@include media-breakpoint-down(xs) {
+  html {
+    font-size: 0.9rem;
+  }
+}

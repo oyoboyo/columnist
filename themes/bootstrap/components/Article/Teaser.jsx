@@ -10,8 +10,8 @@ const Teaser = ({ content }) => {
   const config = useConfig();
 
   return (
-    <article className="teaser border-bottom pb-4 mb-5">
-      <div className="metadata d-flex justify-content-between ms-md-5 me-md-5">
+    <article className="border-bottom pb-4 mb-5">
+      <div className="d-flex justify-content-between ms-md-5 me-md-5">
         {content.tag ? <small className="text-muted me-2">{content.tag}</small> : null}
         {config.article.teaser.date && content.date ? (
           <small className="text-muted">

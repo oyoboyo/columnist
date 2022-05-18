@@ -16,7 +16,7 @@ Built for [Next.js](https://nextjs.org/) Columnist is open source and extensible
 In your terminal, create a Next.js app with the Columnist starter:
 
 ```yaml
-npx create-next-app --example https://github.com/oyoboyo/columnist/tree/workspace/starters/starter
+npx create-next-app --example https://github.com/oyoboyo/columnist/tree/workspace/starters/basic
 ```
 
 Run the project locally:

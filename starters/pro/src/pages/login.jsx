@@ -6,7 +6,8 @@ export default function LogInPage() {
     <>
       <Page>
         <Column style="narrow">
-          <LogIn />
+          <h1>{config.logIn.title}</h1>
+          <LogIn lead={config.logIn.lead} />
         </Column>
       </Page>
     </>

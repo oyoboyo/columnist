@@ -43,10 +43,7 @@ const Bar = () => {
               </Link>
             ) : null}
             {config.header.logIn ? (
-              <Link
-                className="btn btn-white btn-lg ms-1 me-sm-2"
-                href={config.header.logIn.url}
-              >
+              <Link className="btn btn-white ms-1" href={config.header.logIn.url}>
                 {config.header.logIn.button}
               </Link>
             ) : null}

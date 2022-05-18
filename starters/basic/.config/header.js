@@ -8,22 +8,10 @@ export const header = {
     button: "Subscribe",
     url: "/subscribe",
   },
-  logIn: {
-    button: <BsFillPersonFill />,
-    url: "/login",
-  },
   menu: [
     {
-      title: "Art",
-      url: "/art",
-    },
-    {
-      title: "Culture",
-      url: "/culture",
-    },
-    {
-      title: "Design",
-      url: "/design",
+      title: "Articles",
+      url: "/articles",
     },
     {
       title: "About",

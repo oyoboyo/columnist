@@ -20,6 +20,7 @@ const gate = {
 };
 
 const logIn = {
+  title: "Log in",
   lead: "Log in to enjoy more free articles from " + brand.name,
   disclaimer: (
     <div>

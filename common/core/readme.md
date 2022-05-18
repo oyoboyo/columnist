@@ -25,7 +25,7 @@ Getting started is simple (assuming you’re setup with [Node.js](https://www.ne
 In your terminal, create a Next.js app with the Columnist starter:
 
 ```yaml
-npx create-next-app --example https://github.com/oyoboyo/columnist/tree/workspace/starters/starter
+npx create-next-app --example https://github.com/oyoboyo/columnist/tree/workspace/starters/basic
 ```
 
 Run the project locally:

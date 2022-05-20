@@ -7,7 +7,7 @@ image:
   src: /images/film.jpeg
   alt: A film reel
   caption: In each frame of film, there is composition
-author: Tim Wong
+author: sean
 tag: Habits
 ---
 

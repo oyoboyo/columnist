@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const Img = ({ src, alt, width, height, optimize }) => {
+export default function Img({ src, alt, width, height, optimize }) {
   return optimize ? (
     <Image
       width={width}
@@ -13,6 +13,4 @@ const Img = ({ src, alt, width, height, optimize }) => {
   ) : (
     <img className="img-fluid" src={src} alt={alt} />
   );
-};
-
-export default Img;
+}

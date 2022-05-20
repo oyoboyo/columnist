@@ -10,7 +10,7 @@ export const header = {
   },
   logIn: {
     button: <BsFillPersonFill />,
-    url: "/login",
+    url: "/account",
   },
   menu: [
     {

@@ -13,26 +13,30 @@
   }
 }
 
-header .bar {
+header .header-bar {
   h1.name a {
     text-decoration: none;
     &:hover {
       text-decoration: none;
     }
   }
-  .logo {
+  .header-logo {
     width: 40px;
     height: 40px;
   }
 }
 
-header .hero {
-  .logo {
+header .header-hero {
+  .header-logo {
     width: 150px;
+  }
+  .header-login {
+    position: absolute;
+    right: 15px;
   }
 }
 
-// Article
+// Collections
 .collection,
 .collections {
   article:last-of-type {
@@ -51,7 +55,8 @@ header .hero {
   }
 }
 
-.content-body {
+.content-html,
+.article-html {
   // Feature elements
   p,
   div,
@@ -116,11 +121,6 @@ header .hero {
   small {
     line-height: 0.7rem;
   }
-}
-
-.btn-login {
-  position: absolute;
-  right: 15px;
 }
 
 @include media-breakpoint-down(xs) {

@@ -4,7 +4,6 @@ export default function LogInForm({ lead }) {
   const config = useConfig();
   return (
     <div className="d-grid gap-2">
-      <p className="lead text-muted">{lead}</p>
       <div>
         <label for="formGroupExampleInput" class="form-label small">
           Log in using email

@@ -6,7 +6,7 @@ export default function SubscribePage() {
     <Page>
       {
         // Page content
-        <Column style="narrow">
+        <Column style="default">
           <Article content={config.subscribe} style="detail" />
         </Column>
       }
@@ -14,11 +14,14 @@ export default function SubscribePage() {
         // Subscriptions
         config.subscriptions.map((subscription, index) => (
           <Column key={index} style="half">
-            <Subscription content={subscription} />
+            <Subscription style="big" content={subscription} />
           </Column>
         ))
       }
-      {<Column style="narrow">{config.subscribe.disclaimer}</Column>}
+      {
+        // Disclaimer
+        <Column style="default">{config.subscribe.disclaimer}</Column>
+      }
     </Page>
   );
 }

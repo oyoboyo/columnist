@@ -64,25 +64,36 @@ const subscribe = {
   ),
 };
 
+const del = {
+  text: "No longer interested in the benefits of subscription?",
+  button: "Delete account",
+  disclaimer: "Warning. All account data will be deleted.",
+};
+
 const subscriptions = [
   {
-    name: "Subscriber",
+    name: "Free",
+    key: "free",
     description:
-      "Subscribe to our free weekly newsletter and get limited access to premium content.",
-    button: {
-      text: "Subscribe",
+      "Receive our free weekly newsletter and limited access to premium content.",
+    signUp: {
+      text: "Sign Up For Free",
       url: "",
     },
     price: 0,
   },
   {
     name: "Premium",
+    key: "premium",
     description:
-      "Get all the benefits of subscribing plus unlimited access and subscriber exclusives.",
-    url: "",
-    button: {
-      text: "Buy now",
-      url: "",
+      "Get the benefits of subscribing plus unlimited access to premium content.",
+    purchase: {
+      text: "Upgrade To Premium",
+      action: "",
+    },
+    cancel: {
+      text: "Cancel",
+      action: "",
     },
     price: 4.99,
   },
@@ -96,6 +107,7 @@ export default {
   home,
   gate,
   logIn,
+  del,
   subscribe,
   subscriptions,
   all,

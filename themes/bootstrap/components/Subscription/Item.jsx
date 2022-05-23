@@ -1,4 +1,4 @@
-export default function Small({ content, current }) {
+export default function Item({ content, current }) {
   return (
     <div className=" mb-3 pb-3 border-bottom">
       <div className="d-flex">

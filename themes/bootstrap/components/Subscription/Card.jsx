@@ -1,4 +1,4 @@
-export default function Big({ content }) {
+export default function Card({ content }) {
   return (
     <div className="card shadow mb-3">
       <div className="card-body">

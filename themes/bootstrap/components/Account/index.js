@@ -57,7 +57,7 @@ export default function Account() {
                 key={subscription.key}
                 content={subscription}
                 current={true}
-                style="small"
+                style="item"
               />
             ))
         }
@@ -72,7 +72,7 @@ export default function Account() {
                 key={subscription.key}
                 content={subscription}
                 current={false}
-                style="small"
+                style="item"
               />
             ))
         }

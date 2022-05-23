@@ -14,7 +14,7 @@ export default function SubscribePage() {
         // Subscriptions
         config.subscriptions.map((subscription, index) => (
           <Column key={index} style="half">
-            <Subscription style="big" content={subscription} />
+            <Subscription style="card" content={subscription} />
           </Column>
         ))
       }

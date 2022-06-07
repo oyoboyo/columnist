@@ -1,12 +1,8 @@
-import { useConfig } from "@columnist/core";
-
 /**
  * Make author from config object string
  */
 
-export default function makeAuthor(contentAuthor) {
-  const config = useConfig();
-
+export default function makeAuthor(contentAuthor, config) {
   if (config.authors) {
     if (config.authors[contentAuthor]) {
       return config.authors[contentAuthor];

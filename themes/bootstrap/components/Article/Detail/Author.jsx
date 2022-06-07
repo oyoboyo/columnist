@@ -39,13 +39,13 @@ export default function Author({ content }) {
           // Author social links
           content.social ? (
             <ul className="author-social nav d-flex">
-              {content.social.map(({ url, Icon }, index) => (
+              {/*content.social.map(({ url, Icon }, index) => (
                 <li key={index} className="nav-item">
                   <a className="ps-0 nav-link" target="_blank" href={url}>
                     <Icon />
                   </a>
                 </li>
-              ))}
+              ))*/}
             </ul>
           ) : null
         }

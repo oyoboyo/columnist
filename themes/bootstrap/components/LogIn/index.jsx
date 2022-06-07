@@ -1,11 +1,14 @@
 import { useConfig } from "@columnist/core";
 
-export default function LogInForm({ lead }) {
+export default function LogInForm() {
   const config = useConfig();
   return (
     <div className="d-grid gap-2">
       <div>
-        <label for="formGroupExampleInput" class="form-label small">
+        <label
+          htmlFor="formGroupExampleInput"
+          className="form-label small"
+        >
           Log in using email
         </label>
         <input

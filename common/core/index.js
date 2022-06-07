@@ -17,7 +17,9 @@ import truncate from "./utilities/content/truncate";
 
 //hooks
 import useConfig from "./hooks/useConfig";
+import useData from "./";
 // Components
+import Data from "./components/Data";
 import Config from "./components/Config";
 import Link from "./components/Link";
 import Html from "./components/Html";
@@ -41,6 +43,7 @@ export {
   //hooks
   useConfig,
   //components
+  Data,
   Config,
   Link,
   Html,

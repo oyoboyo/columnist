@@ -1,17 +1,14 @@
 // core
 import { Html, useConfig, makeDate } from "@columnist/core";
+
 // local components
 import Head from "./Head";
-import Gate from "./Gate";
 import Author from "./Author";
 import Img from "../../Img";
 // local utilities
-import makeAuthor from "../utilities/makeAuthor";
-import makeGated from "../utilities/makeGated";
 
-const Detail = ({ content }) => {
+const Detail = ({ content, children }) => {
   const config = useConfig();
-  const user = false;
 
   return (
     <article className="article-detail">
@@ -82,22 +79,17 @@ const Detail = ({ content }) => {
         ) : null
       }
       {
-        // Article HTML
-        content.html || content.truncated ? (
-          <div className="article-html serif mt-3">
-            <Html>{makeGated(content, user)}</Html>
-          </div>
+        // Article children
+        children ? (
+          <div className="article-body">{children}</div>
+        ) : // ...or article HTML
+        content.html ? (
+          <Html className="article-html serif mt-3">{content.html}</Html>
         ) : null
-      }
-      {
-        // Article gate
-        content.gated ? <Gate /> : null
       }
       {
         // article author
-        content.author ? (
-          <Author content={makeAuthor(content.author, config)} />
-        ) : null
+        content.author ? <Author content={content.author} /> : null
       }
     </article>
   );

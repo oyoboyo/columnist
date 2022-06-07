@@ -7,7 +7,7 @@ image:
   src: /images/group.jpeg
   alt: A group of woman share a laugh
   caption: People working together is the foundation of a collective
-author: Tim Wong
+author: sean
 tag: Habits
 gated: true
 ---

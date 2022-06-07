@@ -1,32 +1,31 @@
 // Components
-import { Page, Column, Article, LogIn, Account } from "src/components";
+import { Page, Column, LogIn, Account } from "@columnist/bootstrap";
 // Config
-import config from "columnist.config";
+import config from ".config";
 
 export default function AccountPage() {
   // User placeholder
-  const user = true;
+  const user = false;
 
   return (
     <Page header="bar">
-      {user ? (
-        // Account page
-        <Column style="default">
-          <Article
-            content={{
-              title: "Account",
-              summary: "You've been a subscriber since 2020",
-            }}
-          />
-          <Account />
-        </Column>
-      ) : config.logIn ? (
-        // Login page
-        <Column style="default">
-          <Article content={config.logIn} />
-          <LogIn />
-        </Column>
-      ) : null}
+      {
+        // Display user account if logged in
+        user ? (
+          <Column style="default">
+            <h1>{config.account.title}</h1>
+            <p>{config.account.summary}</p>
+            <Account />
+          </Column>
+        ) : (
+          // Display log in if not
+          <Column style="default">
+            <h1>{config.logIn.title}</h1>
+            <p>{config.logIn.summary}</p>
+            <LogIn />
+          </Column>
+        )
+      }
     </Page>
   );
 }

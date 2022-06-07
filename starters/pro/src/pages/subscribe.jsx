@@ -1,5 +1,5 @@
-import { Page, Article, Column, Subscription } from "src/components";
-import config from "columnist.config";
+import { Page, Article, Column, Subscription } from "@columnist/bootstrap";
+import config from ".config";
 
 export default function SubscribePage() {
   return (

@@ -3,8 +3,6 @@ import { Link, useConfig, makeDate } from "@columnist/core";
 // Local components
 import Img from "../../Img";
 import Author from "./Author";
-// Local utilities
-import makeAuthor from "../utilities/makeAuthor";
 
 export default function Teaser({ content }) {
   const config = useConfig();
@@ -48,30 +46,34 @@ export default function Teaser({ content }) {
       {
         // Article image
         content.image && config.article.teaser.image ? (
-          <Link className="article-link text-center" href={content.route}>
-            <Img
-              className="article-image"
-              width={config.article.teaser.image.width}
-              height={config.article.teaser.image.height}
-              src={content.image.src}
-              alt={content.image.alt}
-              optimize={config.article.teaser.image.optimize}
-            />
-            {
-              // Image caption
-              content.image.caption ? (
-                <small className="article-image-caption text-muted mt-2">
-                  {content.caption}
-                </small>
-              ) : null
-            }
-          </Link>
+          <div className="article-image">
+            <Link
+              className="article-link text-center"
+              href={content.route}
+            >
+              <Img
+                width={config.article.teaser.image.width}
+                height={config.article.teaser.image.height}
+                src={content.image.src}
+                alt={content.image.alt}
+                optimize={config.article.teaser.image.optimize}
+              />
+              {
+                // Image caption
+                content.image.caption ? (
+                  <small className="article-image-caption text-muted mt-2">
+                    {content.caption}
+                  </small>
+                ) : null
+              }
+            </Link>
+          </div>
         ) : null
       }
       {
-        // Content truncated
+        // Content teaser text
         <p className="article-truncated serif mt-4 mb-4">
-          {content.truncated}
+          {content.teaser}
         </p>
       }
       <div className="article-footer d-flex justify-content-between align-items-center mb-3 ">
@@ -87,9 +89,7 @@ export default function Teaser({ content }) {
         </Link>
         {
           // Content author
-          content.author ? (
-            <Author content={makeAuthor(content.author)} />
-          ) : null
+          content.author ? <Author content={content.author} /> : null
         }
       </div>
     </article>

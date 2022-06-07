@@ -1,27 +1,47 @@
-import { getAllPaths, getAllContent } from "@columnist/core";
-import { Page, Column, Article } from "src/components";
-import config from "columnist.config";
+import {
+  getAllPaths,
+  getDocument,
+  getCollection,
+  getCollections,
+} from "@columnist/core";
+// Components
+import { Page, Column, Article, Gate } from "@columnist/bootstrap";
+import { Html } from "@columnist/core";
+// Filters and sorts
+import { sortByDate } from ".config/sorts";
+import { filterArticles, filterDrafts } from ".config/filters";
 
 export default function All({ doc, collection, collections }) {
   return (
     <Page header="bar">
       {
-        // Article
+        // Document
+        // Display document in column
         doc ? (
-          <Column name="article">
-            <Article content={doc} style="detail" />
+          <Column name="article" style="default">
+            {doc.type === "collection" ? <h1>{doc.title}</h1> : null}
+            {doc.type === "article" || doc.type === "page" ? (
+              // As an article
+              <Article content={doc} style="detail">
+                {doc.gated ? (
+                  <>
+                    <Html>{doc.gated}</Html>
+                    <Gate />
+                  </>
+                ) : null}
+              </Article>
+            ) : null}
           </Column>
         ) : null
       }
       {
-        // Collection of articles
+        // Collection
+        // Display collection of documents
         collection ? (
-          <Column
-            name="collection"
-            title={doc.collection ? doc.collection : null}
-          >
+          <Column name="collection">
             {collection.map((doc, index) =>
               doc.type === "article" ? (
+                // As articles
                 <Article key={index} content={doc} style="teaser" />
               ) : null
             )}
@@ -29,13 +49,22 @@ export default function All({ doc, collection, collections }) {
         ) : null
       }
       {
-        // Collection of collections
+        // Collections
+        // Display collections of collections (sub-collections)
         collections
-          ? collections.map((column, index) => (
-              <Column key={index} name="collections" title={column.title}>
-                {column.collection.map((doc, index) => (
-                  <Article key={index} content={doc} style="teaser" />
-                ))}
+          ? // Collections
+            collections.map((column, index) => (
+              <Column key={index} name="collections">
+                <h2>{column.title}</h2>
+                {
+                  // Sub-collection
+                  column.collection.map((doc, index) =>
+                    doc.type === "article" ? (
+                      // Article from document in collection
+                      <Article key={index} content={doc} style="teaser" />
+                    ) : null
+                  )
+                }
               </Column>
             ))
           : null
@@ -51,10 +80,31 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { doc, collection, collections } = getAllContent(
-    params.all,
-    config.all
-  );
+  // Get document
+  let doc = getDocument(params.all, {
+    html: true,
+    maxCharacters: 1000,
+  });
+
+  console.log(doc);
+
+  // Get collection
+  let collection = getCollection(params.all, {
+    html: false,
+    listLimit: 10,
+    maxCharacters: 220,
+    sorts: [sortByDate],
+    filters: [filterArticles, filterDrafts],
+  });
+
+  // Get collections
+  let collections = getCollections(params.all, {
+    html: false,
+    listLimit: 10,
+    maxCharacters: 220,
+    sorts: [sortByDate],
+    filters: [filterArticles, filterDrafts],
+  });
 
   return {
     props: {

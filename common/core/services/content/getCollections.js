@@ -14,26 +14,32 @@ import getDirectory from "./getDirectory";
  * @return {array} collections
  */
 
-export default function getCollections(dir, config) {
+export default function getCollections(location, config) {
+  let isParams = Array.isArray(location);
+  // Make dir from param or pass location
+  const dir = isParams ? `content/${location.join("/")}` : location;
+
   let collections = [];
 
-  read(dir).map((item) => {
-    const path = `${dir}/${item}`;
+  if (exists(dir) && status(dir).isDirectory()) {
+    read(dir).map((item) => {
+      const path = `${dir}/${item}`;
 
-    if (exists(path) && status(path).isDirectory()) {
-      let collection;
-      let doc;
+      if (exists(path) && status(path).isDirectory()) {
+        let collection;
+        let doc;
 
-      if (!exists(`${path}/index.md`)) {
-        collection = getCollection(path, config);
-        doc = getDirectory(path);
+        if (!exists(`${path}/index.md`)) {
+          collection = getCollection(path, config);
+          doc = getDirectory(path);
+        }
+
+        if (collection) {
+          collections.push({ ...doc, collection });
+        }
       }
-
-      if (collection) {
-        collections.push({ ...doc, collection });
-      }
-    }
-  });
+    });
+  }
 
   return collections.length > 0 ? collections : null;
 }

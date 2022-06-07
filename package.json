@@ -15,5 +15,7 @@
   ],
   "author": "Sean Rioux",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "firebase": "^9.8.2"
+  }
 }

@@ -1,4 +1,4 @@
-// Require to transpile Columnist modules
+// Transpile Columnist modules
 const withTM = require("next-transpile-modules")([
   "@columnist/core",
   "@columnist/bootstrap",

@@ -1,22 +1,37 @@
 // Core
 import { getDocuments } from "@columnist/core";
 // Components
-import { Page, Column, Article } from "src/components";
+import { Page, Column, Article } from "@columnist/bootstrap";
 // Config
-import config from "columnist.config";
+import { sortByDate } from ".config/sorts";
+import { filterArticles, filterDrafts } from ".config/filters";
 
-export default function HomePage({ documents }) {
+const options = {
+  html: false,
+  listLimit: 10,
+  maxCharacters: 220,
+  sorts: [sortByDate],
+  filters: [filterArticles, filterDrafts],
+};
+
+export default function HomePage({ docs }) {
   return (
     <Page header="hero">
       {
-        // Documents
-        documents ? (
+        // Column
+        // a list of documents in a column
+        docs ? (
           <Column style="default">
             {
-              // Filter & map
-              documents.slice(0, config.home.limit).map((doc, index) => (
-                <Article key={index} content={doc} style="teaser" />
-              ))
+              // Collection
+              // Slice documents according to limit and map
+              docs.slice(0, options.listLimit).map((doc, index) =>
+                doc.type === "article" ? (
+                  // Article
+                  // Display document as article
+                  <Article key={index} content={doc} style="teaser" />
+                ) : null
+              )
             }
           </Column>
         ) : null
@@ -26,12 +41,11 @@ export default function HomePage({ documents }) {
 }
 
 export async function getStaticProps() {
-  // Get documents
-  let documents = await getDocuments("content", config.home);
+  let docs = await getDocuments("content", options);
 
   return {
     props: {
-      documents,
+      docs,
     },
   };
 }

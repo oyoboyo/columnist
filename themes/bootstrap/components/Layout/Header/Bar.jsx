@@ -5,7 +5,7 @@ export default function Bar() {
   const config = useConfig();
   return (
     <header className="page-header">
-      <nav className="header-bar navbar navbar-expand navbar-light bg-white p-md-4 mb-3 mb-md-5 border-bottom">
+      <nav className="header-bar navbar navbar-expand navbar-light bg-white p-md-4 mb-4 mb-md-5 border-bottom">
         <div className="container-fluid pe-0">
           <div className="d-flex w-100 align-content-start justify-content-between">
             <div className="d-flex flex-column flex-md-row">

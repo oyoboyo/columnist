@@ -18,12 +18,12 @@ export const header = {
       url: "/art",
     },
     {
-      title: "Culture",
-      url: "/culture",
+      title: "Mind",
+      url: "/mind",
     },
     {
-      title: "Design",
-      url: "/design",
+      title: "Work",
+      url: "/work",
     },
     {
       title: "About",

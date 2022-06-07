@@ -1,4 +1,4 @@
-import { Page, Column } from "src/components";
+import { Page, Column } from "@columnist/bootstrap";
 
 export default function Custom404() {
   return (

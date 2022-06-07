@@ -16,7 +16,7 @@ export default function makeClasses(name, style) {
       columnClass = "col-sm-4";
       break;
     default:
-      columnClass = "col-sm-10 col-lg-9 col-xl-8 col-xxl-7";
+      columnClass = "col-lg-9 col-xl-8 col-xxl-7";
   }
 
   return { containerClass, columnClass };

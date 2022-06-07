@@ -1,15 +1,28 @@
 import { useConfig } from "@columnist/core";
-import LogInForm from "../../LogIn";
+import LogInForm from "./LogIn";
 
 export default function Gate() {
   const config = useConfig();
+
+  console;
+
   return config.gate ? (
     <div className="article-gate pt-3">
-      <div className="fixed-bottom border-top bg-white container-fluid pt-4 pb-3 shadow-lg">
+      <div
+        className={`${
+          config.gate.popUp ? "container-fluid fixed-bottom pb-3" : null
+        } border-top bg-white pt-4`}
+      >
         <div className="row justify-content-center">
-          <div class="col-md-7 col-lg-6">
+          <div
+            className={
+              config.gate.popUp
+                ? "col-md-7 col-lg-6 col-xl-5"
+                : "col-md-10"
+            }
+          >
             {
-              // Gate heading
+              // Display gate heading if heading in config
               config.gate.heading ? (
                 <h2 className="gate-heading h3">{config.gate.heading}</h2>
               ) : null
@@ -18,7 +31,9 @@ export default function Gate() {
               {
                 // Gate lead
                 config.gate.lead ? (
-                  <p className="gate-lead lead mb-0">{config.gate.lead}</p>
+                  <p className="gate-lead lead text-muted mb-0">
+                    {config.gate.lead}
+                  </p>
                 ) : null
               }
               {

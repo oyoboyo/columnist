@@ -3,6 +3,7 @@ import path from "path";
 import { walk } from "@root/walk";
 // services
 import getDocument from "./getDocument";
+import processCollection from "./utilities/processCollection";
 
 /**
  * @file Get Documents From Directory (And Sub-Directories)
@@ -12,7 +13,7 @@ import getDocument from "./getDocument";
  * @returns {array} documents
  */
 
-export default async function getDocuments(dir, config) {
+export default async function getDocuments(dir, options) {
   let files = [];
 
   const walker = async (error, pathname, item) => {
@@ -31,21 +32,11 @@ export default async function getDocuments(dir, config) {
   await walk(dir, walker);
 
   let documents = files.map((file) => {
-    const doc = getDocument(`${file.path}/${file.name}`, config);
+    const doc = getDocument(`${file.path}/${file.name}`, options);
     return doc ? doc : null;
   });
 
-  if (config.sorts) {
-    config.sorts.map((processor) => {
-      documents = processor(documents);
-    });
-  }
-
-  if (config.filters) {
-    config.filters.map((processor) => {
-      documents = processor(documents);
-    });
-  }
+  documents = processCollection(documents, options);
 
   return documents ? documents : null;
 }

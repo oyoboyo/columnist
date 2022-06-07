@@ -1,35 +1,35 @@
-import { readFileSync as readFile } from "fs";
-import truncate from "../../utilities/content/truncate";
-import rehypeTruncate from "rehype-truncate";
-import makeReadTime from "../../utilities/content/makeReadTime";
+import {
+  readFileSync as readFile,
+  existsSync as exists,
+  lstatSync as status,
+} from "fs";
 // Processors
-import unified from "unified";
+import getFrontMatterAndContent from "gray-matter";
 import remark from "remark";
-import treeParser from "remark-parse";
-import HASTParser from "remark-rehype";
-import HTMLParser from "rehype-raw";
-import stringParser from "rehype-stringify";
-import getDataAndContent from "gray-matter";
 import stripMarkdown from "strip-markdown";
+// Utilities and services
+import getAuthor from "../data/getAuthor";
+import makeReadTime from "../../utilities/content/makeReadTime";
+import truncate from "../../utilities/content/truncate";
+import processMarkdown from "./utilities/processMarkdown";
+import getDirectory from "./getDirectory";
 
 /**
  * @file Get Document From File
- * @param {string} file
- * @param {object} config
+ * @param {string} location
+ * @param {object} options
  * @returns {object} doc
  */
 
-const calcOrderFromFile = (slug) => {
-  let hasNum = /^\d+\-/;
-  if (hasNum.test(slug)) {
-    let dash = slug.indexOf("-");
-    let number = slug.slice(0, dash);
-  }
-};
+export default function getDocument(location, options) {
+  // Check if location is param
+  const isParam = Array.isArray(location);
+  // Make path from param or pass location
+  let path = isParam ? `content/${location.join("/")}.md` : location;
 
-export default function getDocument(path, config) {
-  if (path.includes(".md")) {
-    // Process directory
+  // If path exists and is file
+  if (exists(path) && status(path).isFile()) {
+    // Create params, route, and slug
     const params = path
       .replace("content/", "")
       .replace(".md", "")
@@ -38,51 +38,61 @@ export default function getDocument(path, config) {
     const route = "/" + params.join("/");
     const slug = params[params.length - 1];
 
-    // Process Markdown
+    // Process Markdown from file contents
     const contents = readFile(path, "utf8");
-    const { data, content } = getDataAndContent(contents);
-    // Process data
-    const date = data && data.date ? data.date.toJSON() : null;
-    const text = remark().use(stripMarkdown).processSync(content).toString();
+    const { data, content } = getFrontMatterAndContent(contents);
+
+    // Process content to text
+    const text = remark()
+      .use(stripMarkdown)
+      .processSync(content)
+      .toString();
+
+    // Calculate read time from tex
     const readTime = makeReadTime(text);
 
+    // Initialize doc
     let doc = {
       params,
       slug,
       route,
       ...data,
-      date,
       readTime,
     };
 
-    if (config.truncation) {
-      const truncated = truncate(text, config.truncation);
-      doc.truncated = truncated;
-    } else {
-      const html = unified() // https://unifiedjs.com/learn/recipe/remark-html
-        .use(treeParser)
-        .use(HASTParser, { allowDangerousHtml: true })
-        .use(HTMLParser)
-        .use(stringParser)
-        .processSync(content).contents;
+    // Conditional post processing
+    if (doc.date) {
+      doc.date = doc.date.toJSON();
+    }
 
-      doc.html = html;
+    if (doc.author) {
+      doc.author = getAuthor(doc.author);
+    }
 
-      if (data.gated) {
-        const truncated = unified()
-          .use(treeParser)
-          .use(HASTParser, { allowDangerousHtml: true })
-          .use(rehypeTruncate, { maxChars: 1000 })
-          .use(HTMLParser)
-          .use(stringParser)
-          .processSync(content).contents;
-
-        doc.truncated = truncated;
+    if (options.html) {
+      // Process Markdown with max characters
+      doc.html = processMarkdown(content);
+      // Process gated content
+      if (doc.gated) {
+        doc.gated = processMarkdown(content, options.maxCharacters);
       }
+    } else {
+      // Truncate text for teaser
+      doc.teaser = truncate(text, options.maxCharacters);
     }
 
     return doc;
   } else {
-    throw "Error: Not a Markdown file";
+    // Directory is documents
+    path = isParam ? `content/${location.join("/")}` : location;
+
+    if (exists(path) && status(path).isDirectory) {
+      const index = `${path}/index.md`;
+      let doc = exists(index)
+        ? getDocument(index, { html: true })
+        : getDirectory(path);
+
+      return doc;
+    }
   }
 }

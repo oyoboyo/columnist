@@ -1,11 +1,10 @@
 // Core
-import { Link, useConfig, makeDate } from "@columnist/core";
+import { Link, makeDate } from "@columnist/core";
 // Local components
-import Img from "../../Img";
+import Img from "../Img";
 import Author from "./Author";
 
-export default function Teaser({ content }) {
-  const config = useConfig();
+export default function Teaser({ content, config }) {
   return (
     <article className="article-teaser border-bottom pb-4 mb-5">
       <div className="article-header d-flex justify-content-between">
@@ -19,9 +18,9 @@ export default function Teaser({ content }) {
         }
         {
           // Article date
-          config.article.teaser.date && content.date ? (
+          config.date && content.date ? (
             <small className="article-date text-muted">
-              {makeDate(content.date, config.article.teaser.date)}
+              {makeDate(content.date, config.date)}
             </small>
           ) : null
         }
@@ -37,26 +36,26 @@ export default function Teaser({ content }) {
 
       {
         // Article summary
-        content.summary ? (
+        content.description ? (
           <p className="article-summary lead text-muted mb-4">
-            {content.summary}
+            {content.description}
           </p>
         ) : null
       }
       {
         // Article image
-        content.image && config.article.teaser.image ? (
+        content.image && config.image ? (
           <div className="article-image">
             <Link
               className="article-link text-center"
               href={content.route}
             >
               <Img
-                width={config.article.teaser.image.width}
-                height={config.article.teaser.image.height}
+                width={config.image.width}
+                height={config.image.height}
                 src={content.image.src}
                 alt={content.image.alt}
-                optimize={config.article.teaser.image.optimize}
+                optimize={config.image.optimize}
               />
               {
                 // Image caption
@@ -80,7 +79,7 @@ export default function Teaser({ content }) {
         <Link className="article-link small" href={content.route}>
           {
             // Read time and link
-            config.article.teaser.readTime ? (
+            config.readTime ? (
               <span>{content.readTime} min read</span>
             ) : (
               <span>Read more</span>

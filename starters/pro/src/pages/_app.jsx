@@ -1,21 +1,17 @@
 import "src/styles/index.scss";
-
-import { Config } from "@columnist/core";
-
-import config from ".config";
-
-/**
- * @file App
- *
- * @param {object} component - and page props
- * @returns
- */
+// Local components
+import Layout from "../components/layout";
+// Components
+import { Head } from "@columnist/bootstrap";
+// Config
+import head from ".config";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Config value={config}>
+    <Layout style={pageProps.style}>
+      <Head config={head} />
       <Component {...pageProps} />
-    </Config>
+    </Layout>
   );
 }
 

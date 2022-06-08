@@ -1,8 +1,7 @@
 // Core
-import { Link, useConfig } from "@columnist/core";
+import { Link } from "@columnist/core";
 
-export default function Bar() {
-  const config = useConfig();
+export default function Bar({ config, brand }) {
   return (
     <header className="page-header">
       <nav className="header-bar navbar navbar-expand navbar-light bg-white p-md-4 mb-4 mb-md-5 border-bottom">
@@ -12,23 +11,20 @@ export default function Bar() {
               <div className="d-flex align-items-center">
                 {
                   // Header logo
-                  config.header.logo ? (
+                  config.logo ? (
                     <span className="header-logo me-2 me-md-4">
                       <Link href="/">
-                        <img
-                          className="img-fluid"
-                          src={config.brand.logo}
-                        />
+                        <img className="img-fluid" src={brand.logo} />
                       </Link>
                     </span>
                   ) : null
                 }
                 {
                   // Header name
-                  config.header.name ? (
+                  config.name ? (
                     <div className="header-name align-items-center">
                       <h1 className="name h5 me-3 mb-0">
-                        <Link href="/">{config.brand.name}</Link>
+                        <Link href="/">{brand.name}</Link>
                       </h1>
                     </div>
                   ) : null
@@ -36,9 +32,9 @@ export default function Bar() {
               </div>
               {
                 // Header menu
-                config.header.menu ? (
+                config.menu ? (
                   <ul className="header-menu navbar-nav mt-2 mt-md-0 d-flex">
-                    {config.header.menu.map(({ url, title }, index) => (
+                    {config.menu.map(({ url, title }, index) => (
                       <li className="nav-item" key={index}>
                         <Link className="nav-link" href={url}>
                           {title}
@@ -52,23 +48,23 @@ export default function Bar() {
             <div>
               {
                 // Header call to action button
-                config.header.cta ? (
+                config.cta ? (
                   <Link
                     className="header-cta btn btn-primary"
-                    href={config.header.cta.url}
+                    href={config.cta.url}
                   >
-                    {config.header.cta.button}
+                    {config.cta.button}
                   </Link>
                 ) : null
               }
               {
                 // Header log in button
-                config.header.logIn ? (
+                config.logIn ? (
                   <Link
                     className="header-login btn btn-white ms-1"
-                    href={config.header.logIn.url}
+                    href={config.logIn.url}
                   >
-                    {config.header.logIn.button}
+                    {config.logIn.button}
                   </Link>
                 ) : null
               }

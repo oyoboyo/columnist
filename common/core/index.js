@@ -17,12 +17,14 @@ import truncate from "./utilities/content/truncate";
 
 //hooks
 import useConfig from "./hooks/useConfig";
-import useData from "./";
+import useData from "./hooks/useData";
+import useTheme from "./hooks/useTheme";
 // Components
 import Data from "./components/Data";
 import Config from "./components/Config";
 import Link from "./components/Link";
 import Html from "./components/Html";
+import Theme from "./components/Theme";
 
 export {
   //content
@@ -42,9 +44,11 @@ export {
   truncate,
   //hooks
   useConfig,
+  useTheme,
   //components
   Data,
   Config,
+  Theme,
   Link,
   Html,
 };

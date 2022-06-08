@@ -2,7 +2,7 @@
 type: article
 date: 2021-03-01
 title: "Where worlds collide: art and film"
-summary: Capturing art in film is a matter of exploring the ways in which cinema has established itself.
+description: Capturing art in film is a matter of exploring the ways in which cinema has established itself.
 image:
   src: /images/film.jpeg
   alt: A film reel

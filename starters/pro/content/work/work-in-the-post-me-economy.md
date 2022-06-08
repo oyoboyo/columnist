@@ -2,7 +2,7 @@
 type: article
 date: 2021-04-01
 title: "Work in the post me economy"
-summary: As we become less individualist can work become a meaningful source of collectivity?
+description: As we become less individualist can work become a meaningful source of collectivity?
 image:
   src: /images/group.jpeg
   alt: A group of woman share a laugh

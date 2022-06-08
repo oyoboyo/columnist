@@ -1,19 +1,26 @@
-import Layout from "./components/Layout";
-import Page from "./components/Layout";
+import Page from "./components/Page";
 import Section from "./components/Column";
 import Column from "./components/Column";
-import Article from "./components/Article";
 import LogIn from "./components/LogIn";
 import Subscription from "./components/Subscription";
 import Account from "./components/Account";
 import Gate from "./components/Gate";
-
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Main from "./components/Main";
+import Head from "./components/Head";
+import Detail from "./components/Detail";
+import Teaser from "./components/Teaser";
 export {
   Page,
-  Layout,
+  Head,
+  Header,
+  Detail,
+  Teaser,
+  Main,
+  Footer,
   Section,
   Column,
-  Article,
   Gate,
   LogIn,
   Subscription,

@@ -2,7 +2,7 @@
 type: article
 date: 2021-01-01
 title: Build better habits
-summary: Struggling to make new habits stick? Follow these 5 key steps to build better habits in 2022.
+description: Struggling to make new habits stick? Follow these 5 key steps to build better habits in 2022.
 image:
   src: /images/habits.jpeg
   alt: A young woman looks at her watch, appearing stressed

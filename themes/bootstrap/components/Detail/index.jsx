@@ -1,21 +1,14 @@
 // core
-import { Html, useConfig, makeDate } from "@columnist/core";
+import { Html, makeDate } from "@columnist/core";
 
 // local components
-import Head from "./Head";
 import Author from "./Author";
-import Img from "../../Img";
+import Img from "../Img";
 // local utilities
 
-const Detail = ({ content, children }) => {
-  const config = useConfig();
-
+const Detail = ({ config, content, children }) => {
   return (
     <article className="article-detail">
-      {
-        // Article head
-        <Head content={content} />
-      }
       {
         // Article tag
         content.tag ? (
@@ -27,9 +20,9 @@ const Detail = ({ content, children }) => {
       <h1 className="mt-2">{content.title}</h1>
       {
         // Article summary
-        content.summary ? (
-          <p className="article-summary lead text-muted mb-3">
-            {content.summary}
+        content.description ? (
+          <p className="article-description lead text-muted mb-3">
+            {content.description}
           </p>
         ) : null
       }
@@ -39,15 +32,15 @@ const Detail = ({ content, children }) => {
           <div className="article-date d-flex justify-content-between mb-3">
             {
               // Article date
-              config.article.detail.date && content.date ? (
+              config.date && content.date ? (
                 <small className="article-date text-muted">
-                  {makeDate(content.date, config.article.detail.date)}
+                  {makeDate(content.date, config.date)}
                 </small>
               ) : null
             }
             {
               // Article read time
-              config.article.detail.readTime && content.readTime ? (
+              config.readTime && content.readTime ? (
                 <small className="article-read-time text-muted">
                   {content.readTime} min read
                 </small>
@@ -58,14 +51,14 @@ const Detail = ({ content, children }) => {
       }
       {
         // Article image
-        content.image && config.article.detail.image ? (
+        content.image && config.image ? (
           <div className="article-image text-center">
             <Img
-              width={config.article.detail.image.width}
-              height={config.article.detail.image.height}
+              width={config.image.width}
+              height={config.image.height}
               src={content.image.src}
               alt={content.image.alt}
-              optimize={config.article.detail.image.optimize}
+              optimize={config.image.optimize}
             />
             {
               // Article image caption

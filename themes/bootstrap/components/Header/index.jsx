@@ -1,13 +1,15 @@
 import Hero from "./Hero";
 import Bar from "./Bar";
 
-const Header = ({ style }) => {
+import { useTheme } from "@columnist/core";
+
+const Header = ({ brand, config, style }) => {
   return !style || style === "bar" ? (
     // Header bar
-    <Bar />
+    <Bar brand={brand} config={config} />
   ) : style === "hero" ? (
     // Header hero
-    <Hero />
+    <Hero brand={brand} config={config} />
   ) : null;
 };
 

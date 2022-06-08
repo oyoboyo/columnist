@@ -5,33 +5,49 @@ import {
   getCollections,
 } from "@columnist/core";
 // Components
-import { Page, Column, Article, Gate } from "@columnist/bootstrap";
+import { Head, Page, Column, Article, Gate } from "@columnist/bootstrap";
 import { Html } from "@columnist/core";
 // Filters and sorts
 import { sortByDate } from ".config/sorts";
 import { filterArticles, filterDrafts } from ".config/filters";
+import article from ".config/article";
+
+const style = {
+  header: "bar",
+};
+
+const head = {};
 
 export default function All({ doc, collection, collections }) {
   return (
-    <Page header="bar">
+    <Page style={style}>
       {
         // Document
         // Display document in column
         doc ? (
-          <Column name="article" style="default">
-            {doc.type === "collection" ? <h1>{doc.title}</h1> : null}
-            {doc.type === "article" || doc.type === "page" ? (
-              // As an article
-              <Article content={doc} style="detail">
-                {doc.gated ? (
-                  <>
-                    <Html>{doc.gated}</Html>
-                    <Gate />
-                  </>
-                ) : null}
-              </Article>
-            ) : null}
-          </Column>
+          <>
+            <Column name="article" style="default">
+              {doc.type === "collection" ? <h1>{doc.title}</h1> : null}
+              {doc.type === "article" || doc.type === "page" ? (
+                // Article
+                //
+                <Article content={doc} config={article} style="detail">
+                  <Head
+                    content={{
+                      title: doc.title,
+                      description: doc.summary,
+                    }}
+                  />
+                  {doc.gated ? (
+                    <>
+                      <Html>{doc.gated}</Html>
+                      <Gate />
+                    </>
+                  ) : null}
+                </Article>
+              ) : null}
+            </Column>
+          </>
         ) : null
       }
       {
@@ -42,7 +58,12 @@ export default function All({ doc, collection, collections }) {
             {collection.map((doc, index) =>
               doc.type === "article" ? (
                 // As articles
-                <Article key={index} content={doc} style="teaser" />
+                <Article
+                  key={index}
+                  config={article}
+                  content={doc}
+                  style="teaser"
+                />
               ) : null
             )}
           </Column>
@@ -61,7 +82,12 @@ export default function All({ doc, collection, collections }) {
                   column.collection.map((doc, index) =>
                     doc.type === "article" ? (
                       // Article from document in collection
-                      <Article key={index} content={doc} style="teaser" />
+                      <Article
+                        key={index}
+                        config={article}
+                        content={doc}
+                        style="teaser"
+                      />
                     ) : null
                   )
                 }
@@ -86,11 +112,8 @@ export async function getStaticProps({ params }) {
     maxCharacters: 1000,
   });
 
-  console.log(doc);
-
   // Get collection
   let collection = getCollection(params.all, {
-    html: false,
     listLimit: 10,
     maxCharacters: 220,
     sorts: [sortByDate],
@@ -99,7 +122,6 @@ export async function getStaticProps({ params }) {
 
   // Get collections
   let collections = getCollections(params.all, {
-    html: false,
     listLimit: 10,
     maxCharacters: 220,
     sorts: [sortByDate],
@@ -111,6 +133,7 @@ export async function getStaticProps({ params }) {
       doc,
       collection,
       collections,
+      style,
     },
   };
 }

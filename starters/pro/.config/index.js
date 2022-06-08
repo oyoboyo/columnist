@@ -17,7 +17,7 @@ Use this file to:
 
 */
 
-export default {
+export {
   head,
   brand,
   header,

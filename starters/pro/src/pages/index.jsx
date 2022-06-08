@@ -1,10 +1,16 @@
 // Core
 import { getDocuments } from "@columnist/core";
 // Components
-import { Page, Column, Article } from "@columnist/bootstrap";
+import { Page, Column, Teaser, Head } from "@columnist/bootstrap";
 // Config
+import { teaser } from ".config/article";
 import { sortByDate } from ".config/sorts";
 import { filterArticles, filterDrafts } from ".config/filters";
+
+const content = {
+  title: "Home",
+  description: "Read new content from Columnist.",
+};
 
 const options = {
   html: false,
@@ -14,38 +20,42 @@ const options = {
   filters: [filterArticles, filterDrafts],
 };
 
-export default function HomePage({ docs }) {
+const style = {
+  header: "hero",
+};
+
+export default function HomePage({ collection }) {
   return (
-    <Page header="hero">
+    <Page style={style}>
+      <Head content={content} />
       {
         // Column
-        // a list of documents in a column
-        docs ? (
-          <Column style="default">
-            {
-              // Collection
-              // Slice documents according to limit and map
-              docs.slice(0, options.listLimit).map((doc, index) =>
-                doc.type === "article" ? (
-                  // Article
-                  // Display document as article
-                  <Article key={index} content={doc} style="teaser" />
-                ) : null
-              )
-            }
-          </Column>
-        ) : null
+        // a list of documents in a column collection ?
+        <Column style="default">
+          {
+            // Collection
+            // Slice documents according to limit and map
+            collection.map((doc, index) =>
+              doc.type === "article" ? (
+                // Article
+                // Display document as article
+                <Teaser key={index} config={teaser} content={doc} />
+              ) : null
+            )
+          }
+        </Column>
       }
     </Page>
   );
 }
 
 export async function getStaticProps() {
-  let docs = await getDocuments("content", options);
+  let collection = await getDocuments("content", options);
 
   return {
     props: {
-      docs,
+      collection,
+      style,
     },
   };
 }

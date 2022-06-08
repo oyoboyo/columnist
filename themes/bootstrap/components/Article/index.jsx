@@ -2,12 +2,14 @@
 import Teaser from "./Teaser";
 import Detail from "./Detail";
 
-export default function Article({ content, style, children }) {
+export default function Article({ content, config, style, children }) {
   return style === "teaser" ? (
     // Article teaser
-    <Teaser content={content} />
+    <Teaser config={config.teaser} content={content} />
   ) : style === "detail" || !style ? (
     // Article detail
-    <Detail content={content}>{children}</Detail>
+    <Detail config={config.detail} content={content}>
+      {children}
+    </Detail>
   ) : null;
 }

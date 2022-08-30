@@ -1,31 +1,47 @@
-// Components
-import { Page, Column, LogIn, Account } from "@columnist/bootstrap";
-// Config
-import config from ".config";
+// Import components
+import { Column, LogIn, Account } from "../components";
+// Import config
+import { site } from ".config";
+
+// Declare strings
+const logIn = {
+  title: "Log In",
+  text: "Log in to enjoy more free articles from " + site.name,
+};
 
 export default function AccountPage() {
   // User placeholder
   const user = false;
 
   return (
-    <Page header="bar">
+    <>
       {
-        // Display user account if logged in
+        // Render user account
         user ? (
           <Column style="default">
-            <h1>{config.account.title}</h1>
-            <p>{config.account.summary}</p>
+            <h1>Account</h1>
             <Account />
           </Column>
         ) : (
-          // Display log in if not
+          // Render Login
           <Column style="default">
-            <h1>{config.logIn.title}</h1>
-            <p>{config.logIn.summary}</p>
+            <h1>Log in</h1>
+            <p>{logIn.text}</p>
             <LogIn />
           </Column>
         )
       }
-    </Page>
+    </>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      meta: {
+        title: logIn.title,
+        description: logIn.text,
+      },
+    },
+  };
 }

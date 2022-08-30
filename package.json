@@ -9,7 +9,6 @@
   },
   "workspaces": [
     "./common/*",
-    "./themes/*",
     "./starters/*",
     "./apps/*"
   ],

@@ -1,15 +1,11 @@
 import "src/styles/index.scss";
-// Local components
-import Layout from "../components/layout";
-// Components
-import { Head } from "@columnist/bootstrap";
-// Config
-import head from ".config";
+
+import { Layout, Head } from "../components";
 
 function MyApp({ Component, pageProps }) {
   return (
     <Layout style={pageProps.style}>
-      <Head config={head} />
+      <Head content={pageProps.meta} />
       <Component {...pageProps} />
     </Layout>
   );

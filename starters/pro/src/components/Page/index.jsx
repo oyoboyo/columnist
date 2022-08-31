@@ -1,16 +1,9 @@
 // Import core
-import { Html, makeDate } from "@columnist/core";
+import { Html } from "@columnist/core";
 // Import components
-import Author from "./Author";
 import Img from "../Img";
-import Gate from "../Article/Gate";
-// Import config
-import { date } from ".config";
 
 export const config = {
-  date: date,
-  html: true,
-  readTime: true,
   image: {
     width: 960,
     height: 640,
@@ -18,17 +11,9 @@ export const config = {
   },
 };
 
-const Detail = ({ content }) => {
+const Page = ({ content }) => {
   return (
-    <article className="article-detail">
-      {
-        // Article tag
-        content.tag ? (
-          <small className="article-tag text-muted me-2">
-            {content.tag}
-          </small>
-        ) : null
-      }
+    <article className="page-detail">
       <h1 className="mt-2">{content.title}</h1>
       {
         // Article summary
@@ -39,38 +24,15 @@ const Detail = ({ content }) => {
         ) : null
       }
       {
-        // Article date and read time
-        content.type == "article" ? (
-          <div className="article-date d-flex justify-content-between mb-3">
-            {
-              // Article date
-              config.date && content.date ? (
-                <small className="article-date text-muted">
-                  {makeDate(content.date, config.date)}
-                </small>
-              ) : null
-            }
-            {
-              // Article read time
-              config.readTime && content.readTime ? (
-                <small className="article-read-time text-muted">
-                  {content.readTime} min read
-                </small>
-              ) : null
-            }
-          </div>
-        ) : null
-      }
-      {
         // Article image
         content.image && config.image ? (
           <div className="article-image text-center">
             <Img
-              width={config.image.width}
-              height={config.image.height}
+              width={960}
+              height={640}
               src={content.image.src}
               alt={content.image.alt}
-              optimize={config.image.optimize}
+              optimize={true}
             />
             {
               // Article image caption
@@ -85,19 +47,9 @@ const Detail = ({ content }) => {
       }
       {content.html ? (
         <Html className="article-html serif mt-3">{content.html}</Html>
-      ) : null}{" "}
-      {content.gated ? (
-        <>
-          <Html>{content.gated}</Html>
-          <Gate />
-        </>
       ) : null}
-      {
-        // article author
-        content.author ? <Author content={content.author} /> : null
-      }
     </article>
   );
 };
 
-export default Detail;
+export default Page;

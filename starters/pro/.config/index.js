@@ -15,11 +15,11 @@ const site = {
   GoogleAnalytics: "UA-XXXXX-Y",
   // Configure location
   locale: "en-US",
-  timeZone: "America/Toronto",
   dateStringFormat: {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "America/Toronto",
   },
   // Configure pro features
   gateContent: true,

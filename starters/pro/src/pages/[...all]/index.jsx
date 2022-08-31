@@ -1,13 +1,14 @@
 // Import services
 import { getAllPaths, getDocument, getCollection } from "@columnist/core";
 // Import components
-import { Column, Article } from "../../components";
+import { Column, Article, Page } from "../../components";
 // Import filters and sorts
 import { sortByDate } from ".config/sorts";
 import { filterArticles, filterDrafts } from ".config/filters";
 
-// Render All content
+// # All page
 export default function All({ doc, collection }) {
+  // Render All content in content as pages
   return (
     <>
       {
@@ -72,12 +73,13 @@ export async function getStaticProps({ params }) {
     filters: [filterArticles, filterDrafts],
   });
 
-  // Return document and collection with page props
+  // Return page props
   return {
     props: {
+      // Include document and collection
       doc,
       collection,
-      // Include page meta content
+      // Include page meta tags
       meta: {
         title: doc.title,
         description: doc.description ? doc.description : false,

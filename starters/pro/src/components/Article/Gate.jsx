@@ -18,7 +18,7 @@ export default function Gate() {
             {
               // Display gate heading if heading in config
               <h2 className="gate-heading h3">
-                "Thank you for reading {site.name}
+                Thank you for reading {site.name}
               </h2>
             }
             <div className="d-grid gap-2">

@@ -6,11 +6,11 @@
  * @returns { }
  */
 
-const makeDate = (date, config) => {
-	return new Date(date.replace(".000Z", "")).toLocaleDateString(
-		config.locale,
-		config.string
-	);
+const makeDate = (date, locale, dateStringFormat) => {
+  return new Date(date.replace(".000Z", "")).toLocaleDateString(
+    locale,
+    dateStringFormat
+  );
 };
 
 export default makeDate;

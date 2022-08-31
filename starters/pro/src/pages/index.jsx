@@ -1,12 +1,13 @@
-// Core
+// Import core
 import { getDocuments } from "@columnist/core";
-// Components
+// Import components
 import { Column, Article } from "../components";
-// Config
+// Import config
 import { sortByDate } from ".config/sorts";
 import { filterArticles, filterDrafts } from ".config/filters";
 
 export default function HomePage({ collection }) {
+  // Render home page
   return (
     <Column style="default">
       {
@@ -20,6 +21,7 @@ export default function HomePage({ collection }) {
 }
 
 export async function getStaticProps() {
+  // Set options (to do: deprecate)
   const options = {
     html: false,
     listLimit: 10,
@@ -28,15 +30,20 @@ export async function getStaticProps() {
     filters: [filterArticles, filterDrafts],
   };
 
+  // Get documents from content
   let collection = await getDocuments("content", options);
 
+  // Return static props
   return {
     props: {
+      // Return collection
       collection,
+      // Include meta tags
       meta: {
         title: "Home",
         description: "Read new content from Columnist.",
       },
+      // Include style
       style: {
         header: "hero",
       },

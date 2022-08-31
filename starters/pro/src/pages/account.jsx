@@ -3,30 +3,26 @@ import { Column, LogIn, Account } from "../components";
 // Import config
 import { site } from ".config";
 
-// Declare strings
-const logIn = {
-  title: "Log In",
-  text: "Log in to enjoy more free articles from " + site.name,
-};
-
+// # Account page
 export default function AccountPage() {
-  // User placeholder
-  const user = false;
-
+  // Get user (to do)
+  const user = true;
+  // Render account page
   return (
     <>
       {
-        // Render user account
+        // If user, render user account
         user ? (
           <Column style="default">
             <h1>Account</h1>
+            <p>Manage your account details and subscription</p>
             <Account />
           </Column>
         ) : (
-          // Render Login
+          // If no user, render Login
           <Column style="default">
             <h1>Log in</h1>
-            <p>{logIn.text}</p>
+            <p>Log in to enjoy more free articles from {site.name}</p>
             <LogIn />
           </Column>
         )
@@ -36,11 +32,16 @@ export default function AccountPage() {
 }
 
 export async function getStaticProps() {
+  // Return static props
   return {
     props: {
+      // Include meta
       meta: {
-        title: logIn.title,
-        description: logIn.text,
+        title: "Account & Login",
+        description:
+          "Enjoy free articles & more with your " +
+          site.name +
+          " account.",
       },
     },
   };

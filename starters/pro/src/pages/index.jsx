@@ -2,10 +2,6 @@
 import { getDocuments } from "@columnist/core";
 // Import components
 import { Column, Article } from "../components";
-// Import config
-import { sortByDate } from ".config/sorts";
-import { filterArticles, filterDrafts } from ".config/filters";
-
 // # Home page
 export default function HomePage({ collection }) {
 	// Render home page
@@ -22,19 +18,18 @@ export default function HomePage({ collection }) {
 }
 
 export async function getStaticProps() {
-	// Set options (to do: deprecate)
-	const options = {
-		html: false,
-		listLimit: 10,
-		maxCharacters: 220,
-		sorts: [sortByDate],
-		filters: [filterArticles, filterDrafts],
-	};
-
 	// Get documents from content
-	let collection = await getDocuments("content", options);
+	let collection = await getDocuments("content", {
+		markdown: {
+			html: {
+				truncate: { maxChars: 300 },
+			},
+		},
+		filters: [{ property: "type", value: "article" }],
+		sorts: [{ property: "date", direction: "asc", type: "date" }],
+	});
 
-	// Return static props
+	// Return page props
 	return {
 		props: {
 			// Return collection

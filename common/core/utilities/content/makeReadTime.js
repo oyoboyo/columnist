@@ -7,15 +7,17 @@
  */
 
 const makeReadTime = (text) => {
-  // Process string
-  text = text.replace(/\n/g, " "); // newlines to space
-  text = text.replace(/(^\s*)|(\s*$)/gi, ""); // remove spaces from start + end
-  text = text.replace(/[ ]{2,}/gi, " "); // 2 or more spaces to 1
+	if (text) {
+		// Process string
+		text = text.replace(/\n/g, " "); // newlines to space
+		text = text.replace(/(^\s*)|(\s*$)/gi, ""); // remove spaces from start + end
+		text = text.replace(/[ ]{2,}/gi, " "); // 2 or more spaces to 1
 
-  const wordCount = text.split(" ").length; // Count words
-  const readTime = Math.ceil(wordCount / 225); // Calculate read time
+		const wordCount = text.split(" ").length; // Count words
+		const readTime = Math.ceil(wordCount / 225); // Calculate read time
 
-  return readTime;
+		return readTime;
+	}
 };
 
 export default makeReadTime;

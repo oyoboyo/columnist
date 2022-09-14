@@ -1,8 +1,9 @@
+// Import core
 import { Link } from "@columnist/core";
 
+// # Article teaser author component
 export default function Author({ content }) {
   return typeof content === "object" ? (
-    // Author content
     <div className="author d-flex align-items-center">
       {
         // Author image

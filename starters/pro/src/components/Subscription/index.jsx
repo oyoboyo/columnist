@@ -1,10 +1,13 @@
+// Import components
 import Card from "./Card";
 import Item from "./Item";
 
-export default function Subscription({ content, style, current }) {
-  return style === "card" ? (
-    <Card content={content} current={current} />
-  ) : style === "item" ? (
-    <Item content={content} current={current} />
-  ) : null;
+// # Subscription component
+export default function Subscription({ content, current, card, item }) {
+	// Render subscription as card or
+	return card ? (
+		<Card content={content} current={current} />
+	) : item ? (
+		<Item content={content} current={current} />
+	) : null;
 }

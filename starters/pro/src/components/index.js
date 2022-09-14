@@ -1,9 +1,9 @@
 // Import /components
 import Layout from "./Layout";
-import Head from "./Head";
+import { Favicon } from "./Favicon";
+import Meta from "./Meta";
 import Header from "./Header";
 import Column from "./Column";
-import Main from "./Main/Main";
 import Page from "./Page";
 import Article from "./Article";
 import Footer from "./Footer";
@@ -14,17 +14,17 @@ import Subscription from "./Subscription";
 import { Link, Html } from "@columnist/core";
 
 export {
-  Layout,
-  Head,
-  Header,
-  Column,
-  Main,
-  Page,
-  Article,
-  Footer,
-  LogIn,
-  Account,
-  Subscription,
-  Html,
-  Link,
+	Layout,
+	Meta,
+	Favicon,
+	Header,
+	Column,
+	Page,
+	Article,
+	Footer,
+	LogIn,
+	Account,
+	Subscription,
+	Html,
+	Link,
 };

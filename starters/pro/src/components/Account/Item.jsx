@@ -1,4 +1,6 @@
+// # Account item component
 export default function Item({ content }) {
+  // Return item
   return (
     <div className="border-bottom mb-3">
       <div className="d-flex justify-content-between align-content-center">

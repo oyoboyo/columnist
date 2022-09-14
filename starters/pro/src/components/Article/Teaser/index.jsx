@@ -1,11 +1,12 @@
-// Core
+// Import core
 import { Link, makeDate } from "@columnist/core";
-// Local components
+// Import components
 import Img from "../../Img";
 import Author from "./Author";
-
+// Import config
 import { date } from ".config";
 
+// Get config
 const config = {
   date: date,
   limit: 220,
@@ -16,8 +17,9 @@ const config = {
     optimize: true,
   },
 };
-
+// # Article teaser component
 export default function Teaser({ content }) {
+  // Render teaser
   return (
     <article className="article-teaser border-bottom pb-4 mb-5">
       <div className="article-header d-flex justify-content-between">

@@ -1,4 +1,6 @@
+// # Article detail author component
 export default function Author({ content }) {
+  // Render author
   return typeof content === "object" ? (
     <div className="article-detail-author border-top d-flex align-items-centers mt-5 pt-3">
       {

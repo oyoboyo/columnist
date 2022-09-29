@@ -3,7 +3,9 @@ import Subscription from "../Subscription";
 import Item from "./Item";
 
 // # Account component
-export default function Account() {
+export default function Account({ user }) {
+	console.log(user);
+
 	// Get subscriptions
 	const subscriptions = [
 		{
@@ -38,8 +40,15 @@ export default function Account() {
 	const account = {
 		items: [
 			{
+				label: "Name",
+				text: user.displayName,
+				button: {
+					text: "Change",
+				},
+			},
+			{
 				label: "Email",
-				text: "info@oyoboyo.com",
+				text: user.email,
 				button: {
 					text: "Change",
 				},

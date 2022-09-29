@@ -1,5 +1,14 @@
+// Import firebase
+import { firebaseApp } from "firebase.config";
+import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { getAuth } from "firebase/auth";
+
+const auth = getAuth(firebaseApp);
+
 // # Login form component
 export default function LogInForm() {
+	const [signInWithGoogle] = useSignInWithGoogle(auth);
+
 	// Render login form
 	return (
 		<div className="d-grid gap-2">
@@ -28,7 +37,11 @@ export default function LogInForm() {
 					<button className="btn btn-outline-dark" type="button">
 						Continue with Facebook
 					</button>
-					<button className="btn btn-outline-dark" type="button">
+					<button
+						onClick={() => signInWithGoogle()}
+						className="btn btn-outline-dark"
+						type="button"
+					>
 						Continue with Google
 					</button>
 					<hr className="mt-2 mb-2" />

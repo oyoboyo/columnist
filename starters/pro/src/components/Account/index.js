@@ -1,10 +1,14 @@
+// Firebase
+import { firebaseApp } from "firebase.config";
+import { getAuth, signOut } from "firebase/auth";
+
 // Import components
 import Subscription from "../Subscription";
 import Item from "./Item";
 
 // # Account component
 export default function Account({ user }) {
-	console.log(user);
+	const auth = getAuth(firebaseApp);
 
 	// Get subscriptions
 	const subscriptions = [
@@ -81,6 +85,7 @@ export default function Account({ user }) {
 				// Render profile
 				<div className="account-profile mb-4">
 					<h2>Profile</h2>
+
 					{
 						// Map account items
 						account.items.map((item, index) => (
@@ -131,6 +136,14 @@ export default function Account({ user }) {
 						</div>
 						<div class="d-grid gap-2">
 							<button className="btn btn-dark">Delete account</button>
+							<button
+								className="btn btn-secondary"
+								onClick={() => {
+									signOut(auth);
+								}}
+							>
+								Sign-out
+							</button>
 						</div>
 					</>
 				}

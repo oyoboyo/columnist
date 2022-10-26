@@ -1,7 +1,6 @@
 // Import firebase
 import { firebaseApp } from "firebase.config";
 import {
-	useAuthState,
 	useSignInWithGoogle,
 	useSignInWithEmailAndPassword,
 	useCreateUserWithEmailAndPassword,
@@ -37,101 +36,93 @@ function EmailPasswordForm() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const [user, loading, error] = useAuthState(auth);
-
-	// Authenticate with email and password
+	// Set sign with email and password
 	const [signInWithEmailAndPassword, signInUser, signInLoading, signInError] =
 		useSignInWithEmailAndPassword(auth);
 
 	// Create error message
 	let signInErrorMessage = makeSignInErrorMessage(signInError?.code);
-	let signUp = signInError?.code === "auth/user-not-found" ? true : false;
 
 	// Create user with email and password
-	const [
-		createUserWithEmailAndPassword,
-		signUpUser,
-		signUpLoading,
-		signUpError,
-	] = useCreateUserWithEmailAndPassword(auth);
+	const [signUpWithEmailAndPassword, signUpUser, signUpLoading, signUpError] =
+		useCreateUserWithEmailAndPassword(auth);
 
+	let signUp = signInError?.code === "auth/user-not-found" ? true : false;
+
+	// Form handlers
 	const signUpOrSignIn = (event) => {
 		event.preventDefault();
 		signUp
-			? createUserWithEmailAndPassword(email, password)
+			? signUpWithEmailAndPassword(email, password)
 			: signInWithEmailAndPassword(email, password);
 	};
 
 	return (
 		<>
-			{
-				// No user? render form
-				!user ? (
-					<>
-						{
-							// Render error if error
-							signInError ? (
-								<div className="alert alert-danger" role="alert">
-									{signInErrorMessage}
-								</div>
-							) : null
-						}
-						{
-							// Render form
-							<form
-								onSubmit={(event) => {
-									signUpOrSignIn(event);
-								}}
-							>
-								<label htmlFor="emailInput" className="form-label small">
-									Log in using email
-								</label>
-								<input
-									type="email"
-									className="form-control form-control-lg"
-									id="emailInput"
-									placeholder="Email address"
-									onChange={(event) => setEmail(event.target.value)}
-								/>
-								<label
-									htmlFor="passwordInput"
-									className="mt-2 form-label small"
-								>
-									Password
-								</label>
-								<input
-									type="password"
-									className="form-control form-control-lg mb-3"
-									id="passwordInput"
-									placeholder="Password"
-									onChange={(event) => setPassword(event.target.value)}
-								/>
+			{!signInUser || !signUpUser ? (
+				<>
+					{
+						// Render error if error
+						signInError || signUpError ? (
+							<div className="alert alert-danger" role="alert">
+								{signInErrorMessage ? signInErrorMessage : null}
+							</div>
+						) : null
+					}
+					{signInLoading || signUpLoading ? (
+						<div className="spinner-border" role="status"></div>
+					) : (
+						// Render form
+						<form
+							onSubmit={(event) => {
+								signUpOrSignIn(event);
+							}}
+						>
+							<label htmlFor="emailInput" className="form-label small">
+								Log in using email
+							</label>
+							<input
+								type="email"
+								className="form-control form-control-lg"
+								id="emailInput"
+								placeholder="Email address"
+								onChange={(event) => setEmail(event.target.value)}
+							/>
+							<label htmlFor="passwordInput" className="mt-2 form-label small">
+								Password
+							</label>
+							<input
+								type="password"
+								className="form-control form-control-lg mb-3"
+								id="passwordInput"
+								placeholder="Password"
+								onChange={(event) => setPassword(event.target.value)}
+							/>
 
-								{
-									// Render sign up button if sign up
-									<div className="d-grid gap-2">
-										<button
-											className={
-												email === "" || password === ""
-													? "btn btn-dark disabled btn-lg"
-													: signUp
-													? "btn btn-primary btn-lg"
-													: "btn btn-dark btn-lg"
-											}
-											type="submit"
-											onSubmit={(event) => {
-												signUpOrSignIn(event);
-											}}
-										>
-											{signUp ? "Sign-up" : "Sign-in"} with email and password
-										</button>
-									</div>
-								}
-							</form>
-						}
-					</>
-				) : null
-			}
+							{
+								// Render sign up button if sign up
+								<div className="d-grid gap-2">
+									<button
+										className={
+											email === "" || password === ""
+												? "btn btn-dark disabled btn-lg"
+												: signUp
+												? "btn btn-primary btn-lg"
+												: "btn btn-dark btn-lg"
+										}
+										type="submit"
+										onSubmit={(event) => {
+											signUpOrSignIn(event);
+										}}
+									>
+										{signUp ? "Sign-up" : "Sign-in"} with email and password
+									</button>
+								</div>
+							}
+						</form>
+					)}
+				</>
+			) : null}
 		</>
 	);
 }

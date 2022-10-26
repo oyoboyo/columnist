@@ -11,8 +11,6 @@ const auth = getAuth(firebaseApp);
 
 // # App
 function MyApp({ Component, pageProps }) {
-	const [user, loading, error] = useAuthState(auth);
-
 	// Render app
 	return (
 		// Render layout with page style

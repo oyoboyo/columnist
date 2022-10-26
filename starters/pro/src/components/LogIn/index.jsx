@@ -1,12 +1,15 @@
-// Import firebase
+// Import vendor modules
 import { firebaseApp } from "firebase.config";
+import { getAuth } from "firebase/auth";
 import {
 	useSignInWithGoogle,
 	useSignInWithEmailAndPassword,
 	useCreateUserWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
-import { getAuth } from "firebase/auth";
-import { useState } from "react";
+// Import React modules
+import { useState, useEffect } from "react";
+// Import config
+import { site } from ".config";
 
 const auth = getAuth(firebaseApp);
 
@@ -15,7 +18,7 @@ function makeSignInErrorMessage(code) {
 	switch (code) {
 		case "auth/user-not-found":
 			signInErrorMessage =
-				"Sorry, we couldn't find an account with that email. Would you like to create one? Sign-up below.";
+				"Sorry, we couldn't find an account with that email. Would you like to create one? Sign-up below or try again.";
 			break;
 		case "auth/invalid-email":
 			signInErrorMessage = "Invalid email. Please try again.";
@@ -31,10 +34,14 @@ function makeSignInErrorMessage(code) {
 	return signInErrorMessage;
 }
 
-function EmailPasswordForm() {
+// # Login form component
+export default function LogInForm() {
+	const [signInWithGoogle] = useSignInWithGoogle(auth);
+
 	// Set state
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [signUp, setSignUp] = useState(false);
 
 	// Set sign with email and password
 	const [signInWithEmailAndPassword, signInUser, signInLoading, signInError] =
@@ -47,116 +54,172 @@ function EmailPasswordForm() {
 	const [signUpWithEmailAndPassword, signUpUser, signUpLoading, signUpError] =
 		useCreateUserWithEmailAndPassword(auth);
 
-	let signUp = signInError?.code === "auth/user-not-found" ? true : false;
-
-	// Form handlers
+	// Handle form
 	const signUpOrSignIn = (event) => {
 		event.preventDefault();
+		// Sign up or sign in
 		signUp
 			? signUpWithEmailAndPassword(email, password)
 			: signInWithEmailAndPassword(email, password);
 	};
 
-	return (
-		<>
-			{!signInUser || !signUpUser ? (
-				<>
-					{
-						// Render error if error
-						signInError || signUpError ? (
-							<div className="alert alert-danger" role="alert">
-								{signInErrorMessage ? signInErrorMessage : null}
-							</div>
-						) : null
-					}
-					{signInLoading || signUpLoading ? (
-						<div className="spinner-border" role="status"></div>
-					) : (
-						// Render form
-						<form
-							onSubmit={(event) => {
-								signUpOrSignIn(event);
-							}}
-						>
-							<label htmlFor="emailInput" className="form-label small">
-								Log in using email
-							</label>
-							<input
-								type="email"
-								className="form-control form-control-lg"
-								id="emailInput"
-								placeholder="Email address"
-								onChange={(event) => setEmail(event.target.value)}
-							/>
-							<label htmlFor="passwordInput" className="mt-2 form-label small">
-								Password
-							</label>
-							<input
-								type="password"
-								className="form-control form-control-lg mb-3"
-								id="passwordInput"
-								placeholder="Password"
-								onChange={(event) => setPassword(event.target.value)}
-							/>
-
-							{
-								// Render sign up button if sign up
-								<div className="d-grid gap-2">
-									<button
-										className={
-											email === "" || password === ""
-												? "btn btn-dark disabled btn-lg"
-												: signUp
-												? "btn btn-primary btn-lg"
-												: "btn btn-dark btn-lg"
-										}
-										type="submit"
-										onSubmit={(event) => {
-											signUpOrSignIn(event);
-										}}
-									>
-										{signUp ? "Sign-up" : "Sign-in"} with email and password
-									</button>
-								</div>
-							}
-						</form>
-					)}
-				</>
-			) : null}
-		</>
-	);
-}
-
-// # Login form component
-export default function LogInForm() {
-	const [signInWithGoogle] = useSignInWithGoogle(auth);
+	useEffect(() => {
+		if (signInError && signInError.code === "auth/user-not-found") {
+			setSignUp(true);
+		}
+	}, [signInError]);
 
 	// Render login form
 	return (
-		<div className="d-grid gap-2">
-			<EmailPasswordForm />
-
+		<>
+			{
+				// Render page details
+				<>
+					<h1>Sign {signUp ? "up" : "in"}</h1>
+					<p>
+						Sign {signUp ? "up" : "in"} to enjoy more free articles from{" "}
+						{site.name}
+					</p>
+				</>
+			}
 			{
 				// Render buttons
-				<>
+				<div className="d-grid gap-2">
 					<button
 						onClick={() => signInWithGoogle()}
-						className="btn btn-outline-dark btn-lg"
+						className="btn btn-outline-secondary btn-lg"
 						type="button"
 					>
 						Continue with Google
 					</button>
-					<hr className="mt-2 mb-2" />
-				</>
+					<hr />
+				</div>
 			}
-
 			{
-				// Render policy
-				<small>
-					<span>By continuing, you agree to the </span>
-					<a href="/privacy"> Privacy Policy.</a>
-				</small>
+				// Render form
+				<div className="d-grid gap-2">
+					<>
+						{
+							// If user not logged in render login form
+							!signInUser || !signUpUser ? (
+								<>
+									{
+										// Render error if error
+										signInError || signUpError ? (
+											<div className="alert alert-danger" role="alert">
+												{signInErrorMessage ? signInErrorMessage : null}
+											</div>
+										) : null
+									}
+									{
+										// Render form
+										<form
+											onSubmit={(event) => {
+												signUpOrSignIn(event);
+											}}
+										>
+											<label htmlFor="emailInput" className="form-label small">
+												Email
+											</label>
+											<input
+												type="email"
+												className="form-control form-control-lg"
+												id="emailInput"
+												placeholder="Enter your email..."
+												value={email}
+												onChange={(event) => setEmail(event.target.value)}
+												required
+											/>
+											<label
+												htmlFor="passwordInput"
+												className="mt-2 form-label small"
+											>
+												Password
+											</label>
+											<input
+												type="password"
+												className="form-control form-control-lg mb-3"
+												id="passwordInput"
+												placeholder="Enter your password..."
+												value={password}
+												onChange={(event) => setPassword(event.target.value)}
+												required
+											/>
+
+											{
+												// Render button
+												<>
+													<div className="d-grid gap-2">
+														<button
+															className={
+																"btn btn-lg " +
+																(signUp ? " btn-primary" : "btn-dark") +
+																(email === "" || password === ""
+																	? " disabled"
+																	: "")
+															}
+															type="submit"
+															onSubmit={(event) => {
+																signUpOrSignIn(event);
+															}}
+														>
+															{signUp ? "Sign-up" : "Sign-in"} with email and
+															password
+														</button>
+													</div>
+												</>
+											}
+										</form>
+									}
+								</>
+							) : null
+						}
+					</>
+
+					{
+						// Render policy
+						<small>
+							<span>
+								By continuing, with third party login providers, or email you
+								agree to the{" "}
+							</span>
+							<a href="/privacy"> Privacy Policy.</a>
+						</small>
+					}
+					{
+						// Render sign-in, sign-up navigation
+						<small>
+							{signUp ? (
+								<>
+									Already signed up?{" "}
+									<a
+										href="#"
+										onClick={(event) => {
+											event.preventDefault();
+											setSignUp(false);
+										}}
+									>
+										Sign in.
+									</a>
+								</>
+							) : (
+								<>
+									Don't have an account?{" "}
+									<a
+										href="#"
+										onClick={(event) => {
+											event.preventDefault();
+											setSignUp(true);
+										}}
+									>
+										Sign up.
+									</a>
+								</>
+							)}
+						</small>
+					}
+				</div>
 			}
-		</div>
+		</>
 	);
 }

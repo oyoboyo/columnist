@@ -27,8 +27,6 @@ export default function AccountPage() {
 				) : (
 					// If no user, render Login
 					<Column style="default">
-						<h1>Sign in</h1>
-						<p>Sign in to enjoy more free articles from {site.name}</p>
 						<LogIn user={user} />
 					</Column>
 				)

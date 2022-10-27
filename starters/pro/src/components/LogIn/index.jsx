@@ -6,6 +6,8 @@ import {
 	useSignInWithEmailAndPassword,
 	useCreateUserWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
+// Import Bootstrap
+import Form from "react-bootstrap/Form";
 // Import React modules
 import { useState, useEffect } from "react";
 // Import config
@@ -42,6 +44,7 @@ export default function LogInForm() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [signUp, setSignUp] = useState(false);
+	const [validate, setValidate] = useState();
 
 	// Set sign with email and password
 	const [signInWithEmailAndPassword, signInUser, signInLoading, signInError] =
@@ -57,14 +60,18 @@ export default function LogInForm() {
 	// Handle form
 	const signUpOrSignIn = (event) => {
 		event.preventDefault();
-		// Sign up or sign in
-		signUp
-			? signUpWithEmailAndPassword(email, password)
-			: signInWithEmailAndPassword(email, password);
+		const form = event.currentTarget;
+		// Check form is valid
+		if (form.checkValidity() === true) {
+			// Sign up or sign in
+			signUp
+				? signUpWithEmailAndPassword(email, password)
+				: signInWithEmailAndPassword(email, password);
+		}
 	};
 
 	useEffect(() => {
-		if (signInError && signInError.code === "auth/user-not-found") {
+		if (signInError?.code === "auth/user-not-found") {
 			setSignUp(true);
 		}
 	}, [signInError]);
@@ -114,6 +121,7 @@ export default function LogInForm() {
 									{
 										// Render form
 										<form
+											className={validate ? "was-validated" : ""}
 											onSubmit={(event) => {
 												signUpOrSignIn(event);
 											}}
@@ -121,35 +129,54 @@ export default function LogInForm() {
 											<label htmlFor="emailInput" className="form-label small">
 												Email
 											</label>
-											<input
-												type="email"
-												className="form-control form-control-lg"
-												id="emailInput"
-												placeholder="Enter your email..."
-												value={email}
-												onChange={(event) => setEmail(event.target.value)}
-												required
-											/>
+											<div>
+												<input
+													type="email"
+													className="form-control form-control-lg"
+													id="emailInput"
+													placeholder="Enter your email..."
+													value={email}
+													onChange={(event) => {
+														setEmail(event.target.value);
+														setValidate(true);
+													}}
+													required
+												/>
+												<div class="invalid-feedback">
+													Please enter a valid email
+												</div>
+												<div class="valid-feedback">
+													Thank you, that's a valid email
+												</div>
+											</div>
 											<label
 												htmlFor="passwordInput"
 												className="mt-2 form-label small"
 											>
 												Password
 											</label>
-											<input
-												type="password"
-												className="form-control form-control-lg mb-3"
-												id="passwordInput"
-												placeholder="Enter your password..."
-												value={password}
-												onChange={(event) => setPassword(event.target.value)}
-												required
-											/>
 
+											<div>
+												<input
+													type="password"
+													className="form-control form-control-lg"
+													id="passwordInput"
+													placeholder="Enter your password..."
+													value={password}
+													onChange={(event) => setPassword(event.target.value)}
+													required
+												/>
+												<div class="invalid-feedback">
+													Please enter a valid password
+												</div>
+												<div class="valid-feedback">
+													Thank you, that's a valid password
+												</div>
+											</div>
 											{
 												// Render button
 												<>
-													<div className="d-grid gap-2">
+													<div className="d-grid gap-2 mt-3">
 														<button
 															className={
 																"btn btn-lg " +

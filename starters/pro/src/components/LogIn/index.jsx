@@ -1,13 +1,12 @@
 // Import vendor modules
 import { firebaseApp } from "firebase.config";
-import { getAuth } from "firebase/auth";
 import {
-	useSignInWithGoogle,
-	useSignInWithEmailAndPassword,
-	useCreateUserWithEmailAndPassword,
-} from "react-firebase-hooks/auth";
-// Import Bootstrap
-import Form from "react-bootstrap/Form";
+	getAuth,
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+	sendPasswordResetEmail,
+} from "firebase/auth";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 // Import React modules
 import { useState, useEffect } from "react";
 // Import config
@@ -15,22 +14,31 @@ import { site } from ".config";
 
 const auth = getAuth(firebaseApp);
 
-function makeSignInErrorMessage(code) {
-	let signInErrorMessage = "";
+function makeErrorMessage(code) {
+	let signInErrorMessage = { message: "", type: "" };
 	switch (code) {
 		case "auth/user-not-found":
-			signInErrorMessage =
-				"Sorry, we couldn't find an account with that email. Would you like to create one? Sign-up below or try again.";
+			signInErrorMessage = {
+				message:
+					"Sorry, we couldn't find an account. Would you like to create one? Sign-up below or try again.",
+				type: "alert-danger",
+			};
 			break;
 		case "auth/invalid-email":
-			signInErrorMessage = "Invalid email. Please try again.";
+			signInErrorMessage = {
+				message: "Invalid email. Please try again.",
+				type: "alert-danger",
+			};
 			break;
 		case "auth/wrong-password":
-			signInErrorMessage =
-				"Wrong password. Please try again, or if you've forgotten your password, click the link below.";
+			signInErrorMessage = {
+				message:
+					"Wrong password. Please try again, or if you've forgotten your password, Reset below.",
+				type: "alert-danger",
+			};
 			break;
 		default:
-			signInErrorMessage = "Unknown error";
+			signInErrorMessage = { message: "Unknown error", type: "alert-danger" };
 			break;
 	}
 	return signInErrorMessage;
@@ -38,43 +46,79 @@ function makeSignInErrorMessage(code) {
 
 // # Login form component
 export default function LogInForm() {
-	const [signInWithGoogle] = useSignInWithGoogle(auth);
-
 	// Set state
+	const [user, setUser] = useState(null);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [signUp, setSignUp] = useState(false);
+	const [formAction, setFormAction] = useState("Sign in");
 	const [validate, setValidate] = useState();
+	const [alert, setAlert] = useState();
+	const [loading, setLoading] = useState(false);
+	// Social sign in
+	const [signInWithGoogle] = useSignInWithGoogle(auth);
 
-	// Set sign with email and password
-	const [signInWithEmailAndPassword, signInUser, signInLoading, signInError] =
-		useSignInWithEmailAndPassword(auth);
-
-	// Create error message
-	let signInErrorMessage = makeSignInErrorMessage(signInError?.code);
-
-	// Create user with email and password
-	const [signUpWithEmailAndPassword, signUpUser, signUpLoading, signUpError] =
-		useCreateUserWithEmailAndPassword(auth);
-
-	// Handle form
-	const signUpOrSignIn = (event) => {
+	// Handle form submission
+	const handleSubmit = (event) => {
+		setLoading(true);
+		// Prevent default
 		event.preventDefault();
+		// Validate form
 		const form = event.currentTarget;
-		// Check form is valid
 		if (form.checkValidity() === true) {
-			// Sign up or sign in
-			signUp
-				? signUpWithEmailAndPassword(email, password)
-				: signInWithEmailAndPassword(email, password);
+			// Sign in, sign up or reset password
+			switch (formAction) {
+				case "Sign in":
+					// Sign in user with email and password
+					signInWithEmailAndPassword(auth, email, password)
+						.then((userCredential) => {
+							// Set user
+							setUser(userCredential.user);
+							setLoading(false);
+						})
+						.catch((error) => {
+							// Set alert to error message
+							setAlert(makeErrorMessage(error.code));
+							// If user not found
+							if (error.code === "auth/user-not-found") {
+								// Set form action to sign up
+								setFormAction("Sign up");
+								setLoading(false);
+							}
+						});
+					break;
+				case "Sign up":
+					// Create user with email and password
+					createUserWithEmailAndPassword(auth, email, password)
+						.then((userCredential) => {
+							// Set user
+							setUser(userCredential.user);
+							setLoading(false);
+						})
+						.catch((error) => {
+							// Set alert to error message
+							setAlert(makeErrorMessage(error.code));
+							setLoading(false);
+						});
+					break;
+				// Reset password
+				case "Reset password":
+					sendPasswordResetEmail(auth, email)
+						.then(() => {
+							setAlert({
+								message: "Password reset email sent.",
+								type: "alert-success",
+							});
+							setLoading(false);
+						})
+						.catch((error) => {
+							// Set alert to error message
+							setAlert(makeErrorMessage(error.code));
+							setLoading(false);
+						});
+					break;
+			}
 		}
 	};
-
-	useEffect(() => {
-		if (signInError?.code === "auth/user-not-found") {
-			setSignUp(true);
-		}
-	}, [signInError]);
 
 	// Render login form
 	return (
@@ -82,14 +126,17 @@ export default function LogInForm() {
 			{
 				// Render page details
 				<>
-					<h1>Sign {signUp ? "up" : "in"}</h1>
+					<h1>{formAction}</h1>
 					<p>
-						Sign {signUp ? "up" : "in"} to enjoy more free articles from{" "}
+						{formAction}{" "}
+						{formAction === "Reset password"
+							? "to access "
+							: "to enjoy more free articles from "}
 						{site.name}
 					</p>
 				</>
 			}
-			{
+			{formAction === "Sign in" || formAction === "Sign up" ? (
 				// Render buttons
 				<div className="d-grid gap-2">
 					<button
@@ -101,105 +148,132 @@ export default function LogInForm() {
 					</button>
 					<hr />
 				</div>
-			}
+			) : null}
 			{
 				// Render form
 				<div className="d-grid gap-2">
 					<>
 						{
 							// If user not logged in render login form
-							!signInUser || !signUpUser ? (
-								<>
-									{
-										// Render error if error
-										signInError || signUpError ? (
-											<div className="alert alert-danger" role="alert">
-												{signInErrorMessage ? signInErrorMessage : null}
-											</div>
-										) : null
-									}
-									{
-										// Render form
-										<form
-											className={validate ? "was-validated" : ""}
-											onSubmit={(event) => {
-												signUpOrSignIn(event);
-											}}
-										>
-											<label htmlFor="emailInput" className="form-label small">
-												Email
-											</label>
+							<>
+								{
+									// Render error if error
+									alert ? (
+										<div className={"alert " + alert.type} role="alert">
+											{alert.message}
+										</div>
+									) : null
+								}
+								{
+									// Render form
+									<form
+										className={validate ? "was-validated" : ""}
+										onSubmit={(event) => {
+											handleSubmit(event);
+										}}
+									>
+										{
+											// Render email input
 											<div>
+												<label
+													htmlFor="emailInput"
+													className="form-label small"
+												>
+													Email
+												</label>
 												<input
 													type="email"
-													className="form-control form-control-lg"
-													id="emailInput"
-													placeholder="Enter your email..."
 													value={email}
+													id="emailInput"
+													className="form-control form-control-lg"
+													placeholder="Enter your email..."
 													onChange={(event) => {
 														setEmail(event.target.value);
 														setValidate(true);
 													}}
 													required
 												/>
-												<div class="invalid-feedback">
+												<div className="invalid-feedback">
 													Please enter a valid email
 												</div>
-												<div class="valid-feedback">
+												<div className="valid-feedback">
 													Thank you, that's a valid email
 												</div>
 											</div>
-											<label
-												htmlFor="passwordInput"
-												className="mt-2 form-label small"
-											>
-												Password
-											</label>
-
-											<div>
-												<input
-													type="password"
-													className="form-control form-control-lg"
-													id="passwordInput"
-													placeholder="Enter your password..."
-													value={password}
-													onChange={(event) => setPassword(event.target.value)}
-													required
-												/>
-												<div class="invalid-feedback">
-													Please enter a valid password
+										}
+										{
+											// Render password input
+											formAction === "Reset password" ? null : (
+												<div>
+													<label
+														htmlFor="passwordInput"
+														className="mt-2 form-label small"
+													>
+														Password
+													</label>
+													<input
+														type="password"
+														value={password}
+														id="passwordInput"
+														className="form-control form-control-lg"
+														placeholder="Enter your password..."
+														onChange={(event) =>
+															setPassword(event.target.value)
+														}
+														required
+													/>
+													<div class="invalid-feedback">
+														Please enter a valid password
+													</div>
+													<div class="valid-feedback">
+														Thank you, that's a valid password
+													</div>
 												</div>
-												<div class="valid-feedback">
-													Thank you, that's a valid password
+											)
+										}
+										{
+											// Render submit
+											<>
+												<div className="d-grid gap-2 mt-3">
+													<button
+														className={
+															"btn btn-lg btn-dark" +
+															(loading ? " disabled" : "")
+														}
+														type="submit"
+													>
+														{loading ? (
+															<div
+																class="spinner-border text-light"
+																role="status"
+															>
+																<span class="visually-hidden">Loading...</span>
+															</div>
+														) : (
+															<>{formAction}</>
+														)}
+													</button>
 												</div>
-											</div>
-											{
-												// Render button
-												<>
-													<div className="d-grid gap-2 mt-3">
-														<button
-															className={
-																"btn btn-lg " +
-																(signUp ? " btn-primary" : "btn-dark") +
-																(email === "" || password === ""
-																	? " disabled"
-																	: "")
-															}
-															type="submit"
-															onSubmit={(event) => {
-																signUpOrSignIn(event);
+												{
+													// Reset password button
+													formAction === "Reset password" ? null : (
+														<a
+															className="small"
+															href="/#"
+															onClick={(event) => {
+																event.preventDefault();
+																setFormAction("Reset password");
 															}}
 														>
-															{signUp ? "Sign-up" : "Sign-in"} with email and
-															password
-														</button>
-													</div>
-												</>
-											}
-										</form>
-									}
-								</>
-							) : null
+															Forget your password?
+														</a>
+													)
+												}
+											</>
+										}
+									</form>
+								}
+							</>
 						}
 					</>
 
@@ -215,35 +289,37 @@ export default function LogInForm() {
 					}
 					{
 						// Render sign-in, sign-up navigation
-						<small>
-							{signUp ? (
-								<>
+						<div className="">
+							{formAction === "Sign up" || formAction === "Reset password" ? (
+								<div className="small mb-2">
 									Already signed up?{" "}
 									<a
 										href="#"
 										onClick={(event) => {
 											event.preventDefault();
-											setSignUp(false);
+											setFormAction("Sign in");
 										}}
 									>
 										Sign in.
 									</a>
-								</>
-							) : (
-								<>
+								</div>
+							) : null}
+							{formAction === "Sign in" || formAction === "Reset password" ? (
+								// Render sign-up link
+								<div className="small mb-2">
 									Don't have an account?{" "}
 									<a
 										href="#"
 										onClick={(event) => {
 											event.preventDefault();
-											setSignUp(true);
+											setFormAction("Sign up");
 										}}
 									>
 										Sign up.
 									</a>
-								</>
-							)}
-						</small>
+								</div>
+							) : null}
+						</div>
 					}
 				</div>
 			}

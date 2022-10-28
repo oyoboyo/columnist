@@ -65,7 +65,7 @@ export default function Bar() {
 								// Header log in button
 								header.logIn ? (
 									<Link
-										className="header-login btn btn-white ms-1"
+										className="header-login btn btn-link text-dark ms-1"
 										href={header.logIn.url}
 									>
 										{header.logIn.button}

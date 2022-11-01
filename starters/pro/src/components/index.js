@@ -7,7 +7,7 @@ import Column from "./Column";
 import Page from "./Page";
 import Article from "./Article";
 import Footer from "./Footer";
-import LogIn from "./LogIn";
+import LogIn from "./Access";
 import Account from "./Account";
 import Subscription from "./Subscription";
 // Import core

@@ -1,5 +1,5 @@
 // Import component
-import LogInForm from "../LogIn";
+import LogInForm from "../Access";
 // Import config
 import { site } from ".config";
 

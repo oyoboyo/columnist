@@ -41,3 +41,4 @@ legacy/
 *.next/
 *.vscode/
 firebase.config.js
+starters/pro/firebase.config.js

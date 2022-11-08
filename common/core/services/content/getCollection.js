@@ -1,5 +1,11 @@
-import { existsSync as exists, readdirSync as read, lstatSync as status } from "fs";
-
+import {
+	existsSync as exists,
+	readdirSync as read,
+	lstatSync as status,
+} from "fs";
+//
+import filterCollection from "./utilities/filterCollection";
+import sortCollection from "./utilities/sortCollection";
 // services
 import getDocument from "./getDocument";
 
@@ -10,46 +16,42 @@ import getDocument from "./getDocument";
  * @return {array} collection
  */
 
-export default function getCollection(dir, config) {
-  let collection = [];
+export default function getCollection(location, options) {
+	let isParams = Array.isArray(location);
+	// Make dir from param or pass location
+	const dir = isParams ? `content/${location.join("/")}` : location;
 
-  read(dir).map((item) => {
-    const path = `${dir}/${item}`;
+	let collection = [];
 
-    if (exists(path)) {
-      if (status(path).isFile()) {
-        if (!path.includes("index.md")) {
-          const doc = getDocument(path, config);
-          collection.push(doc);
-        }
-      }
-      if (status(path).isDirectory()) {
-        const index = `${path}/index.md`;
-        if (exists(index)) {
-          const doc = getDocument(index, config);
-          collection.push(doc);
-        }
-      }
-    }
-  });
+	if (exists(dir) && status(dir).isDirectory()) {
+		read(dir).map((item) => {
+			const path = `${dir}/${item}`;
 
-  if (collection.length > 0) {
-    // Process array based on config
-    if (config.sorts) {
-      config.sorts.map((func) => {
-        collection = func(collection);
-      });
-    }
-    if (config.filters) {
-      config.filters.map((func) => {
-        collection = func(collection);
-      });
-    }
-    if (config.limit) {
-      collection = collection.slice(0, (config.limit - 1));
-    }
-    return collection;
-  } else {
-    return null;
-  }
+			if (exists(path)) {
+				if (status(path).isFile()) {
+					if (!path.includes("index.md")) {
+						const doc = getDocument(path, options);
+						collection.push(doc);
+					}
+				}
+				if (status(path).isDirectory()) {
+					const index = `${path}/index.md`;
+					if (exists(index)) {
+						const doc = getDocument(index, options);
+						collection.push(doc);
+					}
+				}
+			}
+		});
+	}
+
+	if (options.filters) {
+		collection = filterCollection(collection, options.filters);
+	}
+
+	if (options.sorts) {
+		collection = sortCollection(collection, options.sorts);
+	}
+
+	return collection ? collection : null;
 }

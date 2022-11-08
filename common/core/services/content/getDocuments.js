@@ -3,49 +3,50 @@ import path from "path";
 import { walk } from "@root/walk";
 // services
 import getDocument from "./getDocument";
+import filterCollection from "./utilities/filterCollection";
+import sortCollection from "./utilities/sortCollection";
 
 /**
  * @file Get Documents From Directory (And Sub-Directories)
  *
  * @param {string} dir
- * @param {object} config
  * @returns {array} documents
  */
 
-export default async function getDocuments(dir, config) {
-  let files = [];
+export default async function getDocuments(dir, options) {
+	// Initialize files
+	let files = [];
 
-  const walker = async (error, pathname, item) => {
-    if (error) {
-      throw error;
-    }
+	// Initialize walker
+	const walker = async (error, pathname, item) => {
+		if (error) {
+			throw error;
+		}
 
-    if (item.isFile() && item.name.includes(".md")) {
-      files.push({
-        name: item.name,
-        path: path.dirname(pathname),
-      });
-    }
-  };
+		// If item is file
+		if (item.isFile() && item.name.includes(".md")) {
+			// Push file to files
+			files.push({
+				name: item.name,
+				path: path.dirname(pathname),
+			});
+		}
+	};
 
-  await walk(dir, walker);
+	await walk(dir, walker);
 
-  let documents = files.map((file) => {
-    const doc = getDocument(`${file.path}/${file.name}`, config);
-    return doc ? doc : null;
-  });
+	let documents = files.map((file) => {
+		const doc = getDocument(`${file.path}/${file.name}`, options);
+		return doc ? doc : null;
+	});
 
-  if (config.sorts) {
-    config.sorts.map((processor) => {
-      documents = processor(documents);
-    });
-  }
+	if (options.filters) {
+		documents = filterCollection(documents, options.filters);
+	}
 
-  if (config.filters) {
-    config.filters.map((processor) => {
-      documents = processor(documents);
-    });
-  }
+	if (options.sorts) {
+		documents = sortCollection(documents, options.sorts);
+	}
 
-  return documents ? documents : null;
+	return documents ? documents : null;
 }

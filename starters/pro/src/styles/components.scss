@@ -1,0 +1,146 @@
+// Header
+.header {
+  h1.name a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+    color: $black;
+  }
+  .btn-primary {
+    color: white;
+  }
+}
+
+header .header-bar {
+  h1.name a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .header-logo {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+header .header-hero {
+  .header-logo {
+    width: 150px;
+  }
+  .header-login {
+    position: absolute;
+    right: 15px;
+  }
+}
+
+// Collections
+.collection,
+.collections {
+  article:last-of-type {
+    border-bottom: 0 solid transparent !important;
+    padding-bottom: 0px !important;
+    margin-bottom: 0px !important;
+  }
+}
+
+// Article
+.article-teaser,
+.article-detail {
+  .article-image {
+    overflow: hidden;
+    margin-left: -30px;
+    margin-right: -30px;
+  }
+}
+.article-teaser {
+  .article-truncated {
+    line-height: 1.75rem;
+  }
+}
+
+.author {
+  .teaser-photo {
+    max-width: 25px;
+  }
+  .detail-photo {
+    max-width: 50px;
+  }
+}
+
+.content-html,
+.article-html {
+  font-family: $font-family-serif;
+  // Feature elements
+  p,
+  div,
+  aside,
+  blockquote,
+  ul,
+  ol {
+    font-size: 1.2rem;
+  }
+  p {
+    line-height: 2.2rem;
+  }
+  // Feature headings
+  h1 {
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+  }
+  h2 {
+    margin-top: 3rem;
+    font-size: 1.5rem;
+  }
+  h3 {
+    margin-top: 2.5rem;
+    font-size: 1.25rem;
+    font-weight: normal;
+    border-bottom: 1px solid $gray-500;
+    padding-bottom: 0.25rem;
+  }
+  h4 {
+    margin-top: 2.5rem;
+    font-size: 1.1rem;
+    font-weight: normal;
+  }
+  // Features paragraphs
+  &:first-letter:not(h1) {
+    font-size: 4rem;
+    float: left;
+    padding-top: 1.5rem;
+    padding-right: 0.5rem;
+  }
+  h1 + p::first-letter {
+    font-size: 4rem;
+    float: left;
+    padding-top: 1.5rem;
+    padding-right: 0.5rem;
+  }
+  // feature lists
+  ul {
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+  blockquote {
+    border-left: 3px solid $primary;
+    padding-left: 1rem;
+  }
+  blockquote,
+  blockquote p {
+    font-style: italic;
+  }
+  small {
+    line-height: 0.7rem;
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  html {
+    font-size: 0.9rem;
+  }
+}

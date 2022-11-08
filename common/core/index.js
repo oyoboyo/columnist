@@ -14,34 +14,36 @@ import makeTitle from "./utilities/content/makeTitle";
 import makeReadTime from "./utilities/content/makeReadTime";
 import makeSlug from "./utilities/content/makeSlug";
 import truncate from "./utilities/content/truncate";
+import sortByDate from "./utilities/content/sortByDate";
+import sortByOrder from "./utilities/content/sortByOrder";
+import filterArticles from "./utilities/content/filterArticles";
+import filterDrafts from "./utilities/content/filterDrafts";
 
-//hooks
-import useConfig from "./hooks/useConfig";
 // Components
-import Config from "./components/Config";
 import Link from "./components/Link";
 import Html from "./components/Html";
 
 export {
-  //content
-  getAllPaths,
-  getAllContent,
-  getCollection,
-  getCollections,
-  getDirectory,
-  getDocument,
-  getDocuments,
-  getDynamicPaths,
-  // utilities/content
-  makeDate,
-  makeSlug,
-  makeTitle,
-  makeReadTime,
-  truncate,
-  //hooks
-  useConfig,
-  //components
-  Config,
-  Link,
-  Html,
+	//content
+	getAllPaths,
+	getAllContent,
+	getCollection,
+	getCollections,
+	getDirectory,
+	getDocument,
+	getDocuments,
+	getDynamicPaths,
+	// utilities/content
+	makeDate,
+	makeSlug,
+	makeTitle,
+	makeReadTime,
+	sortByDate,
+	sortByOrder,
+	filterArticles,
+	filterDrafts,
+	truncate,
+	//components
+	Link,
+	Html,
 };

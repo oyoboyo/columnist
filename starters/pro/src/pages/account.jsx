@@ -1,32 +1,50 @@
-// Components
-import { Page, Column, Article, LogIn, Account } from "src/components";
-// Config
-import config from "columnist.config";
+// Import components
+import { Column, LogIn, Account } from "../components";
+// Import config
+import { site } from ".config";
+import { firebaseApp } from "../../firebase.config";
+// Import hooks
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getAuth } from "firebase/auth";
 
+const auth = getAuth(firebaseApp);
+
+// # Account page
 export default function AccountPage() {
-  // User placeholder
-  const user = true;
+	// Get user (to do)
+	const [user, loading, error] = useAuthState(auth);
+	// Render account page
+	return (
+		<>
+			{
+				// If user, render user account
+				user ? (
+					<Column style="default">
+						<h1>Account</h1>
+						<p>Manage your account details and subscription</p>
+						<Account user={user} />
+					</Column>
+				) : (
+					// If no user, render Login
+					<Column style="default">
+						<LogIn user={user} />
+					</Column>
+				)
+			}
+		</>
+	);
+}
 
-  return (
-    <Page header="bar">
-      {user ? (
-        // Account page
-        <Column style="default">
-          <Article
-            content={{
-              title: "Account",
-              summary: "You've been a subscriber since 2020",
-            }}
-          />
-          <Account />
-        </Column>
-      ) : config.logIn ? (
-        // Login page
-        <Column style="default">
-          <Article content={config.logIn} />
-          <LogIn />
-        </Column>
-      ) : null}
-    </Page>
-  );
+export async function getStaticProps() {
+	// Return static props
+	return {
+		props: {
+			// Include meta
+			meta: {
+				title: "Account & Login",
+				description:
+					"Enjoy free articles & more with your " + site.name + " account.",
+			},
+		},
+	};
 }

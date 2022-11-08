@@ -1,18 +1,30 @@
-import {
-  Page,
-  Column,
-  Article,
-  LogIn,
-  Subscription,
-  Account,
-} from "@columnist/bootstrap";
+// Import /components
+import Layout from "./Layout";
+import { Favicon } from "./Favicon";
+import Meta from "./Meta";
+import Header from "./Header";
+import Column from "./Column";
+import Page from "./Page";
+import Article from "./Article";
+import Footer from "./Footer";
+import LogIn from "./Access";
+import Account from "./Account";
+import Subscription from "./Subscription";
+// Import core
 import { Link, Html } from "@columnist/core";
 
-/*
-Use this file to:
-
-- Add components
-- Override theme components
-*/
-
-export { Page, Column, Article, LogIn, Subscription, Account, Html, Link };
+export {
+	Layout,
+	Meta,
+	Favicon,
+	Header,
+	Column,
+	Page,
+	Article,
+	Footer,
+	LogIn,
+	Account,
+	Subscription,
+	Html,
+	Link,
+};

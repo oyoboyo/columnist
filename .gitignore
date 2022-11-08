@@ -40,3 +40,4 @@ common/pro/
 legacy/
 *.next/
 *.vscode/
+firebase.config.js

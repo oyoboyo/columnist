@@ -1,7 +1,6 @@
 {
-	"name": "columnist-pro",
-	"version": "0.1.0",
-	"private": true,
+	"name": "columnist-free",
+	"version": "0.2.2",
 	"scripts": {
 		"dev": "next-remote-watch ./content",
 		"build": "next build && next-sitemap",

@@ -7,7 +7,7 @@ A feature rich blog starter for Next.js, built with savvy creators in mind.
 - [For creators](https://www.notion.so/For-creators-b2dafe28cee74b7aaa4d1fe97eb8c0df)
 - [For developers](https://www.notion.so/For-developers-3b5f7eb718a743c9a15b97762b1f114d)
 
-# Getting started
+## Getting started
 
 Built for [Next.js](https://nextjs.org/) Columnist is open source and extensible, but easy enough for savvy web creators. **Getting started is simple.**
 
@@ -16,7 +16,7 @@ Built for [Next.js](https://nextjs.org/) Columnist is open source and extensible
 In your terminal, create a Next.js app with the Columnist starter:
 
 ```yaml
-npx create-next-app --example https://github.com/oyoboyo/columnist/tree/workspace/starters/basic
+npx create-next-app --example https://github.com/oyoboyo/columnist/tree/workspace/starters/free
 ```
 
 Run the project locally:

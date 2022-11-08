@@ -1,5 +1,4 @@
 // Import icons
-import { BsFillPersonFill } from "react-icons/bs";
 import { FiLinkedin, FiGithub, FiInstagram } from "react-icons/fi";
 
 // # Configuration

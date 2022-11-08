@@ -37,7 +37,7 @@ Using your [integrated development environment](https://code.visualstudio.com/) 
 
 Columnist can be configured in a number of ways, for example:
 
-1. Brand and configuration `columnist.config.js` in the root folder
+1. Configure the site by editing values under `.config`
 2. Site logo at `public/graphics/logo.svg`
 3. Edit colour and other style variables at `src/style/custom.scss`
 

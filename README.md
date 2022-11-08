@@ -2,14 +2,11 @@
 
 A feature rich blog starter for Next.js, built with savvy creators in mind.
 
-## Documentation
-
-- [For creators](https://www.notion.so/For-creators-b2dafe28cee74b7aaa4d1fe97eb8c0df)
-- [For developers](https://www.notion.so/For-developers-3b5f7eb718a743c9a15b97762b1f114d)
-
 ## Getting started
 
 Built for [Next.js](https://nextjs.org/) Columnist is open source and extensible, but easy enough for savvy web creators. **Getting started is simple.**
+
+- [Documentation for creators](https://www.notion.so/For-creators-b2dafe28cee74b7aaa4d1fe97eb8c0df)
 
 ## Setup
 

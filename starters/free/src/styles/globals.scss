@@ -1,0 +1,26 @@
+// Typography
+
+.serif {
+  font-family: $font-family-serif;
+}
+
+.sans-serif {
+  font-family: $font-family-sans-serif;
+}
+
+// Forms
+
+input,
+button,
+label {
+  font-family: $font-family-sans-serif;
+}
+
+// Utilities
+
+a.no-deco {
+  &:hover {
+    text-decoration: none;
+  }
+  display: block;
+}

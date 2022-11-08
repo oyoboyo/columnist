@@ -1,0 +1,19 @@
+{
+	"sarah": {
+		"name": "Sarah Wong",
+		"role": "Writer",
+		"bio": "I've spent the last decade designing, building, and managing brands and products online. As editor and contributor to Becomist I've made it my mission to empower creative entrepreneurs with professional product and brand strategy.",
+		"email": "sarah@yocolumnist.com",
+		"image": {
+			"src": "/images/sarah-wong.jpg",
+			"alt": "photo of Sarah Wong"
+		},
+		"social": [
+			{
+				"name": "Twitter",
+				"icon": "twitter",
+				"url": "https://twitter.com/sarahwong$"
+			}
+		]
+	}
+}
